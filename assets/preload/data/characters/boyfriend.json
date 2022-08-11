@@ -1,0 +1,87 @@
+{
+	"animData": [
+		{
+			"name": "idle",
+			"prefix": "BF idle dance",
+			"offset": [
+				0,
+				0
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": false,
+			"fps": 24
+		},
+		{
+			"name": "singLEFT",
+			"prefix": "BF NOTE LEFT",
+			"offset": [
+				70,
+				20
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": false,
+			"fps": 24
+		},
+		{
+			"name": "singDOWN",
+			"prefix": "BF NOTE DOWN",
+			"offset": [
+				70,
+				10
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": false,
+			"fps": 24
+		},
+		{
+			"name": "singUP",
+			"prefix": "BF NOTE UP",
+			"offset": [
+				30,
+				90
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": false,
+			"fps": 24
+		},
+		{
+			"name": "singRIGHT",
+			"prefix": "BF NOTE RIGHT",
+			"offset": [
+				50,
+				50
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": false,
+			"fps": 24
+		}
+	],
+	"sprPath": "characters/Boyfriend",
+	"sprType": "sparrow-v2",
+	"groundOffset": [
+		0,
+		350
+	],
+	"flipX": true,
+	"flipY": false,
+	"antialiasing": true,
+	"scale": [
+		1.0,
+		1.0
+	],
+	"deadVariant": "boyfriend",
+	"idleLoop": [
+		"idle"
+	],
+	"holdTimer": 4
+}

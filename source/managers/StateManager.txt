@@ -1,0 +1,22 @@
+package managers;
+
+import flixel.FlxG;
+import gamestates.MusicBeatState;
+
+// import gamestates.LoadingState;
+class StateManager
+{
+	public static function loadAndClearMemory(newState:Class<MusicBeatState>, ?args:Array<Dynamic>)
+	{
+		if (args == null)
+			args = [];
+		MusicBeatState.switchState(newState, args, true); // LoadingState, [true, newState, args]);
+	}
+
+	public static function load(newState:Class<MusicBeatState>, ?args:Array<Dynamic>)
+	{
+		if (args == null)
+			args = [];
+		MusicBeatState.switchState(newState, args, false); // LoadingState, [false, newState, args]);
+	}
+}

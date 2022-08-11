@@ -1,0 +1,57 @@
+{
+	"animData": [
+		{
+			"name": "deathStart",
+			"prefix": "BF dies",
+			"offset": [
+				0,
+				0
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": true,
+			"fps": 24
+		},
+		{
+			"name": "deathIdle",
+			"prefix": "BF Dead Loop",
+			"offset": [
+				0,
+				0
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": true,
+			"fps": 24
+		},
+		{
+			"name": "deathEnd",
+			"prefix": "BF Dead confirm",
+			"offset": [
+				0,
+				0
+			],
+			"indices": [],
+			"flipX": false,
+			"flipY": false,
+			"looped": true,
+			"fps": 24
+		}
+	],
+	"sprPath": "characters/Boyfriend Dead",
+	"sprType": "sparrow-v2",
+	"groundOffset": [
+		0,
+		350
+	],
+	"flipX": false,
+	"flipY": false,
+	"antialiasing": true,
+	"scale": [
+		1.0,
+		1.0
+	],
+	"deadVariant": "boyfriend"
+}

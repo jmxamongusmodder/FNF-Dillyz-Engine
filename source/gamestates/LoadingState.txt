@@ -1,0 +1,48 @@
+package gamestates;
+
+import flixel.FlxG;
+import flixel.FlxSprite;
+import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
+
+class LoadingState extends MusicBeatState
+{
+	public var clearMemory:Bool = false;
+	public var newState:Class<MusicBeatState>;
+	public var args:Array<Dynamic>;
+
+	public function new(clearMemory:Bool, newState:Class<MusicBeatState>, ?args:Array<Dynamic>)
+	{
+		super();
+		this.clearMemory = clearMemory;
+		this.newState = newState;
+		this.args = args;
+	}
+
+	override public function create()
+	{
+		super.create();
+
+		var preloaderArt:FlxSprite = new FlxSprite().loadGraphic(Paths.png('preloader'));
+		add(preloaderArt);
+
+		FlxG.camera.zoom = 1;
+		FlxG.camera.follow(null);
+		FlxG.camera.focusOn(new FlxPoint(FlxG.width / 2, FlxG.height / 2));
+
+		new FlxTimer().start(0.5, function(t:FlxTimer)
+		{
+			if (clearMemory)
+				Paths.clearMemory();
+
+			var newStateInstance:MusicBeatState = Type.createInstance(newState, args);
+
+			new FlxTimer().start(0.25, function(t:FlxTimer)
+			{
+				// MusicBeatState.switchState(newState, args);
+				// MusicBeatState.switchState(newState, args);
+				MusicBeatState.switchStateInstance(newStateInstance);
+			});
+		});
+	}
+}

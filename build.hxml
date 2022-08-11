@@ -1,0 +1,11 @@
+-cp source
+-lib hxcpp
+-main Main
+-debug
+-cpp bin/cpp
+-lib flixel
+-lib openfl
+-lib lime
+-dce full
+--define MODS_ACTIVE=true
+--define LOGS_ENABLED=true
