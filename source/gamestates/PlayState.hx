@@ -27,7 +27,6 @@ class PlayState extends MusicBeatState
 		charLeft = new Character(theStage.posDad.x, theStage.posDad.y, 'daddy dearest', false, false, false);
 		add(charLeft);
 
-		// mid girl woman thing goes at x 420
 		charMid = new Character(theStage.posGF.x, theStage.posGF.y, 'girlfriend', false, false, false);
 		add(charMid);
 
