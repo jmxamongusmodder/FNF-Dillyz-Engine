@@ -17,8 +17,8 @@
 			"name": "singLEFT",
 			"prefix": "BF NOTE LEFT",
 			"offset": [
-				70,
-				20
+				0,
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -30,8 +30,8 @@
 			"name": "singDOWN",
 			"prefix": "BF NOTE DOWN",
 			"offset": [
-				70,
-				10
+				0,
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -43,8 +43,8 @@
 			"name": "singUP",
 			"prefix": "BF NOTE UP",
 			"offset": [
-				30,
-				90
+				0,
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -56,8 +56,8 @@
 			"name": "singRIGHT",
 			"prefix": "BF NOTE RIGHT",
 			"offset": [
-				50,
-				50
+				0,
+				0
 			],
 			"indices": [],
 			"flipX": false,
