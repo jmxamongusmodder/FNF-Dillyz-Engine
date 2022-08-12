@@ -12,6 +12,8 @@ typedef CharAnimData =
 {
 	var offset:Array<Int>;
 	var indices:Array<Int>;
+	var cameraOffset:Array<Int>;
+	var camZoomMulti:Null<Float>;
 	var name:String;
 	var prefix:String;
 	var flipX:Bool;
@@ -46,6 +48,8 @@ class Character extends FunkySprite
 	{
 		return {
 			offset: [0, 0],
+			cameraOffset: [0, 0],
+			camZoomMulti: 1,
 			indices: [],
 			name: 'idle',
 			prefix: 'BF Idle Dance',
@@ -150,6 +154,13 @@ class Character extends FunkySprite
 	{
 		this.charName = charName;
 		charData = Paths.json('${gameOver ? 'characters dead' : 'characters'}/$charName', null, charDefault);
+		for (i in charData.animData)
+		{
+			if (i.cameraOffset == null || i.cameraOffset.length != -2)
+				i.cameraOffset = [0, 0];
+			if (i.camZoomMulti == null || i.camZoomMulti == 0)
+				i.camZoomMulti = 1;
+		}
 		reloadChar(reloadSprite);
 	}
 
