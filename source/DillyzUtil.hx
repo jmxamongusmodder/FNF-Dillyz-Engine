@@ -57,4 +57,20 @@ class DillyzUtil
 			return maxVal;
 		return i;
 	}
+
+	public static function getAverageFloat(floatArray:Array<Float>):Float
+	{
+		var bigNumb:Float = 0;
+		for (i in 0...floatArray.length)
+			bigNumb += floatArray[i];
+		return bigNumb / floatArray.length;
+	}
+
+	public static function getAverageInt(floatArray:Array<Int>):Float
+	{
+		var bigNumb:Int = 0;
+		for (i in 0...floatArray.length)
+			bigNumb += floatArray[i];
+		return bigNumb / floatArray.length;
+	}
 }

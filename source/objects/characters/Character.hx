@@ -24,6 +24,8 @@ typedef CharacterData =
 {
 	var animData:Array<CharAnimData>;
 	var groundOffset:Array<Int>;
+	var cameraOffset:Array<Int>;
+	var camZoomMulti:Float;
 	var scale:Array<Float>;
 	var sprPath:String;
 	var sprType:String;
@@ -42,7 +44,7 @@ class Character extends FunkySprite
 
 	private static var charAnimDefault:CharAnimData = {
 		offset: [0, 0],
-		indices: [0, 0],
+		indices: [],
 		name: 'idle',
 		prefix: 'BF idle dance',
 		flipX: false,
@@ -53,6 +55,8 @@ class Character extends FunkySprite
 	private static var charDefault:CharacterData = {
 		animData: [charAnimDefault],
 		groundOffset: [0, 350],
+		cameraOffset: [0, 0],
+		camZoomMulti: 1,
 		scale: [1.0, 1.0],
 		sprPath: "characters/Boyfriend",
 		sprType: "sparrow-v2",
@@ -61,10 +65,12 @@ class Character extends FunkySprite
 		flipY: false,
 		antialiasing: true,
 		idleLoop: ["idle"],
-		holdTimer: 6.1
+		holdTimer: 6.1,
 	};
 
 	private var defPoint:FlxPoint;
+
+	public var camOffset:FlxPoint;
 
 	public var rightSide:Bool;
 	public var isPlaying:Bool;
@@ -73,6 +79,8 @@ class Character extends FunkySprite
 	public var holdingControls:Bool = false;
 
 	public var charName:String;
+
+	public var camZoomMultiplier:Float;
 
 	public function new(x:Float, y:Float, charName:String, ?rightSide:Bool = false, ?isPlaying:Bool = false, ?gameOver:Bool = false)
 	{
@@ -149,6 +157,7 @@ class Character extends FunkySprite
 	@:allow(CharacterEditorState)
 	private function reloadChar(?reloadSprite:Bool = true)
 	{
+		setPosition(defPoint.x, defPoint.y);
 		this.flipX = false;
 		this.flipY = false;
 		// DillyzLogger.log(cast(charData), LogType.Normal);
@@ -187,11 +196,13 @@ class Character extends FunkySprite
 
 		this.x += charData.groundOffset[0];
 		this.y += charData.groundOffset[1];
+		this.camOffset = new FlxPoint(charData.cameraOffset[0], charData.cameraOffset[1]);
 		this.scale.x = charData.scale[0];
 		this.scale.y = charData.scale[1];
 		this.flipX = charData.flipX;
 		this.flipY = charData.flipY;
 		this.antialiasing = charData.antialiasing;
+		this.camZoomMultiplier = charData.camZoomMulti;
 
 		if (rightSide)
 			this.flipX = !this.flipX;

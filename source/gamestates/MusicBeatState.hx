@@ -2,8 +2,10 @@ package gamestates;
 
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -24,11 +26,15 @@ class MusicBeatState extends FlxState
 	private var preloaderTween:FlxTween;
 	private var preloaderCamera:FlxCamera;
 
+	public var camFollow:FlxObject;
+
 	/*public function new(?clearGraphics:Bool = true, ?clearSound:Bool = true, ?clearFrames:Bool = true)
 		{
 			Paths.clearMemory(clearGraphics, clearSound, clearFrames);
 			super();
 	}*/
+	public var followingPosition:FlxPoint;
+
 	override public function create()
 	{
 		if (intendedToClearMemory)
@@ -44,6 +50,11 @@ class MusicBeatState extends FlxState
 		camHUD.bgColor.alpha = 0;
 		FlxG.cameras.add(camHUD, false);
 		// FlxG.camera.fade(FlxColor.BLACK, 0.5, true);
+
+		camFollow = new FlxObject(FlxG.width / 2, FlxG.height / 2, 1, 1);
+		FlxG.camera.follow(camFollow, LOCKON, 0.02 / (60 / FlxG.updateFramerate));
+		followingPosition = camFollow.getPosition();
+		FlxG.camera.focusOn(followingPosition);
 	}
 
 	public function postCreate()

@@ -72,6 +72,11 @@
 		0,
 		350
 	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"camZoomMulti": 1,
 	"flipX": true,
 	"flipY": false,
 	"antialiasing": true,

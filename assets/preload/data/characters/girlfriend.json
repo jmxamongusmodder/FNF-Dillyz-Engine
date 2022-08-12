@@ -130,6 +130,11 @@
 		0,
 		0
 	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"camZoomMulti": 1,
 	"flipX": false,
 	"flipY": false,
 	"antialiasing": true,
