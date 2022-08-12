@@ -5,6 +5,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -27,6 +28,8 @@ class MusicBeatState extends FlxState
 	private var preloaderCamera:FlxCamera;
 
 	public var camFollow:FlxObject;
+
+	var curCamZoom:Float = 1;
 
 	/*public function new(?clearGraphics:Bool = true, ?clearSound:Bool = true, ?clearFrames:Bool = true)
 		{
@@ -103,6 +106,11 @@ class MusicBeatState extends FlxState
 			beatHit();
 		if (lastStep != curStep)
 			stepHit();
+
+		var ripPigMan:Float = e * 114;
+		// debugArrayLol.push(ripPigMan);
+		// debugText.text = Std.string(debugArrayLol.getAverageFloat());
+		FlxG.camera.zoom = FlxMath.lerp(curCamZoom, FlxG.camera.zoom, ripPigMan);
 	}
 
 	public function sectionHit() {};

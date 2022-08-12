@@ -42,18 +42,22 @@ class Character extends FunkySprite
 	@:allow(CharacterEditorState)
 	private var charData:CharacterData;
 
-	private static var charAnimDefault:CharAnimData = {
-		offset: [0, 0],
-		indices: [],
-		name: 'idle',
-		prefix: 'BF idle dance',
-		flipX: false,
-		flipY: false,
-		fps: 24,
-		looped: false
-	};
+	private static function charAnimDefault():CharAnimData
+	{
+		return {
+			offset: [0, 0],
+			indices: [],
+			name: 'idle',
+			prefix: 'BF Idle Dance',
+			flipX: false,
+			flipY: false,
+			fps: 24,
+			looped: false
+		};
+	}
+
 	private static var charDefault:CharacterData = {
-		animData: [charAnimDefault],
+		animData: [charAnimDefault()],
 		groundOffset: [0, 350],
 		cameraOffset: [0, 0],
 		camZoomMulti: 1,

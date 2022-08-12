@@ -173,7 +173,8 @@ class FlxUIDropDownMenuScrollable extends FlxUIGroup implements IFlxUIWidget imp
 				var data = DataList[i];
 				list.push(makeListButton(i, data.label, data.name));
 			}
-			selectSomething(DataList[0].name, DataList[0].label);
+			if (DataList.length >= 1)
+				selectSomething(DataList[0].name, DataList[0].label);
 		}
 		else if (ButtonList != null)
 		{
@@ -376,6 +377,15 @@ class FlxUIDropDownMenuScrollable extends FlxUIGroup implements IFlxUIWidget imp
 		if (btn != null && btn.label != null)
 		{
 			btn.label.text = NewLabel;
+		}
+	}
+
+	public function changeNameByIndex(i:Int, NewName:String):Void
+	{
+		var btn:FlxUIButton = getBtnByIndex(i);
+		if (btn != null && btn.label != null)
+		{
+			btn.label.name = NewName;
 		}
 	}
 
