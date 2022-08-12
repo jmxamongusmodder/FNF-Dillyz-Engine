@@ -48,4 +48,13 @@ class DillyzUtil
 			newArray.push(i);
 		return newArray;
 	}
+
+	public static function snapInt(i:Int, minVal:Int, maxVal:Int):Int
+	{
+		if (i < minVal)
+			return minVal;
+		else if (i > maxVal)
+			return maxVal;
+		return i;
+	}
 }

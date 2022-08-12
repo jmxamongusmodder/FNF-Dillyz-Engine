@@ -37,7 +37,8 @@ typedef CharacterData =
 
 class Character extends FunkySprite
 {
-	var charData:CharacterData;
+	@:allow(CharacterEditorState)
+	private var charData:CharacterData;
 
 	private static var charAnimDefault:CharAnimData = {
 		offset: [0, 0],
@@ -132,24 +133,30 @@ class Character extends FunkySprite
 		danceIndex++;
 	}
 
-	public function loadCharacter(charName:String)
+	public function loadCharacter(charName:String, ?reloadSprite:Bool = true)
 	{
+		this.charName = charName;
 		charData = Paths.json('${gameOver ? 'characters dead' : 'characters'}/$charName', null, charDefault);
-		reloadChar();
+		reloadChar(reloadSprite);
 	}
 
-	public function loadCharacterByData(charData:CharacterData)
+	public function loadCharacterByData(charData:CharacterData, ?reloadSprite:Bool = true)
 	{
 		this.charData = charData;
-		reloadChar();
+		reloadChar(reloadSprite);
 	}
 
 	@:allow(CharacterEditorState)
 	private function reloadChar(?reloadSprite:Bool = true)
 	{
+		this.flipX = false;
+		this.flipY = false;
 		// DillyzLogger.log(cast(charData), LogType.Normal);
 
 		var animData:Array<CharAnimData> = charData.animData;
+
+		DillyzLogger.log('Loading $charName from ${charData.sprPath} as type ${charData.sprType}.', LogType.Normal);
+		// DillyzLogger.log('$charData.', LogType.Normal);
 
 		// haxeflixel fix ur clear() function >:(((((((((
 		var dirtBlockValues:Array<String> = [];
@@ -164,6 +171,8 @@ class Character extends FunkySprite
 			default:
 				if (reloadSprite || frames == null)
 					frames = Paths.sparrowV2(charData.sprPath, 'shared');
+
+				DillyzLogger.log('Loading $charName from ${charData.sprPath} as type ${charData.sprType}.', LogType.Normal);
 
 				for (i in animData)
 				{

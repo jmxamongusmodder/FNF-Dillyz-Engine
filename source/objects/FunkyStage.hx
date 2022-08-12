@@ -140,6 +140,7 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 			newStaticAsset.active = i.active;
 			newStaticAsset.scrollFactor.set(i.scrollFactor[0], i.scrollFactor[1]);
 			newStaticAsset.scale.set(i.scale[0], i.scale[1]);
+			newStaticAsset.antialiasing = !pixelStage;
 			bgAssets.set(i.name, newStaticAsset);
 			add(newStaticAsset);
 		}
