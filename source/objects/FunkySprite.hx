@@ -30,6 +30,16 @@ class FunkySprite extends FlxSprite
 		DillyzLogger.log('Animation "$name" ${forced ? 'with' : 'without'} force not found!', LogType.Warning);
 	}
 
+	public function updateOffset()
+	{
+		if (animOffsets.exists(getAnim()))
+		{
+			var offsetReal:FlxPoint = animOffsets.get(getAnim());
+			offset.set(offsetReal.x, offsetReal.y);
+			return;
+		}
+	}
+
 	public function playAnim(name:String, ?forced:Bool = false)
 	{
 		if (animOffsets.exists(name))

@@ -1,92 +1,92 @@
 {
-	"animData": [
-		{
-			"name": "idle",
-			"prefix": "BF idle dance",
-			"offset": [
-				0,
-				0
-			],
-			"indices": [],
-			"flipX": false,
-			"flipY": false,
-			"looped": false,
-			"fps": 24
-		},
-		{
-			"name": "singLEFT",
-			"prefix": "BF NOTE LEFT",
-			"offset": [
-				0,
-				0
-			],
-			"indices": [],
-			"flipX": false,
-			"flipY": false,
-			"looped": false,
-			"fps": 24
-		},
-		{
-			"name": "singDOWN",
-			"prefix": "BF NOTE DOWN",
-			"offset": [
-				0,
-				0
-			],
-			"indices": [],
-			"flipX": false,
-			"flipY": false,
-			"looped": false,
-			"fps": 24
-		},
-		{
-			"name": "singUP",
-			"prefix": "BF NOTE UP",
-			"offset": [
-				0,
-				0
-			],
-			"indices": [],
-			"flipX": false,
-			"flipY": false,
-			"looped": false,
-			"fps": 24
-		},
-		{
-			"name": "singRIGHT",
-			"prefix": "BF NOTE RIGHT",
-			"offset": [
-				0,
-				0
-			],
-			"indices": [],
-			"flipX": false,
-			"flipY": false,
-			"looped": false,
-			"fps": 24
-		}
-	],
-	"sprPath": "characters/Boyfriend",
-	"sprType": "sparrow-v2",
-	"groundOffset": [
-		0,
-		350
+	"idleLoop": [
+		"idle"
 	],
 	"cameraOffset": [
 		0,
 		0
 	],
-	"camZoomMulti": 1,
-	"flipX": true,
-	"flipY": false,
-	"antialiasing": true,
-	"scale": [
-		1.0,
-		1.0
-	],
 	"deadVariant": "boyfriend",
-	"idleLoop": [
-		"idle"
+	"scale": [
+		1,
+		1
 	],
-	"holdTimer": 4
+	"sprPath": "characters/Boyfriend",
+	"groundOffset": [
+		0,
+		350
+	],
+	"flipX": true,
+	"animData": [
+		{
+			"flipY": false,
+			"fps": 24,
+			"prefix": "BF idle dance",
+			"looped": false,
+			"flipX": false,
+			"name": "idle",
+			"offset": [
+				0,
+				0
+			],
+			"indices": []
+		},
+		{
+			"flipY": false,
+			"fps": 24,
+			"prefix": "BF NOTE LEFT",
+			"looped": false,
+			"flipX": false,
+			"name": "singLEFT",
+			"offset": [
+				9,
+				-9
+			],
+			"indices": []
+		},
+		{
+			"flipY": false,
+			"fps": 24,
+			"prefix": "BF NOTE DOWN",
+			"looped": false,
+			"flipX": false,
+			"name": "singDOWN",
+			"offset": [
+				-17,
+				-50
+			],
+			"indices": []
+		},
+		{
+			"flipY": false,
+			"fps": 24,
+			"prefix": "BF NOTE UP",
+			"looped": false,
+			"flipX": false,
+			"name": "singUP",
+			"offset": [
+				-40,
+				29
+			],
+			"indices": []
+		},
+		{
+			"flipY": false,
+			"fps": 24,
+			"prefix": "BF NOTE RIGHT",
+			"looped": false,
+			"flipX": false,
+			"name": "singRIGHT",
+			"offset": [
+				-43,
+				-6
+			],
+			"indices": []
+		}
+	],
+	"antialiasing": true,
+	"flipY": false,
+	"holdTimer": 4,
+	"sprType": "sparrow-v2",
+	"camZoomMulti": 1
 }

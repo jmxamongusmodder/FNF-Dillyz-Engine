@@ -9,6 +9,7 @@ import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.StrNameLabel;
 import flixel.animation.FlxAnimation;
 import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import haxe.Json;
@@ -20,6 +21,7 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.net.FileFilter;
 import openfl.net.FileReference;
+import sys.io.File;
 
 using DillyzUtil;
 using StringTools;
@@ -37,7 +39,7 @@ class CharacterEditorState extends MusicBeatState
 	public var curCharName:String = 'boyfriend';
 	public var charSide:CharSideEdit = CharSideEdit.Right;
 
-	public var bgChar:Character;
+	public var bgChars:Array<Character>;
 	public var curChar:Character;
 
 	public var animList:Array<String> = [];
@@ -113,9 +115,20 @@ class CharacterEditorState extends MusicBeatState
 		normalStage = new FunkyStage('stage');
 		add(normalStage);
 
-		bgChar = new Character(getDefaultPos().x, getDefaultPos().y, getDefaultChar(), charSide == CharSideEdit.Right, false, false);
-		bgChar.alpha = 0.15;
-		add(bgChar);
+		var bgCharBF = new Character(normalStage.posBF.x, normalStage.posBF.y, 'boyfriend', true, true, false);
+		bgCharBF.alpha = 0.15;
+		add(bgCharBF);
+
+		var bgCharGF = new Character(normalStage.posGF.x, normalStage.posGF.y, 'girlfriend', false, true, false);
+		bgCharGF.alpha = 0.15;
+		add(bgCharGF);
+
+		var bgCharDad = new Character(normalStage.posDad.x, normalStage.posDad.y, 'daddy dearest', false, true, false);
+		bgCharDad.alpha = 0.15;
+		add(bgCharDad);
+
+		bgChars = [bgCharBF, bgCharGF, bgCharDad];
+
 		curChar = new Character(getDefaultPos().x, getDefaultPos().y, curCharName, charSide == CharSideEdit.Right, false, false);
 		add(curChar);
 
@@ -259,8 +272,91 @@ class CharacterEditorState extends MusicBeatState
 				funnyFile.browse([new FileFilter('Character JSON File', 'json')]);
 			}
 		});
+
+		var saveJSONButton:FlxUIButton = new FlxUIButton(200, choseJSONButton.y + choseJSONButton.height + 10, 'Save Current JSON', function()
+		{
+			DillyzLogger.log('Attempting to save the JSON file for a character.', LogType.Normal);
+
+			@:suppressWarnings {
+				var funnyFile:FileReference = new FileReference();
+
+				var onSaveComplete:(Event) -> Void;
+				var onSaveCancel:(Event) -> Void;
+				var onSaveError:(IOErrorEvent) -> Void;
+
+				var likeIfYouAgree:() -> Void = function()
+				{
+					funnyFile.removeEventListener(Event.COMPLETE, onSaveComplete);
+					funnyFile.removeEventListener(Event.CANCEL, onSaveCancel);
+					funnyFile.removeEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+					funnyFile = null;
+				};
+
+				onSaveComplete = function(_:Event)
+				{
+					DillyzLogger.log('Sent the json.', LogType.Normal);
+					curCharName = funnyFile.name.substring(0, funnyFile.name.lastIndexOf('.') - 1);
+					likeIfYouAgree();
+				};
+				onSaveCancel = function(_:Event)
+				{
+					DillyzLogger.log('Kept the json.', LogType.Warning);
+					likeIfYouAgree();
+				};
+				onSaveError = function(_:IOErrorEvent)
+				{
+					DillyzLogger.log('Uhhhh whoops! Something went wrong saving the json!', LogType.Warning);
+					likeIfYouAgree();
+				};
+
+				funnyFile.addEventListener(Event.COMPLETE, onSaveComplete);
+				funnyFile.addEventListener(Event.CANCEL, onSaveCancel);
+				funnyFile.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+				var newJsonText:String = '{\n	"__comment": "lmao i failed to get the data xdwbuwafni",\n	"__comment_2": "nah but if you see this report it as a bug"\n}';
+				@:privateAccess {
+					newJsonText = Json.stringify(curChar.charData);
+				}
+				// [new FileFilter('Character JSON File', 'json')]
+				funnyFile.save(newJsonText, '$curCharName.json');
+			}
+		});
+
+		var sideDropdown:FlxUIDropDownMenuScrollable = new FlxUIDropDownMenuScrollable(100, saveJSONButton.y + saveJSONButton.height + 10, [
+			new StrNameLabel("Left", "Left"),
+			new StrNameLabel("Middle", "Middle"),
+			new StrNameLabel("Right", "Right")
+		], function(opt:String)
+		{
+			@:privateAccess {
+				// DillyzLogger.log('Dropdown Option $opt selected. No functionality implemented.', LogType.Normal);
+				switch (opt.toLowerCase())
+				{
+					case 'left':
+						charSide = CharSideEdit.Left;
+						curChar.rightSide = false;
+					case 'middle':
+						charSide = CharSideEdit.Middle;
+						curChar.rightSide = false;
+					case 'right':
+						charSide = CharSideEdit.Right;
+						curChar.rightSide = true;
+				}
+
+				curChar.defPoint.set(getDefaultPos().x, getDefaultPos().y);
+
+				curChar.resetPosition();
+				curChar.resetFlip();
+				refreshCharacter(false);
+			}
+		});
+		sideDropdown.x -= sideDropdown.width / 2;
+		sideDropdown.selectedLabel = sideDropdown.selectedId = 'Right';
+
 		choseJSONButton.resize(choseJSONButton.width * 2.5, choseJSONButton.height);
 		choseJSONButton.x -= choseJSONButton.width / 2;
+
+		saveJSONButton.resize(saveJSONButton.width * 2.5, saveJSONButton.height);
+		saveJSONButton.x -= saveJSONButton.width / 2;
 
 		// make new char ui var
 		var tabGroup_characters = new FlxUI(null, optionsBox);
@@ -270,6 +366,8 @@ class CharacterEditorState extends MusicBeatState
 		tabGroup_characters.add(spriteSheetInput);
 		tabGroup_characters.add(spriteSheetSubmit);
 		tabGroup_characters.add(choseJSONButton);
+		tabGroup_characters.add(saveJSONButton);
+		tabGroup_characters.add(sideDropdown);
 
 		// assign it to the box
 		optionsBox.addGroup(tabGroup_characters);
@@ -279,7 +377,9 @@ class CharacterEditorState extends MusicBeatState
 	override public function beatHit()
 	{
 		if (curBeat % 2 == 0)
-			bgChar.dance();
+			for (i in bgChars)
+				i.dance();
+		// bgChar.dance();
 	}
 
 	public function reloadAnims()
@@ -305,6 +405,8 @@ class CharacterEditorState extends MusicBeatState
 	{
 		super.update(e);
 
+		curChar.holdTimer = 1000000;
+
 		/*if (FlxG.keys.justPressed.ONE)
 				switchState(PlayState, [], false);
 			// StateManager.load(PlayState);
@@ -316,7 +418,9 @@ class CharacterEditorState extends MusicBeatState
 
 		var kp = FlxG.keys.pressed;
 		var kjp = FlxG.keys.justPressed;
-		var controls:Array<Bool> = [kp.W, kp.A, kp.S, kp.D, kp.Q, kp.E, kjp.ONE, kjp.TWO, kjp.THREE, kjp.SPACE];
+		var controls:Array<Bool> = [
+			kp.W, kp.A, kp.S, kp.D, kp.Q, kp.E, kjp.ONE, kjp.TWO, kjp.THREE, kjp.SPACE, kp.UP, kp.LEFT, kp.DOWN, kp.RIGHT, kjp.COMMA, kjp.PERIOD
+		];
 
 		for (i in 0...controls.length)
 			if (controls[i])
@@ -351,7 +455,122 @@ class CharacterEditorState extends MusicBeatState
 						switchState(PlayState, [], i == 7);
 					case 8:
 						refreshCharacter(false);
+					// animation force play
 					case 9:
+						curChar.playAnim(curAnim, true);
+					// animation offset
+					case 10:
+						@:privateAccess
+						{
+							var newPoint:FlxPoint;
+							if (curChar.animOffsets.exists(curAnim))
+							{
+								newPoint = curChar.animOffsets.get(curAnim);
+								newPoint.y++;
+							}
+							else
+								newPoint = new FlxPoint(0, 1);
+
+							curChar.animOffsets.set(curAnim, newPoint);
+
+							curChar.updateOffset();
+							for (i in curChar.charData.animData)
+								if (i.name == curAnim)
+								{
+									i.offset[0] = Std.int(newPoint.x);
+									i.offset[1] = Std.int(newPoint.y);
+								}
+							updateAnims();
+						}
+					case 11:
+						@:privateAccess
+						{
+							var newPoint:FlxPoint;
+							if (curChar.animOffsets.exists(curAnim))
+							{
+								newPoint = curChar.animOffsets.get(curAnim);
+								newPoint.x++;
+							}
+							else
+								newPoint = new FlxPoint(1, 0);
+
+							curChar.animOffsets.set(curAnim, newPoint);
+
+							curChar.updateOffset();
+							for (i in curChar.charData.animData)
+								if (i.name == curAnim)
+								{
+									i.offset[0] = Std.int(newPoint.x);
+									i.offset[1] = Std.int(newPoint.y);
+								}
+							updateAnims();
+						}
+					case 12:
+						@:privateAccess
+						{
+							var newPoint:FlxPoint;
+							if (curChar.animOffsets.exists(curAnim))
+							{
+								newPoint = curChar.animOffsets.get(curAnim);
+								newPoint.y--;
+							}
+							else
+								newPoint = new FlxPoint(0, -1);
+
+							curChar.animOffsets.set(curAnim, newPoint);
+
+							curChar.updateOffset();
+							for (i in curChar.charData.animData)
+								if (i.name == curAnim)
+								{
+									i.offset[0] = Std.int(newPoint.x);
+									i.offset[1] = Std.int(newPoint.y);
+								}
+							updateAnims();
+						}
+					case 13:
+						@:privateAccess
+						{
+							var newPoint:FlxPoint;
+							if (curChar.animOffsets.exists(curAnim))
+							{
+								newPoint = curChar.animOffsets.get(curAnim);
+								newPoint.x--;
+							}
+							else
+								newPoint = new FlxPoint(-1, 0);
+
+							curChar.animOffsets.set(curAnim, newPoint);
+
+							curChar.updateOffset();
+							for (i in curChar.charData.animData)
+								if (i.name == curAnim)
+								{
+									i.offset[0] = Std.int(newPoint.x);
+									i.offset[1] = Std.int(newPoint.y);
+								}
+							updateAnims();
+						}
+					// current animation
+					case 14:
+						var curIndex:Int = allAnimNames.indexOf(curAnim);
+						curIndex++;
+						if (curIndex < 0)
+							curIndex = allAnimNames.length - 1;
+						else if (curIndex > allAnimNames.length)
+							curIndex = 0;
+						curAnim = allAnimNames[curIndex];
+						updateAnims();
+						curChar.playAnim(curAnim, true);
+					case 15:
+						var curIndex:Int = allAnimNames.indexOf(curAnim);
+						curIndex--;
+						if (curIndex < 0)
+							curIndex = allAnimNames.length - 1;
+						else if (curIndex > allAnimNames.length)
+							curIndex = 0;
+						curAnim = allAnimNames[curIndex];
+						updateAnims();
 						curChar.playAnim(curAnim, true);
 				}
 		var ripPigMan:Float = e * 114;

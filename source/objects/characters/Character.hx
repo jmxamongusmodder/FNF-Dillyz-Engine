@@ -68,6 +68,7 @@ class Character extends FunkySprite
 		holdTimer: 6.1,
 	};
 
+	@:allow(CharacterEditorState)
 	private var defPoint:FlxPoint;
 
 	public var camOffset:FlxPoint;
@@ -152,6 +153,19 @@ class Character extends FunkySprite
 	{
 		this.charData = charData;
 		reloadChar(reloadSprite);
+	}
+
+	public function resetPosition()
+	{
+		setPosition(defPoint.x + charData.groundOffset[0], defPoint.y + charData.groundOffset[1]);
+	}
+
+	public function resetFlip()
+	{
+		this.flipX = charData.flipX;
+		this.flipY = charData.flipY;
+		if (rightSide)
+			this.flipX = !this.flipX;
 	}
 
 	@:allow(CharacterEditorState)
