@@ -169,6 +169,26 @@ class Character extends FunkySprite
 	}
 
 	@:allow(CharacterEditorState)
+	private function reloadAnims()
+	{
+		this.animation.destroyAnimations();
+		switch (charData.sprType)
+		{
+			// sparrow v2
+			default:
+				for (i in charData.animData)
+				{
+					if (i.indices.length == 0)
+						this.animation.addByPrefix(i.name, i.prefix + '0', i.fps, i.looped, i.flipX, i.flipY);
+					else
+						this.animation.addByIndices(i.name, i.prefix + '0', i.indices, "", i.fps, i.looped, i.flipX, i.flipY);
+
+					animOffsets.set(i.name, new FlxPoint(i.offset[0], i.offset[1]));
+				}
+		}
+	}
+
+	@:allow(CharacterEditorState)
 	private function reloadChar(?reloadSprite:Bool = true)
 	{
 		setPosition(defPoint.x, defPoint.y);
@@ -176,7 +196,7 @@ class Character extends FunkySprite
 		this.flipY = false;
 		// DillyzLogger.log(cast(charData), LogType.Normal);
 
-		var animData:Array<CharAnimData> = charData.animData;
+		// var animData:Array<CharAnimData> = charData.animData;
 
 		DillyzLogger.log('Loading $charName from ${charData.sprPath} as type ${charData.sprType}.', LogType.Normal);
 		// DillyzLogger.log('$charData.', LogType.Normal);
@@ -196,17 +216,9 @@ class Character extends FunkySprite
 					frames = Paths.sparrowV2(charData.sprPath, 'shared');
 
 				DillyzLogger.log('Loading $charName from ${charData.sprPath} as type ${charData.sprType}.', LogType.Normal);
-
-				for (i in animData)
-				{
-					if (i.indices.length == 0)
-						this.animation.addByPrefix(i.name, i.prefix + '0', i.fps, i.looped, i.flipX, i.flipY);
-					else
-						this.animation.addByIndices(i.name, i.prefix + '0', i.indices, "", i.fps, i.looped, i.flipX, i.flipY);
-
-					animOffsets.set(i.name, new FlxPoint(i.offset[0], i.offset[1]));
-				}
 		}
+
+		reloadAnims();
 
 		this.x += charData.groundOffset[0];
 		this.y += charData.groundOffset[1];
