@@ -63,7 +63,7 @@
 			"prefix": "GF Note Left",
 			"offset": [
 				0,
-				-9
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -76,7 +76,7 @@
 			"prefix": "GF Note Down",
 			"offset": [
 				0,
-				-10
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -89,7 +89,7 @@
 			"prefix": "GF Note Up",
 			"offset": [
 				0,
-				14
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -102,7 +102,7 @@
 			"prefix": "GF Note Right",
 			"offset": [
 				0,
-				-10
+				0
 			],
 			"indices": [],
 			"flipX": false,
@@ -115,7 +115,7 @@
 			"prefix": "GF Scared",
 			"offset": [
 				0,
-				-8
+				0
 			],
 			"indices": [],
 			"flipX": false,
