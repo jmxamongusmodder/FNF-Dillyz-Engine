@@ -11,6 +11,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import objects.FunkyText;
+import objects.ui.Alphabet;
+import sys.FileSystem;
 
 class ModManagerMenu extends MusicBeatState
 {
@@ -51,6 +53,13 @@ class ModManagerMenu extends MusicBeatState
 		add(bgFlash);
 		bgFlash.cameras = [camHUD];
 
+		var fileList:Array<String> = FileSystem.readDirectory('./mods/');
+		for (i in 0...fileList.length)
+		{
+			trace(fileList[i]);
+			var newAlphabet:Alphabet = new Alphabet(0, i * 75, fileList[i]);
+			add(newAlphabet);
+		}
 		postCreate();
 	}
 

@@ -42,11 +42,18 @@ class FunkySprite extends FlxSprite
 
 	public function playAnim(name:String, ?forced:Bool = false)
 	{
-		if (animOffsets.exists(name))
+		if (animation.exists(name))
 		{
 			this.animation.play(name, forced);
-			var offsetReal:FlxPoint = animOffsets.get(name);
-			offset.set(offsetReal.x, offsetReal.y);
+
+			if (animOffsets.exists(name))
+			{
+				var offsetReal:FlxPoint = animOffsets.get(name);
+				offset.set(offsetReal.x, offsetReal.y);
+			}
+			else
+				offset.set(0, 0);
+
 			return;
 		}
 
