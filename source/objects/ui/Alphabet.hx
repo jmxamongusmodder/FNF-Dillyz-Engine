@@ -71,6 +71,7 @@ class AlphabetCharacter extends FunkySprite
 		animOffsets.set('=', new FlxPoint(0, -12));
 		animOffsets.set('~', new FlxPoint(0, -24));
 		animOffsets.set('-', new FlxPoint(0, -16));
+		animOffsets.set('Period', new FlxPoint(0, -50));
 		var bOffset = -5;
 		animOffsets.set('B Bold', new FlxPoint(bOffset, 0));
 		animOffsets.set('E Bold', new FlxPoint(bOffset, 0));
