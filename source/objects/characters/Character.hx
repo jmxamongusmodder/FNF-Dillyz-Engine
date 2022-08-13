@@ -156,8 +156,11 @@ class Character extends FunkySprite
 		charData = Paths.json('${gameOver ? 'characters dead' : 'characters'}/$charName', null, charDefault);
 		for (i in charData.animData)
 		{
-			if (i.cameraOffset == null || i.cameraOffset.length != -2)
+			if (i.cameraOffset == null || i.cameraOffset.length != 2)
+				// {
+				// trace(i.name + '\'s cam offset null ' + i.cameraOffset.length + ' ' + i.cameraOffset);
 				i.cameraOffset = [0, 0];
+			// }
 			if (i.camZoomMulti == null || i.camZoomMulti == 0)
 				i.camZoomMulti = 1;
 		}

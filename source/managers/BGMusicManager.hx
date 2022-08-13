@@ -5,17 +5,19 @@ import rhythm.Conductor;
 
 class BGMusicManager
 {
-	public static var bgMusicName:String = 'freakyMenu';
-	public static var bpm:Int = 102;
+	public static var bgMusicName:String = 'nothing';
+	public static var bpm:Int = 100;
+	public static var soundMemCleared:Bool = false;
 
 	public static function play(musicName:String, bpm:Int, ?force:Bool = false)
 	{
-		if (bgMusicName != musicName || force)
+		if (bgMusicName != musicName || force || soundMemCleared)
 		{
 			bgMusicName = musicName;
 			BGMusicManager.bpm = bpm;
+			restart();
+			soundMemCleared = false;
 		}
-		restart();
 	}
 
 	public static function pause()
@@ -30,7 +32,7 @@ class BGMusicManager
 
 	public static function restart()
 	{
-		FlxG.sound.playMusic(Paths.music(bgMusicName), true);
+		FlxG.sound.playMusic(Paths.music(bgMusicName), 1.05, true);
 		Conductor.changeBPM(bpm);
 	}
 }

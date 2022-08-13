@@ -11,6 +11,7 @@ import haxe.Json;
 import objects.FunkyStage;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
+import openfl.text.Font;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -28,7 +29,9 @@ class Paths
 	public static var loadedSounds:Map<String, Sound> = [];
 	public static var loadedFrames:Map<String, FlxAtlasFrames> = [];
 
-	public static function clearMemory(?clearGraphics:Bool = true, ?clearSound:Bool = true, ?clearFrames:Bool = true)
+	// public static var loadedFonts:Map<String, Font> = [];
+
+	public static function clearMemory(?clearGraphics:Bool = true, ?clearSound:Bool = true, ?clearFrames:Bool = true) // , ?clearFonts:Bool = false)
 	{
 		DillyzLogger.log('Clearing out assets. Graphics? ${clearGraphics ? 'Yes' : 'No'}. Sounds? ${clearSound ? 'Yes' : 'No'}. Atlas Frames? ${clearFrames ? 'Yes' : 'No'}.',
 			LogType.Normal);
@@ -90,6 +93,24 @@ class Paths
 				}
 			}
 		}
+
+		/*if (clearFonts)
+			{
+				var keys:Array<String> = cast(loadedFonts.keys().toArray());
+				for (i in 0...keys.length)
+				{
+					try
+					{
+						var font:Font = loadedFonts.get(keys[i]);
+						loadedFonts.remove(keys[i]);
+						font.decompose();
+					}
+					catch (e:Exception)
+					{
+						DillyzLogger.log('Could not clear font \'${keys[i]}\'; ${e.toString()}\n${e.message}', LogType.Error);
+					}
+				}
+		}*/
 	}
 
 	inline public static function asset(path:String, ?lib:Null<String>, ?fileExt:String = 'txt')
@@ -344,6 +365,28 @@ class Paths
 		{
 			DillyzLogger.log('Sparrow V2 SpriteSheet Missing OR Invalid; ${e.toString()}\n${e.message}', LogType.Error);
 			return PathDefaults.getFrames();
+		}
+	}
+
+	inline public static function font(path:String, ?ext:String = 'ttf')
+	{
+		try
+		{
+			/*var assetID:String = 'font:$path';
+
+				if (loadedFonts.exists(assetID))
+					return loadedFonts.get(assetID);
+
+				var newFont:Font = Font.fromBytes(File.getBytes(asset(path, 'fonts', ext)));
+				loadedFonts.set(assetID, newFont);
+				return newFont; */
+
+			return asset('fonts/$path', null, ext); // 'assets/fonts/$path.${ext.toLowerCase()}';
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Font OR Invalid; ${e.toString()}\n${e.message}', LogType.Error);
+			return 'assets/fonts/vcr.ttf'; // null;
 		}
 	}
 }

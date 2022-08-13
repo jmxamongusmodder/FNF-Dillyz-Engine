@@ -81,7 +81,7 @@ class PlayState extends MusicBeatState
 		else if (FlxG.keys.justPressed.THREE)
 		{
 			// StateManager.loadAndClearMemory(CharacterEditorState);
-			switchState(MainMenuState, [], false, FunkinTransitionType.Normal);
+			switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 		}
 
 		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);

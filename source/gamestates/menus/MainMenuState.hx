@@ -6,6 +6,7 @@ import flixel.effects.FlxFlicker;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -13,6 +14,7 @@ import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import managers.BGMusicManager;
 import objects.FunkySprite;
+import objects.FunkyText;
 
 using DillyzUtil;
 
@@ -47,31 +49,11 @@ class MainMenuState extends MusicBeatState
 	private var funnyBG:FlxSprite;
 	private var funnyBGAlt:FlxSprite;
 
-	private var options:Array<String> = [
-		'Story Mode',
-		'Freeplay',
-		'Options',
-		'Donate' /*,
-			'Story Mode',
-			'Freeplay',
-			'Options',
-			'Donate',
-			'Story Mode',
-			'Freeplay',
-			'Options',
-			'Donate',
-			'Story Mode',
-			'Freeplay',
-			'Options',
-			'Donate',
-			'Story Mode',
-			'Freeplay',
-			'Options',
-			'Donate' ,
-				'Story Mode', 'Freeplay', 'Options', 'Donate',
-				'Story Mode', 'Freeplay', 'Options', 'Donate',
-				'Story Mode', 'Freeplay', 'Options', 'Donate',
-				'Story Mode', 'Freeplay', 'Options', 'Donate' */];
+	private var funnyGayText:FunkyText;
+
+	public static var gayWatermark(default, never):String = 'Dillyz Engine 0.0.2\nFriday Night Funkin\' 0.2.8\n';
+
+	private var options:Array<String> = ['Story Mode', 'Freeplay', 'Options', 'Donate', 'Mods', #if debug 'Debug' #end];
 	private var optionDisplay:Array<MenuButtonThing>;
 	private var curIndex:Int;
 
@@ -82,6 +64,8 @@ class MainMenuState extends MusicBeatState
 			animOffsets: [{parentAnim: "static", x: 0, y: 0}, {parentAnim: "hover", x: 0, y: 0}]
 		};
 	}
+
+	var bgFlash:FlxSprite;
 
 	override public function create()
 	{
@@ -98,6 +82,11 @@ class MainMenuState extends MusicBeatState
 		funnyBGAlt.visible = false;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBGAlt);
+
+		bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
+		bgFlash.antialiasing = true;
+		bgFlash.alpha = 0;
+		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 
 		curCamZoom = 1.0075;
 
@@ -127,6 +116,18 @@ class MainMenuState extends MusicBeatState
 
 		curIndex = 0;
 		changeSelection();
+
+		funnyGayText = new FunkyText(FlxG.width / 2 - 60, FlxG.height - 2 - 40, 0, gayWatermark, 16);
+		funnyGayText.setFormat(Paths.font('vcr'), 16, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		funnyGayText.borderSize = 1;
+		add(funnyGayText);
+		funnyGayText.cameras = [camHUD];
+		funnyGayText.screenCenter(X);
+		funnyGayText.x += 20;
+		funnyGayText.antialiasing = true;
+
+		add(bgFlash);
+		bgFlash.cameras = [camHUD];
 
 		postCreate();
 	}
@@ -180,6 +181,8 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 
 			FlxFlicker.flicker(funnyBGAlt, 1.1, 0.15, false);
+			bgFlash.alpha = 0.5;
+			FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
 
 			for (i in 0...options.length)
 			{
@@ -199,6 +202,10 @@ class MainMenuState extends MusicBeatState
 						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					case 'Donate':
 						FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
+						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
+					case 'Mods':
+						switchState(ModManagerMenu, [], false, FunkinTransitionType.Black);
+					case 'Debug':
 						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					default:
 						Sys.exit(0);

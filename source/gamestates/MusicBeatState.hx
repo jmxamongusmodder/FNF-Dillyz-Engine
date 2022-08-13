@@ -11,6 +11,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import managers.BGMusicManager;
 import rhythm.Conductor;
 
 enum FunkinTransitionType
@@ -161,6 +162,8 @@ class MusicBeatState extends FlxState
 				FlxG.switchState(Type.createInstance(newState, args));
 				return;
 		}
+
+		BGMusicManager.soundMemCleared = intendedToClearMemory;
 
 		preloaderTween = FlxTween.tween(preloaderArt, {alpha: 1}, 0.5, {
 			ease: FlxEase.cubeInOut,

@@ -60,7 +60,7 @@
 	<assets path="assets/catch" library="catch"/>
 
 	<!-- funny fonts you can\'t screw with-->
-	<assets path="assets/fonts" library="fonts" embed="true"/>
+	<assets path="assets/fonts" library="fonts" embed="false"/>
 
 	<section if="MODS_ACTIVE">
 		<assets path="mods"/>

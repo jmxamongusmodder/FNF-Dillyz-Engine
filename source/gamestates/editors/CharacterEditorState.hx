@@ -426,8 +426,8 @@ class CharacterEditorState extends MusicBeatState
 		tabGroup_animation.add(labelText(25, animationLooped.y + animationName.height + 10, 'Anim FPS'));
 		animationFPS = new FlxUINumericStepper(100, animationLooped.y + animationName.height + 10, 1, 24, 0, 120);
 		tabGroup_animation.add(labelText(25, animationFPS.y + animationName.height + 10, 'Anim Cam'));
-		animationCamOffX = new FlxUINumericStepper(100, animationFPS.y + animationName.height + 10, 5, 0, -100, 100);
-		animationCamOffY = new FlxUINumericStepper(175, animationFPS.y + animationName.height + 10, 5, 0, -100, 100);
+		animationCamOffX = new FlxUINumericStepper(100, animationFPS.y + animationName.height + 10, 5, 0, -2500, 2500);
+		animationCamOffY = new FlxUINumericStepper(175, animationFPS.y + animationName.height + 10, 5, 0, -2500, 2500);
 		tabGroup_animation.add(labelText(25, animationCamOffY.y + animationName.height + 10, 'Anim Zoom'));
 		animationCamZoom = new FlxUINumericStepper(100, animationCamOffY.y + animationName.height + 10, 0.1, 1, 0.5, 1.5);
 		animationCamZoom.isPercent = true;
