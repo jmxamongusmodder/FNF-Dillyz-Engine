@@ -71,7 +71,7 @@ class AlphabetCharacter extends FunkySprite
 		animOffsets.set('=', new FlxPoint(0, -12));
 		animOffsets.set('~', new FlxPoint(0, -24));
 		animOffsets.set('-', new FlxPoint(0, -16));
-		animOffsets.set('Period', new FlxPoint(0, -50));
+		animOffsets.set('Period', new FlxPoint(-15, -45));
 		var bOffset = -5;
 		animOffsets.set('B Bold', new FlxPoint(bOffset, 0));
 		animOffsets.set('E Bold', new FlxPoint(bOffset, 0));
@@ -142,7 +142,8 @@ class AlphabetCharacter extends FunkySprite
 class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 {
 	private var letterList:Array<AlphabetCharacter>;
-	private var text(get, set):String;
+
+	public var text(get, set):String;
 
 	private var _text:String = '';
 
@@ -150,7 +151,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 	{
 		super(x, y); // idol
 		letterList = new Array<AlphabetCharacter>();
-		set_text(newText);
+		text = newText;
 	}
 
 	private function destroyCharacters()
