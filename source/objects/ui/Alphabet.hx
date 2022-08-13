@@ -61,7 +61,7 @@ class AlphabetCharacter extends FunkySprite
 
 		animation.addByPrefix('Parenthesis Open', 'Parenthesis Open0', 24, true, false, false);
 		animation.addByPrefix('Parenthesis Close', 'Parenthesis Close0', 24, true, false, false);
-		animation.addByPrefix('Period', 'Period0', 24, true, false, false);
+		// animation.addByPrefix('Period', 'Period0', 24, true, false, false);
 		animation.addByPrefix('Default', 'Sad Spongebob0', 24, true, false, false);
 
 		animOffsets.set('_', new FlxPoint(0, -50));

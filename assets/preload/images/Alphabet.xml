@@ -342,10 +342,10 @@
 	<SubTexture name="Parenthesis Open0001" x="1590" y="432" width="31" height="33"/>
 	<SubTexture name="Parenthesis Open0002" x="1625" y="432" width="31" height="33"/>
 	<SubTexture name="Parenthesis Open0003" x="1660" y="432" width="31" height="33"/>
-	<SubTexture name="Peroid0000" x="1695" y="432" width="14" height="14"/>
-	<SubTexture name="Peroid0001" x="1713" y="432" width="14" height="14"/>
-	<SubTexture name="Peroid0002" x="1731" y="432" width="14" height="14"/>
-	<SubTexture name="Peroid0003" x="1749" y="432" width="14" height="14"/>
+	<SubTexture name="Period0000" x="1695" y="432" width="14" height="14"/>
+	<SubTexture name="Period0001" x="1713" y="432" width="14" height="14"/>
+	<SubTexture name="Period0002" x="1731" y="432" width="14" height="14"/>
+	<SubTexture name="Period0003" x="1749" y="432" width="14" height="14"/>
 	<SubTexture name="Q Bold0000" x="1767" y="432" width="52" height="67"/>
 	<SubTexture name="Q Bold0001" x="1823" y="432" width="52" height="67"/>
 	<SubTexture name="Q Bold0002" x="1879" y="432" width="52" height="67"/>
