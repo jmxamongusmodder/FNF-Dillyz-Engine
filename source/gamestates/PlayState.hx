@@ -1,7 +1,9 @@
 package gamestates;
 
 import flixel.FlxG;
+import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
+import gamestates.menus.MainMenuState;
 import managers.BGMusicManager;
 import objects.FunkyStage;
 import objects.characters.Character;
@@ -32,8 +34,6 @@ class PlayState extends MusicBeatState
 
 		charRight = new Character(theStage.posBF.x, theStage.posBF.y, 'boyfriend', true, true, false);
 		add(charRight);
-
-		BGMusicManager.play('freakyMenu', 102);
 
 		postCreate();
 	}
@@ -77,6 +77,11 @@ class PlayState extends MusicBeatState
 		{
 			// StateManager.loadAndClearMemory(CharacterEditorState);
 			switchState(CharacterEditorState, [], true);
+		}
+		else if (FlxG.keys.justPressed.THREE)
+		{
+			// StateManager.loadAndClearMemory(CharacterEditorState);
+			switchState(MainMenuState, [], false, FunkinTransitionType.Normal);
 		}
 
 		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);

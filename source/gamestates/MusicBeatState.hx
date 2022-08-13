@@ -13,6 +13,13 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import rhythm.Conductor;
 
+enum FunkinTransitionType
+{
+	Normal;
+	Black;
+	None;
+}
+
 class MusicBeatState extends FlxState
 {
 	public var curSection:Int = 0;
@@ -70,6 +77,17 @@ class MusicBeatState extends FlxState
 		add(preloaderArt);
 		preloaderArt.cameras = [preloaderCamera];
 
+		switch (transType)
+		{
+			case Normal:
+				preloaderArt.color = FlxColor.WHITE;
+			case Black:
+				preloaderArt.color = FlxColor.BLACK;
+			default:
+				preloaderArt.alpha = 0.01;
+				return;
+		}
+
 		preloaderTween = FlxTween.tween(preloaderArt, {alpha: 0}, 0.5, {
 			ease: FlxEase.cubeInOut
 		});
@@ -121,12 +139,28 @@ class MusicBeatState extends FlxState
 
 	private static var intendedToClearMemory:Bool = false;
 
-	public function switchState(newState:Class<MusicBeatState>, args:Array<Dynamic>, clearMemory:Bool)
+	public static var transType:FunkinTransitionType = FunkinTransitionType.Normal;
+
+	public function switchState(newState:Class<MusicBeatState>, args:Array<Dynamic>, clearMemory:Bool,
+			?transType:FunkinTransitionType = FunkinTransitionType.Normal)
 	{
+		MusicBeatState.transType = transType;
+
 		if (preloaderTween != null)
 			preloaderTween.cancel();
 
 		intendedToClearMemory = clearMemory;
+
+		switch (transType)
+		{
+			case Normal:
+				preloaderArt.color = FlxColor.WHITE;
+			case Black:
+				preloaderArt.color = FlxColor.BLACK;
+			default:
+				FlxG.switchState(Type.createInstance(newState, args));
+				return;
+		}
 
 		preloaderTween = FlxTween.tween(preloaderArt, {alpha: 1}, 0.5, {
 			ease: FlxEase.cubeInOut,

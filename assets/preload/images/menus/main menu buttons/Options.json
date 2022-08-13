@@ -1,0 +1,18 @@
+{
+	"posOffset": [
+		-25,
+		0
+	],
+	"animOffsets": [
+		{
+			"parentAnim": "static",
+			"x": 0,
+			"y": 0
+		},
+		{
+			"parentAnim": "hover",
+			"x": 60,
+			"y": 20
+		}
+	]
+}

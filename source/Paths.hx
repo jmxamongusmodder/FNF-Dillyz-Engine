@@ -233,6 +233,24 @@ class Paths
 		}
 	}
 
+	inline public static function menuButtonJson(path:String, ?defaultThing:Null<Dynamic> = null):Dynamic
+	{
+		try
+		{
+			if (assetExists('images/menus/main menu buttons/$path', null, 'json'))
+				return Json.parse(File.getContent(asset('images/menus/main menu buttons/$path', null, 'json')));
+			else
+				return Json.parse(Json.stringify(defaultThing));
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Json Missing; ${e.toString()}\n${e.message}', LogType.Error);
+			if (defaultThing == null)
+				defaultThing = {name: 'Default', value: 0};
+			return Json.parse(Json.stringify(defaultThing));
+		}
+	}
+
 	inline public static function stageSettingsJson(stage:String):Dynamic
 	{
 		try

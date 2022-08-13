@@ -1,0 +1,28 @@
+{
+	"bgImg": "menus/menuBG_yellow",
+	"bgImgRecolorable": false,
+	"beatZoom": 0.0075,
+	"options": [
+		{
+			"name": "Story Mode",
+			"redirectType": "state",
+			"redirect": "storyMode"
+		},
+		{
+			"name": "Freeplay",
+			"redirectType": "state",
+			"redirect": "freeplay"
+		},
+		{
+			"name": "Options",
+			"redirectType": "state",
+			"redirect": "options"
+		},
+		{
+			"name": "Donate",
+			"redirectType": "url",
+			"redirect": "https://ninja-muffin24.itch.io/funkin"
+		}
+	],
+	"optionStyle": "main menu"
+}

@@ -8,10 +8,13 @@ class BGMusicManager
 	public static var bgMusicName:String = 'freakyMenu';
 	public static var bpm:Int = 102;
 
-	public static function play(musicName:String, bpm:Int)
+	public static function play(musicName:String, bpm:Int, ?force:Bool = false)
 	{
-		bgMusicName = musicName;
-		BGMusicManager.bpm = bpm;
+		if (bgMusicName != musicName || force)
+		{
+			bgMusicName = musicName;
+			BGMusicManager.bpm = bpm;
+		}
 		restart();
 	}
 
