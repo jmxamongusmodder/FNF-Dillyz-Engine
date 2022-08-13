@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Options.png">
+	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Options Hover0000" x="0" y="329" width="606" height="155" frameX="-2" frameY="-1" frameWidth="610" frameHeight="163"/>
+	<SubTexture name="Options Hover0001" x="0" y="167" width="607" height="158" frameX="-3" frameY="-1" frameWidth="610" frameHeight="163"/>
+	<SubTexture name="Options Hover0002" x="0" y="0" width="610" height="163"/>
+	<SubTexture name="Options Static0000" x="0" y="488" width="487" height="111"/>
+	<SubTexture name="Options Static0001" x="0" y="488" width="487" height="111"/>
+	<SubTexture name="Options Static0002" x="0" y="488" width="487" height="111"/>
+	<SubTexture name="Options Static0003" x="0" y="603" width="487" height="111"/>
+	<SubTexture name="Options Static0004" x="0" y="603" width="487" height="111"/>
+	<SubTexture name="Options Static0005" x="0" y="603" width="487" height="111"/>
+	<SubTexture name="Options Static0006" x="0" y="718" width="487" height="111"/>
+	<SubTexture name="Options Static0007" x="0" y="718" width="487" height="111"/>
+	<SubTexture name="Options Static0008" x="0" y="718" width="487" height="111"/>
+</TextureAtlas>
