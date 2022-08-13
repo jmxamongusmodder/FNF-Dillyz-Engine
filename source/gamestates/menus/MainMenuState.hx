@@ -111,7 +111,7 @@ class MainMenuState extends MusicBeatState
 			optionDisplay.push(newMenuOption);
 			newMenuOption.antialiasing = true;
 
-			newMenuOption.x = ((FlxG.width / 2) - (newMenuOption.width / 2)) + newMenuOption.posOffset.x + 90;
+			newMenuOption.x = ((FlxG.width / 2) - (newMenuOption.width / 2)) + newMenuOption.posOffset.x + 60;
 		}
 
 		curIndex = 0;
@@ -123,7 +123,7 @@ class MainMenuState extends MusicBeatState
 		add(funnyGayText);
 		funnyGayText.cameras = [camHUD];
 		funnyGayText.screenCenter(X);
-		funnyGayText.x += 20;
+		// funnyGayText.x += 20;
 		funnyGayText.antialiasing = true;
 
 		add(bgFlash);

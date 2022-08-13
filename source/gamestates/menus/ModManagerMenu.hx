@@ -45,7 +45,7 @@ class ModManagerMenu extends MusicBeatState
 		add(funnyGayText);
 		funnyGayText.cameras = [camHUD];
 		funnyGayText.screenCenter(X);
-		funnyGayText.x += 35;
+		// funnyGayText.x += 35;
 		funnyGayText.antialiasing = true;
 
 		add(bgFlash);

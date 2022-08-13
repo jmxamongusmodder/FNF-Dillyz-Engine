@@ -1,6 +1,6 @@
 {
 	"posOffset": [
-		-5,
+		-25,
 		0
 	],
 	"animOffsets": [
@@ -11,8 +11,8 @@
 		},
 		{
 			"parentAnim": "hover",
-			"x": 80,
-			"y": 25
+			"x": 55,
+			"y": 35
 		}
 	]
 }
