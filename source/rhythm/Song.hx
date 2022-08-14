@@ -14,8 +14,8 @@ typedef SongData =
 	var speed:Float;
 	var player1:String;
 	var player2:String;
-	var validScore:Bool;
 
+	// var validScore:Bool;
 	// DILLYZ ENGINE STUFF
 	var girlfriend:Null<String>;
 	var stage:Null<String>;
@@ -57,7 +57,7 @@ class Song
 		speed: 1,
 		player1: 'boyfriend',
 		player2: 'daddy dearest',
-		validScore: true,
+		// validScore: true,
 		// DILLYZ ENGINE STUFF
 		girlfriend: 'girlfriend',
 		stage: 'stage'
