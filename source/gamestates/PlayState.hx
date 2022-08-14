@@ -26,11 +26,11 @@ class PlayState extends MusicBeatState
 
 		FlxG.camera.zoom = theStage.camZoom;
 
-		charLeft = new Character(theStage.posDad.x, theStage.posDad.y, 'daddy dearest', false, false, false);
-		add(charLeft);
-
 		charMid = new Character(theStage.posGF.x, theStage.posGF.y, 'girlfriend', false, false, false);
 		add(charMid);
+
+		charLeft = new Character(theStage.posDad.x, theStage.posDad.y, 'daddy dearest', false, false, false);
+		add(charLeft);
 
 		charRight = new Character(theStage.posBF.x, theStage.posBF.y, 'boyfriend', true, true, false);
 		add(charRight);

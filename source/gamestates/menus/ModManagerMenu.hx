@@ -3,6 +3,7 @@ package gamestates.menus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.effects.FlxFlicker;
+import flixel.graphics.FlxGraphic;
 import flixel.math.FlxMath;
 import flixel.text.FlxText.FlxTextAlign;
 import flixel.text.FlxText.FlxTextBorderStyle;
@@ -13,13 +14,16 @@ import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import objects.FunkyText;
 import objects.ui.Alphabet;
+import openfl.display.BitmapData;
+import openfl.media.Sound;
 import sys.FileSystem;
+import sys.io.File;
 
 using DillyzUtil;
 
 class ModManagerMenu extends MusicBeatState
 {
-	private var bgFlash:FlxSprite;
+	// private var bgFlash:FlxSprite;
 	private var funnyBG:FlxSprite;
 	private var funnyBGAlt:FlxSprite;
 	private var funnyGayText:FunkyText;
@@ -42,9 +46,9 @@ class ModManagerMenu extends MusicBeatState
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBGAlt);
 
-		bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
-		bgFlash.antialiasing = true;
-		bgFlash.alpha = 0;
+		/*bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
+			bgFlash.antialiasing = true;
+			bgFlash.alpha = 0; */
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 
 		funnyGayText = new FunkyText(FlxG.width / 2 - 60, FlxG.height - 2 - 40, 0, MainMenuState.gayWatermark, 16);
@@ -56,8 +60,8 @@ class ModManagerMenu extends MusicBeatState
 		// funnyGayText.x += 35;
 		funnyGayText.antialiasing = true;
 
-		add(bgFlash);
-		bgFlash.cameras = [camHUD];
+		// add(bgFlash);
+		// bgFlash.cameras = [camHUD];
 
 		var fileList:Array<String> = FileSystem.readDirectory('./mods/');
 		optionArray = new Array<Alphabet>();
@@ -71,6 +75,12 @@ class ModManagerMenu extends MusicBeatState
 
 		curIndex = 0;
 		changeSelection();
+
+		/*selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay'));
+			selectOverlay.antialiasing = true;
+			selectOverlay.alpha = 0;
+			add(selectOverlay);
+			selectOverlay.cameras = [camHUD]; */
 
 		postCreate();
 	}
@@ -96,19 +106,24 @@ class ModManagerMenu extends MusicBeatState
 
 	override public function update(e:Float)
 	{
+		super.update(e);
+
 		for (i in 0...optionArray.length)
 		{
 			var curOption:Alphabet = optionArray[i];
 			var intendedMulti:Int = i - curIndex;
-			var intX:Float = 240 + (-125 * Math.abs(intendedMulti));
-			var intY:Float = FlxG.height / 2 - 30 + (125 * intendedMulti);
-			var intAlpha:Float = (1 - (Math.abs(intendedMulti) / 3.2)).snapFloat(0, 1);
+			var intY:Float = FlxG.height / 2 - 30 + (165 * intendedMulti);
+			var intX:Float = 240 + (-165 * Math.abs(intendedMulti));
+			var intAlpha:Float = (1 - (Math.abs(intendedMulti) / 3.25)).snapFloat(0, 1);
 			curOption.y = FlxMath.lerp(intY, curOption.y, e * 114);
-			curOption.alpha = FlxMath.lerp(intAlpha, curOption.alpha, e * (114 * 0.8));
+			curOption.x = FlxMath.lerp(intX, curOption.x, e * 114);
+			curOption.alpha = FlxMath.lerp(intAlpha, curOption.alpha, e * (114 * 0.65));
 
 			// curOption.x = FlxMath.lerp(intX, curOption.x, e * 144);
+			#if debug
 			if (FlxG.keys.justPressed.ONE)
 				trace('$i ${curOption.text} $intX $intY $intAlpha');
+			#end
 			// curOption.alpha = FlxMath.lerp(intendedMulti / 4, curOption.alpha, e * 28.5);
 
 			/* var curOption:Alphabet = optionArray[i];
@@ -126,7 +141,6 @@ class ModManagerMenu extends MusicBeatState
 			}*/
 		}
 
-		super.update(e);
 		if (stopSpamming)
 			return;
 
@@ -138,11 +152,33 @@ class ModManagerMenu extends MusicBeatState
 		}
 		else if (FlxG.keys.justPressed.ENTER)
 		{
+			// FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 			stopSpamming = true;
-			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 			FlxFlicker.flicker(funnyBGAlt, 1.1, 0.15, false);
-			bgFlash.alpha = 0.5;
-			FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
+			// bgFlash.alpha = 0.8;
+			// FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
+			camHUD.flash(FlxColor.WHITE, 0.5);
+
+			Paths.curMod = optionArray[curIndex].text;
+			FlxG.save.data.lastMod = Paths.curMod;
+
+			for (i in 0...optionArray.length)
+			{
+				var curOption:Alphabet = optionArray[i];
+				var rightOption:Bool = i == curIndex;
+
+				if (!rightOption)
+					curOption.text = '...';
+			}
+
+			// thisis cooler bc it plays the custom sound and shows your custom sprite
+			FlxG.sound.play(Sound.fromFile(Paths.asset('sounds/menus/confirmMenu', null, 'ogg')));
+
+			var selectOverlay = new FlxSprite()
+				.loadGraphic(FlxGraphic.fromBitmapData(BitmapData.fromBytes(File.getBytes(Paths.asset('images/menus/selectOverlay', null, 'png')))));
+			selectOverlay.antialiasing = true;
+			add(selectOverlay);
+			selectOverlay.cameras = [camHUD];
 
 			new FlxTimer().start(1.5, function(t:FlxTimer)
 			{
