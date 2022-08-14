@@ -55,8 +55,8 @@ class Song
 		bpm: 100,
 		needsVoices: false,
 		speed: 1,
-		player1: 'bf',
-		player2: '',
+		player1: 'boyfriend',
+		player2: 'daddy dearest',
 		validScore: true,
 		// DILLYZ ENGINE STUFF
 		girlfriend: 'girlfriend',
