@@ -59,7 +59,7 @@ class Song
 		player2: '',
 		validScore: true,
 		// DILLYZ ENGINE STUFF
-		girlfriend: 'gf',
+		girlfriend: 'girlfriend',
 		stage: 'stage'
 	};
 
