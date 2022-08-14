@@ -51,6 +51,12 @@ class MainMenuState extends MusicBeatState
 
 	private var funnyGayText:FunkyText;
 
+	// HEY!!!!
+	// If you're modding the engine, do NOT change this!
+	// Modding someone else's engine does not mean you made one!
+	// I mean, imagine that from my perspective. I spend weeks writing this engine and you just discredit it for 5 edits you did?
+	// Instead, just add another line like this: 'Bruh Additions 1.0.0\nDillyz Engine 0.0.2\nFriday Night Funkin\' 0.2.8\n'
+	// If you do discredit my work for your minimal programming, I WILL request that you add it back or take your """"engine"""" down for lack of co-operation.
 	public static var gayWatermark(default, never):String = 'Dillyz Engine 0.0.2\nFriday Night Funkin\' 0.2.8\n';
 
 	private var options:Array<String> = ['Story Mode', 'Freeplay', 'Options', 'Donate', 'Mods', #if debug 'Debug' #end];

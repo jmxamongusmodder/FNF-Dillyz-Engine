@@ -1,7 +1,9 @@
 package rhythm;
 
 import rhythm.Section.SectionData;
+import rhythm.Section;
 
+using DillyzUtil;
 using StringTools;
 
 typedef SongData =
@@ -19,6 +21,11 @@ typedef SongData =
 	// DILLYZ ENGINE STUFF
 	var girlfriend:Null<String>;
 	var stage:Null<String>;
+	// IF YOU ARE MAKING AN ENGINE, THEN I ENCOURAGE MAKING THIS VARIABLE AND SETTING IT TO YOUR ENGINE NAME!
+	// WE COULD ALLOW FOR CROSS ENGINE COMPATIBILITY!!!!!
+	// (if you make an engine & you'd want your charts to be compatible here, just contact me. server: https://discord.gg/49NFTwcYgZ)
+	var engineType:Null<String>;
+	var countdownSuffix:Null<String>;
 }
 
 class Song
@@ -35,8 +42,10 @@ class Song
 
 	public var stage:String = 'stage';
 
+	public var countdownSuffix:String;
+
 	public function new(songName:String, notes:Array<SectionData>, bpm:Int, needsVoices:Bool, speed:Float, boyfriend:String, dad:String,
-			girlfriendYouDontHave:String, stage:String)
+			girlfriendYouDontHave:String, stage:String, countdownSuffix:String)
 	{
 		this.songName = songName;
 		this.notes = notes;
@@ -47,6 +56,7 @@ class Song
 		this.dad = dad;
 		this.girlfriendYouDontHave = (girlfriendYouDontHave == null || girlfriendYouDontHave == '') ? 'girlfriend' : girlfriendYouDontHave;
 		this.stage = (stage == null || stage == '') ? 'stage' : stage;
+		this.countdownSuffix = countdownSuffix;
 	}
 
 	public static var defSong:SongData = {
@@ -60,14 +70,80 @@ class Song
 		// validScore: true,
 		// DILLYZ ENGINE STUFF
 		girlfriend: 'girlfriend',
-		stage: 'stage'
+		stage: 'stage',
+		countdownSuffix: '',
+		// feel free to use this variable in your engine
+		engineType: 'Dillyz Engine'
 	};
 
-	public static function fromSongName(songName:String, difficulty:String):SongData
+	public static function songFromName(songName:String, difficulty:String):Song
 	{
-		return
-			Paths.json('${songName.toLowerCase().replace(' ', '-')}/${songName.toLowerCase().replace(' ', '-')}-${difficulty.toLowerCase().replace(' ', '-')}',
-				null,
-			defSong);
+		var songData:SongData = songDataFromName(songName, difficulty);
+		return new Song(songData.song, songData.notes, songData.bpm, songData.needsVoices, songData.speed, songData.player1, songData.player2,
+			songData.girlfriend, songData.stage, songData.countdownSuffix);
+	}
+
+	public static function oldCharToDillyz(oldChar:String)
+	{
+		switch (oldChar)
+		{
+			case 'bf':
+				oldChar = 'boyfriend';
+			case 'dad':
+				oldChar = 'daddy dearest';
+			default:
+				if (oldChar.startsWith('bf-'))
+					oldChar = oldChar.replace('bf-', 'boyfriend-');
+		}
+
+		return oldChar;
+	}
+
+	public static function songDataFromName(songName:String, difficulty:String):SongData
+	{
+		var newData:SongData;
+		var dataUntouched:Dynamic = Paths.json('songs/${songName.toLowerCase().replace(' ', '-')}/${songName.toLowerCase().replace(' ', '-')}-${difficulty.toLowerCase().replace(' ', '-')}',
+			null, defSong);
+
+		if (dataUntouched.song != null && !Std.isOfType(dataUntouched.song, String))
+		{
+			trace('base game song');
+			newData = dataUntouched.song;
+		}
+		else
+		{
+			trace('possibly dillyz engine song');
+			newData = dataUntouched;
+		}
+
+		// just assume it's base game
+		// maybe i'll add engine checks in the future
+		if (newData.engineType == null || newData.engineType == '')
+		{
+			// just write the engine name
+			newData.engineType = 'Dillyz Engine';
+			newData.girlfriend == 'girlfriend';
+			newData.stage == 'stage';
+			newData.countdownSuffix = '';
+
+			newData.player1 = oldCharToDillyz(newData.player1);
+			newData.player2 = oldCharToDillyz(newData.player2);
+
+			for (i in newData.notes)
+			{
+				i.theNotes = new Array<NoteData>();
+				for (o in i.sectionNotes)
+					i.theNotes.push({
+						strumTime: o[0],
+						noteData: o[1],
+						sustainLength: o[2],
+						noteType: ''
+					});
+
+				i.sectionNotes.wipeArray();
+			}
+		}
+
+		return newData;
 	}
 }

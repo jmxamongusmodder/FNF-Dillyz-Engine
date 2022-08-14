@@ -2,17 +2,19 @@ package rhythm;
 
 import rhythm.Song.SongData;
 
+using DillyzUtil;
+
 typedef BPMChangeEvent =
 {
-	var stepTime:Int;
-	var songTime:Float;
-	var bpm:Int;
+	var stepTime:Null<Int>;
+	var songTime:Null<Float>;
+	var bpm:Null<Float>;
 }
 
 // mostly pasted from https://github.com/ninjamuffin99/Funkin/blob/master/source/Conductor.hx
 class Conductor
 {
-	public static var bpm:Int = 100;
+	public static var bpm:Float = 100;
 	public static var crochet:Float = ((60 / bpm) * 1000);
 	public static var stepCrochet:Float = crochet / 4;
 	public static var songPosition:Float;
@@ -24,7 +26,7 @@ class Conductor
 
 	public static var bpmChanges:Array<BPMChangeEvent> = [];
 
-	public static function mapBPMChanges(song:SongData)
+	public static function mapBPMChanges(song:Song) // (song:SongData)
 	{
 		clearBPMChanges();
 
@@ -52,15 +54,22 @@ class Conductor
 
 	public static function clearBPMChanges()
 	{
-		var dirtBPMChanges:Array<BPMChangeEvent> = [];
-		for (i in bpmChanges)
-			dirtBPMChanges.push(i);
-		for (i in dirtBPMChanges)
-			bpmChanges.remove(i);
+		/*var dirtBPMChanges:Array<BPMChangeEvent> = [];
+			for (i in bpmChanges)
+				dirtBPMChanges.push(i);
+			for (i in dirtBPMChanges)
+				bpmChanges.remove(i); */
 		// untyped bpmChanges.length = 0;
+		for (i in bpmChanges)
+		{
+			i.bpm = i.songTime = null;
+			i.stepTime = null;
+		}
+
+		bpmChanges.wipeArray();
 	}
 
-	public static function changeBPM(bpm:Int)
+	public static function changeBPM(bpm:Float)
 	{
 		Conductor.bpm = bpm;
 

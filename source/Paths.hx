@@ -16,6 +16,7 @@ import sys.FileSystem;
 import sys.io.File;
 
 using DillyzUtil;
+using StringTools;
 
 class Paths
 {
@@ -304,6 +305,46 @@ class Paths
 		catch (e:Exception)
 		{
 			DillyzLogger.log('Music Missing; ${e.toString()}\n${e.message}', LogType.Error);
+			return PathDefaults.getSound();
+		}
+	}
+
+	inline public static function songInst(songName:String):Sound
+	{
+		try
+		{
+			var assetID:String = '$songName-SongINST';
+
+			if (loadedSounds.exists(assetID))
+				return loadedSounds.get(assetID);
+
+			var newSound:Sound = Sound.fromFile(asset('songs/${songName.toLowerCase().replace(' ', '-')}/Inst', null, 'ogg'));
+			loadedSounds.set(assetID, newSound);
+			return newSound;
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Song Inst for $songName Missing; ${e.toString()}\n${e.message}', LogType.Error);
+			return PathDefaults.getSound();
+		}
+	}
+
+	inline public static function songVoices(songName:String):Sound
+	{
+		try
+		{
+			var assetID:String = '$songName-SongVOICES';
+
+			if (loadedSounds.exists(assetID))
+				return loadedSounds.get(assetID);
+
+			var newSound:Sound = Sound.fromFile(asset('songs/${songName.toLowerCase().replace(' ', '-')}/Voices', null, 'ogg'));
+			loadedSounds.set(assetID, newSound);
+			return newSound;
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Song Voices for $songName Missing; ${e.toString()}\n${e.message}', LogType.Error);
 			return PathDefaults.getSound();
 		}
 	}
