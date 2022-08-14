@@ -17,8 +17,8 @@ typedef SongData =
 	var validScore:Bool;
 
 	// DILLYZ ENGINE STUFF
-	var girlfriend:String;
-	var stage:String;
+	var girlfriend:Null<String>;
+	var stage:Null<String>;
 }
 
 class Song
@@ -45,8 +45,8 @@ class Song
 		this.speed = speed;
 		this.boyfriend = boyfriend;
 		this.dad = dad;
-		this.girlfriendYouDontHave = girlfriendYouDontHave;
-		this.stage = stage;
+		this.girlfriendYouDontHave = (girlfriendYouDontHave == null || girlfriendYouDontHave == '') ? 'girlfriend' : girlfriendYouDontHave;
+		this.stage = (stage == null || stage == '') ? 'stage' : stage;
 	}
 
 	public static var defSong:SongData = {
