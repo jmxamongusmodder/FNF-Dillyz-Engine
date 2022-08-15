@@ -13,6 +13,8 @@ class FunkySprite extends FlxSprite
 {
 	public var animOffsets:Map<String, FlxPoint> = [];
 
+	public var debugEnabled:Bool = true;
+
 	public function setOffset(name:String, x:Int, y:Int)
 	{
 		animOffsets.set(name, new FlxPoint(x, y));
@@ -27,7 +29,8 @@ class FunkySprite extends FlxSprite
 
 	public function animationError(name:String, forced:Bool)
 	{
-		DillyzLogger.log('Animation "$name" ${forced ? 'with' : 'without'} force not found!', LogType.Warning);
+		if (debugEnabled)
+			DillyzLogger.log('Animation "$name" ${forced ? 'with' : 'without'} force not found!', LogType.Warning);
 	}
 
 	public function updateOffset()
@@ -39,6 +42,8 @@ class FunkySprite extends FlxSprite
 			return;
 		}
 	}
+
+	public var lastOffset:FlxPoint = new FlxPoint();
 
 	public function playAnim(name:String, ?forced:Bool = false)
 	{
@@ -53,6 +58,8 @@ class FunkySprite extends FlxSprite
 			}
 			else
 				offset.set(0, 0);
+
+			lastOffset.set(offset.x, offset.y);
 
 			return;
 		}

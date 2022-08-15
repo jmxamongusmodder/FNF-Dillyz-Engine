@@ -1,0 +1,156 @@
+package managers;
+
+import flixel.FlxG;
+import flixel.input.actions.FlxAction.FlxActionDigital;
+import flixel.input.actions.FlxActionManager;
+import flixel.input.actions.FlxActionSet;
+
+// UGHHH idk how to do custom contrls in haxe so here you go
+// it's like the ONE thing i'm not good at in this language
+enum abstract Action(String) to String from String
+{
+	// held
+	var LEFT = "left";
+	var DOWN = "down";
+	var UP = "up";
+	var RIGHT = "right";
+	// pressed
+	var LEFT_P = "left-press";
+	var DOWN_P = "down-press";
+	var UP_P = "up-press";
+	var RIGHT_P = "right-press";
+	// released
+	var LEFT_R = "left-release";
+	var DOWN_R = "down-release";
+	var UP_R = "up-release";
+	var RIGHT_R = "right-release";
+	// other
+	var PAUSE = "pause";
+}
+
+enum Control
+{
+	LEFT;
+	DOWN;
+	UP;
+	RIGHT;
+	PAUSE;
+}
+
+class Controls extends FlxActionSet
+{
+	// held
+	var _left = new FlxActionDigital(Action.LEFT);
+	var _down = new FlxActionDigital(Action.DOWN);
+	var _up = new FlxActionDigital(Action.UP);
+	var _right = new FlxActionDigital(Action.RIGHT);
+	// pressed
+	var _leftP = new FlxActionDigital(Action.LEFT_P);
+	var _downP = new FlxActionDigital(Action.DOWN_P);
+	var _upP = new FlxActionDigital(Action.UP_P);
+	var _rightP = new FlxActionDigital(Action.RIGHT_P);
+	// released
+	var _leftR = new FlxActionDigital(Action.LEFT_R);
+	var _downR = new FlxActionDigital(Action.DOWN_R);
+	var _upR = new FlxActionDigital(Action.UP_R);
+	var _rightR = new FlxActionDigital(Action.RIGHT_R);
+	// other
+	var _pause = new FlxActionDigital(Action.PAUSE);
+
+	// checks held
+	public var LEFT(get, never):Bool;
+
+	public function get_LEFT()
+		return _left.check();
+
+	public var DOWN(get, never):Bool;
+
+	public function get_DOWN()
+		return _down.check();
+
+	public var UP(get, never):Bool;
+
+	public function get_UP()
+		return _up.check();
+
+	public var RIGHT(get, never):Bool;
+
+	public function get_RIGHT()
+		return _right.check();
+
+	// checks pressed
+	public var LEFT_P(get, never):Bool;
+
+	public function get_LEFT_P()
+		return _leftP.check();
+
+	public var DOWN_P(get, never):Bool;
+
+	public function get_DOWN_P()
+		return _downP.check();
+
+	public var UP_P(get, never):Bool;
+
+	public function get_UP_P()
+		return _upP.check();
+
+	public var RIGHT_P(get, never):Bool;
+
+	public function get_RIGHT_P()
+		return _rightP.check();
+
+	// checks released
+	public var LEFT_R(get, never):Bool;
+
+	public function get_LEFT_R()
+		return _leftR.check();
+
+	public var DOWN_R(get, never):Bool;
+
+	public function get_DOWN_R()
+		return _downR.check();
+
+	public var UP_R(get, never):Bool;
+
+	public function get_UP_R()
+		return _upR.check();
+
+	public var RIGHT_R(get, never):Bool;
+
+	public function get_RIGHT_R()
+		return _rightR.check();
+
+	// other checks
+	public var PAUSE(get, never):Bool;
+
+	public function get_PAUSE()
+		return _pause.check();
+
+	public function new(name:String)
+	{
+		super(name);
+
+		add(_left);
+		add(_down);
+		add(_up);
+		add(_right);
+		// pressed
+		add(_leftP);
+		add(_downP);
+		add(_upP);
+		add(_rightP);
+		// released
+		add(_leftR);
+		add(_downR);
+		add(_upR);
+		add(_rightR);
+		// other
+		add(_pause);
+	}
+
+	static function init()
+	{
+		var actions = new FlxActionManager();
+		FlxG.inputs.add(actions);
+	}
+}

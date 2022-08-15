@@ -19,6 +19,8 @@ class StrumLineNote extends FunkySprite
 	public var ogY:Float;
 	public var noteData:Int;
 
+	public var autoSnapAnim:Bool = true;
+
 	public function new(x:Float, y:Float, noteData:Int, ?textureName:String = 'Strum Line Notes', ?textureJson:Null<StrumLineNoteData>)
 	{
 		super(x, y);
@@ -64,7 +66,7 @@ class StrumLineNote extends FunkySprite
 
 		animation.finishCallback = function(anim:String)
 		{
-			if (anim != 'Static')
+			if (anim != 'Static' && autoSnapAnim)
 				letGo();
 		};
 	}

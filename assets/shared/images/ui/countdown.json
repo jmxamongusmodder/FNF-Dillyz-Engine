@@ -1,15 +1,15 @@
 {
 	"threeOffset": [
-		0,
-		0
+		50,
+		50
 	],
 	"twoOffset": [
-		0,
-		0
+		-90,
+		30
 	],
 	"oneOffset": [
-		0,
-		0
+		-80,
+		35
 	],
 	"goOffset": [
 		0,

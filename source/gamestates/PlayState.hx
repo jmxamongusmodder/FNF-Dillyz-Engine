@@ -10,6 +10,7 @@ import flixel.system.debug.console.Console;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
@@ -70,7 +71,7 @@ class PlayState extends MusicBeatState
 	private var voices:FlxSound;
 
 	// strum note stuff
-	private var strumLine:Float = 50;
+	private var strumLine:Float = 35;
 	private var opponentStrums:FlxTypedSpriteGroup<StrumLineNote>;
 	private var playerStrums:FlxTypedSpriteGroup<StrumLineNote>;
 
@@ -215,6 +216,8 @@ class PlayState extends MusicBeatState
 
 				newStrumNote.x -= ((SongNote.noteWidth * SongNote.noteScaling) / 2) + 35;
 
+				newStrumNote.autoSnapAnim = p == 0;
+
 				FlxTween.tween(newStrumNote, {alpha: (middleScroll && p == 0) ? 0.5 : 1, y: strumLine}, 1.75, {ease: FlxEase.circOut, startDelay: i * 0.15});
 			}
 		}
@@ -229,6 +232,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.list.add(voices);
 
+		var lastNote:SongNote = null;
 		var songNoteDataMap:Map<String, SongNoteData> = new Map<String, SongNoteData>();
 		for (section in curSong.notes)
 			for (notes in section.theNotes)
@@ -259,8 +263,25 @@ class PlayState extends MusicBeatState
 					});
 					songNoteDataMap.set(noteName, curData);
 				}
-				var theNote:SongNote = new SongNote(0, 0, notes.strumTime, notes.noteData % keyCount, isBFNote, notes.noteType, noteName, curData);
-				displayedNotes.add(theNote);
+				var theNote:SongNote = new SongNote(0, 0, lastNote, notes.strumTime, notes.noteData % keyCount, isBFNote, false, notes.noteType, noteName,
+					curData);
+
+				lastNote = theNote;
+
+				var susDiv:Float = 64;
+				var susCut:Float = notes.sustainLength / susDiv;
+				for (i in 0...Std.int(susCut))
+				{
+					var sustainNote:SongNote = new SongNote(0, 0, lastNote, notes.strumTime + (i * susDiv), notes.noteData % keyCount, isBFNote, true,
+						notes.noteType, noteName, curData);
+					hiddenNotes.push(sustainNote);
+					lastNote = sustainNote;
+					sustainNote.alpha = 0.5;
+					sustainNote.visible = sustainNote.active = false;
+				}
+
+				hiddenNotes.push(theNote);
+				theNote.visible = theNote.active = false;
 			}
 
 		genMusic = true;
@@ -303,6 +324,7 @@ class PlayState extends MusicBeatState
 				case 1:
 					FlxG.sound.play(Paths.sound('countdown/intro3', 'shared'), 0.75);
 					makeCountdownSpr('Three', false, countdownJson.threeOffset);
+					setCamTarget('dad');
 				case 2:
 					FlxG.sound.play(Paths.sound('countdown/intro2', 'shared'), 0.75);
 					makeCountdownSpr('Two', false, countdownJson.twoOffset);
@@ -314,6 +336,7 @@ class PlayState extends MusicBeatState
 					makeCountdownSpr('Go', true, countdownJson.goOffset);
 				case 5:
 					startSong();
+					setCamTarget('bf');
 			}
 		}, 5);
 	}
@@ -379,13 +402,60 @@ class PlayState extends MusicBeatState
 	}
 
 	var dirtyNotes:Array<SongNote> = [];
+	var alreadyHitNote:Array<Bool> = [false, false, false, false];
 
+	function displaySort(bruhL:Int, Obj1:SongNote, Obj2:SongNote)
+	{
+		return FlxSort.byValues(FlxSort.ASCENDING, Obj1 != null ? Obj1.strumTime : 0, Obj2 != null ? Obj2.strumTime : 0);
+	}
+
+	/*function hiddenSort(Obj1:SongNote, Obj2:SongNote)
+		{
+			return FlxSort.byValues(FlxSort.ASCENDING, Obj1 != null ? Obj1.strumTime : 0, Obj2 != null ? Obj2.strumTime : 0);
+	}*/
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
+		// yes ik this gets set off even when hitting a note but shut up it's just ghost tapping rn
+		for (i in 0...SongNote.keyArray.length)
+		{
+			if (FlxG.keys.anyJustPressed([SongNote.keyArray[i]]))
+			{
+				var strumNote:StrumLineNote = playerStrums.members[i % playerStrums.members.length];
+				strumNote.press();
+				// charRight.playAnim('sing${SongNote.noteDirections[i % SongNote.noteDirections.length].toUpperCase()}miss', true);
+				// FlxG.sound.play(Paths.sound('notes/missnote${FlxG.random.int(1, 3)}', 'shared'), 0.85);
+			}
+			else if (FlxG.keys.anyJustReleased([SongNote.keyArray[i]]))
+			{
+				var strumNote:StrumLineNote = playerStrums.members[i % playerStrums.members.length];
+				strumNote.letGo();
+			}
+		}
+
+		for (i in 0...alreadyHitNote.length)
+			alreadyHitNote[i] = false;
+
 		if (genMusic)
 		{
+			dirtyNotes.wipeArray();
+
+			for (i in hiddenNotes)
+			{
+				var strumNoteList:FlxTypedSpriteGroup<StrumLineNote> = !i.boyfriendNote ? opponentStrums : playerStrums;
+				var strumNote:StrumLineNote = strumNoteList.members[i.noteData % strumNoteList.members.length];
+				if ((strumNote.y - (Conductor.songPosition - i.strumTime) * (0.45 * FlxMath.roundDecimal(curSpeed, 2))) <= FlxG.height)
+					dirtyNotes.push(i);
+			}
+
+			for (i in dirtyNotes)
+			{
+				hiddenNotes.remove(i);
+				displayedNotes.add(i);
+				i.visible = i.active = true;
+			}
+
 			dirtyNotes.wipeArray();
 
 			for (i in displayedNotes)
@@ -395,13 +465,69 @@ class PlayState extends MusicBeatState
 				i.x = strumNote.x;
 				i.y = (strumNote.y - (Conductor.songPosition - i.strumTime) * (0.45 * FlxMath.roundDecimal(curSpeed, 2)));
 
-				if (songStarted && i.strumTime <= Conductor.songPosition)
-				{
-					dirtyNotes.push(i);
+				// i.visible = i.y >= FlxG.height;
 
-					var curChar:Character = i.boyfriendNote ? charRight : charLeft;
-					curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
-					strumNote.hit();
+				if (i.sustainNote)
+				{
+					i.scale.y = 2.15 * (0.45 * FlxMath.roundDecimal(curSpeed, 2)) * SongNote.noteScaling;
+					i.offset.set(i.lastOffset.x, i.lastOffset.y * FlxMath.roundDecimal(curSpeed, 2));
+				}
+
+				var curChar:Character = i.boyfriendNote ? charRight : charLeft;
+
+				if (songStarted)
+				{
+					if (!i.deletedOnScroll)
+					{
+						if (!i.boyfriendNote)
+						{
+							if (i.strumTime <= Conductor.songPosition)
+							{
+								dirtyNotes.push(i);
+
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+								strumNote.hit();
+								i.deletedOnScroll = true;
+							}
+						}
+						else
+						{
+							var noteHasBeenHit:Bool = alreadyHitNote[i.noteData % alreadyHitNote.length];
+							if (i.strumTime <= Conductor.songPosition - Conductor.safeZoneOffset)
+							{
+								// dirtyNotes.push(i);
+								FlxG.sound.play(Paths.sound('notes/missnote${FlxG.random.int(1, 3)}', 'shared'), 0.85);
+
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}miss', true);
+								// strumNote.fail();
+								i.deletedOnScroll = true;
+								i.alpha /= 2;
+							}
+							else if (i.sustainNote
+								&& i.strumTime <= Conductor.songPosition
+								&& FlxG.keys.anyPressed([SongNote.keyArray[i.noteData % SongNote.keyArray.length]]))
+							{
+								dirtyNotes.push(i);
+
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+								strumNote.hit();
+								i.deletedOnScroll = true;
+							}
+							else if (!i.sustainNote
+								&& i.strumTime <= Conductor.songPosition + Conductor.safeZoneOffset
+								&& FlxG.keys.anyJustPressed([SongNote.keyArray[i.noteData % SongNote.keyArray.length]])
+								&& !noteHasBeenHit)
+							{
+								dirtyNotes.push(i);
+
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+								strumNote.hit();
+								i.deletedOnScroll = alreadyHitNote[i.noteData % alreadyHitNote.length] = true;
+							}
+						}
+					}
+					else if (SongNote.noteWidth >= i.y)
+						dirtyNotes.push(i);
 				}
 			}
 
@@ -415,6 +541,11 @@ class PlayState extends MusicBeatState
 				setCamTarget('bf');
 			else
 				setCamTarget('dad');
+
+			if (displayedNotes != null && displayedNotes.length >= 2)
+				displayedNotes.sort(displaySort);
+			// if (hiddenNotes != null && hiddenNotes.length >= 2)
+			//	hiddenNotes.sort(hiddenSort);
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
@@ -446,5 +577,6 @@ class PlayState extends MusicBeatState
 			charMid.dance();
 			charRight.dance();
 		}
+		camGame.zoom *= 1.05;
 	}
 }

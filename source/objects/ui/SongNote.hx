@@ -1,14 +1,15 @@
 package objects.ui;
 
+import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxPoint;
 import gamestates.PlayState;
 
 using DillyzUtil;
+using StringTools;
 
 typedef SongNoteData =
 {
 	var scale:Int;
-
 	var scrollOffsetCyan:Array<Int>;
 	var sustainEndCyan:Array<Int>;
 	var sustainHoldCyan:Array<Int>;
@@ -29,6 +30,12 @@ class SongNote extends FunkySprite
 	public static var noteScaling:Float = 0.7;
 	public static var noteColors:Array<String> = ['Pink', 'Cyan', 'Lime', 'Red'];
 	public static var noteDirections:Array<String> = ['Left', 'Down', 'Up', 'Right'];
+	public static var keyArray:Array<FlxKey> = [
+		FlxKey.fromString('S'),
+		FlxKey.fromString('D'),
+		FlxKey.fromString('K'),
+		FlxKey.fromString('L')
+	];
 
 	public var ogX:Float;
 	public var ogY:Float;
@@ -39,16 +46,24 @@ class SongNote extends FunkySprite
 
 	public var boyfriendNote:Bool;
 
-	public function new(x:Float, y:Float, strumTime:Float, noteData:Int, boyfriendNote:Bool, ?noteType:String = '', ?textureName:String = 'Scrolling Notes',
-			?textureJson:Null<SongNoteData>)
+	public var lastNote:SongNote;
+	public var sustainNote:Bool;
+
+	public var deletedOnScroll:Bool = false;
+
+	public function new(x:Float, y:Float, lastNote:SongNote, strumTime:Float, noteData:Int, boyfriendNote:Bool, sustainNote:Bool, ?noteType:String = '',
+			?textureName:String = 'Scrolling Notes', ?textureJson:Null<SongNoteData>)
 	{
 		super(x, y);
+		this.debugEnabled = false;
 		this.ogX = x;
 		this.ogY = y;
+		this.lastNote = lastNote;
 		this.strumTime = strumTime;
 		this.noteData = noteData;
 		this.boyfriendNote = boyfriendNote;
 		this.noteType = noteType;
+		this.sustainNote = sustainNote;
 		reloadNote(textureName, textureJson);
 		this.antialiasing = true;
 	}
@@ -75,8 +90,8 @@ class SongNote extends FunkySprite
 
 		frames = Paths.sparrowV2('ui/notes/scrolling/$textureName', 'shared');
 		animation.addByPrefix('Scrolling', 'Scrolling Note ${SongNote.noteColors[noteData % SongNote.noteColors.length]}', 24, true, false, false);
-		animation.addByPrefix('Sustain End', 'Sustain End Hit ${SongNote.noteColors[noteData % SongNote.noteColors.length]}', 24, false, false, false);
-		animation.addByPrefix('Sustain Hold', 'Sustain Hold Pressed ${SongNote.noteColors[noteData % SongNote.noteColors.length]}', 24, false, false, false);
+		animation.addByPrefix('Sustain End', 'Sustain End ${SongNote.noteColors[noteData % SongNote.noteColors.length]}', 24, false, false, false);
+		animation.addByPrefix('Sustain Hold', 'Sustain Hold ${SongNote.noteColors[noteData % SongNote.noteColors.length]}', 24, false, false, false);
 		switch (SongNote.noteColors[noteData % SongNote.noteColors.length])
 		{
 			case 'Lime':
@@ -96,7 +111,15 @@ class SongNote extends FunkySprite
 				animOffsets.set('Sustain End', new FlxPoint(textureJson.sustainEndCyan[0], textureJson.sustainEndCyan[1]));
 				animOffsets.set('Sustain Hold', new FlxPoint(textureJson.sustainHoldCyan[0], textureJson.sustainHoldCyan[1]));
 		}
-		playAnim('Scrolling', true);
+
+		if (sustainNote)
+		{
+			if (lastNote != null && lastNote.getAnim().startsWith('Sustain'))
+				lastNote.playAnim('Sustain Hold', true);
+			playAnim('Sustain End', true);
+		}
+		else
+			playAnim('Scrolling', true);
 	}
 
 	public static function resetVariables()
@@ -118,6 +141,12 @@ class SongNote extends FunkySprite
 				noteDirections.push('Down');
 				noteDirections.push('Up');
 				noteDirections.push('Right');
+				// get controls
+				keyArray.wipeArray();
+				keyArray.push(FlxKey.fromString('S'));
+				keyArray.push(FlxKey.fromString('D'));
+				keyArray.push(FlxKey.fromString('K'));
+				keyArray.push(FlxKey.fromString('L'));
 		}
 	}
 }
