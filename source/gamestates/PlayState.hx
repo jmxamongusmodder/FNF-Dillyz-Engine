@@ -3,9 +3,13 @@ package gamestates;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.system.debug.console.Console;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
@@ -21,6 +25,8 @@ import openfl.media.Sound;
 import rhythm.Conductor;
 import rhythm.Song;
 import sys.io.File;
+
+using DillyzUtil;
 
 typedef CountdownJson =
 {
@@ -69,6 +75,12 @@ class PlayState extends MusicBeatState
 	private var playerStrums:FlxTypedSpriteGroup<StrumLineNote>;
 
 	public static var keyCount:Int = 4; // future support
+	private static var middleScroll:Bool = true;
+	private static var curSpeed:Float = 1;
+
+	// notes
+	private var displayedNotes:FlxTypedSpriteGroup<SongNote>;
+	private var hiddenNotes:Array<SongNote>;
 
 	override public function create()
 	{
@@ -92,6 +104,8 @@ class PlayState extends MusicBeatState
 
 		charRight = new Character(theStage.posBF.x, theStage.posBF.y, curSong.boyfriend, true, true, false);
 		add(charRight);
+
+		prepareStrumLineNotes();
 
 		// this is used for cloning
 		countdownSprite = new FlxSprite();
@@ -117,10 +131,36 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -5000;
 		canCountdown = true;
 
+		curSpeed = curSong.speed;
+
+		// arrow debugging
+		/*var bbruhhhhh = new FlxSprite((FlxG.width / 4) - 4, 0).makeGraphic(8, FlxG.height, FlxColor.RED);
+			var bbruhhhhh2 = new FlxSprite(((FlxG.width / 4) * 3) - 4, 0).makeGraphic(8, FlxG.height, FlxColor.RED);
+			add(bbruhhhhh);
+			add(bbruhhhhh2);
+			bbruhhhhh.cameras = bbruhhhhh2.cameras = [camHUD]; */
+
+		displayedNotes = new FlxTypedSpriteGroup<SongNote>();
+		hiddenNotes = new Array<SongNote>();
+
+		add(displayedNotes);
+		displayedNotes.cameras = [camHUD];
+
 		regenerateSong();
 		startCountdown();
 
 		postCreate();
+	}
+
+	// this function is for future usage with songs
+	public function getStrumNoteName(player:Int, index:Int)
+	{
+		return 'Strum Line Notes';
+	}
+
+	public function getNoteName(noteData:Int, mustHit:Bool)
+	{
+		return 'Scrolling Notes';
 	}
 
 	private function prepareStrumLineNotes()
@@ -128,16 +168,56 @@ class PlayState extends MusicBeatState
 		opponentStrums = new FlxTypedSpriteGroup<StrumLineNote>();
 		playerStrums = new FlxTypedSpriteGroup<StrumLineNote>();
 
+		add(opponentStrums);
+		add(playerStrums);
+		opponentStrums.cameras = playerStrums.cameras = [camHUD];
+
 		SongNote.resetVariables();
 
+		var noteAnimMap:Map<String, StrumLineNoteData> = new Map<String, StrumLineNoteData>();
+
 		for (p in 0...2)
+		{
+			var strumMid:Float;
+			if (!middleScroll)
+				strumMid = (p == 0) ? FlxG.width / 4 : FlxG.width - (FlxG.width / 4);
+			else
+				strumMid = (p == 0) ? FlxG.width / 4 : FlxG.width / 2;
+
 			for (i in 0...keyCount)
 			{
 				var strumNoteList:FlxTypedSpriteGroup<StrumLineNote> = (p == 0) ? opponentStrums : playerStrums;
-				var strumMid:Float = FlxG.width / 4;
-				if (p == 0)
-					strumMid *= 3;
+
+				var noteDataJson:StrumLineNoteData;
+
+				var noteName:String = getStrumNoteName(p, i);
+
+				if (noteAnimMap.exists(noteName))
+					noteDataJson = noteAnimMap.get(noteName);
+				else
+				{
+					noteDataJson = Paths.imageJson('ui/notes/strumline/$noteName', 'shared', {
+						scale: 1,
+						staticOffset: [0, 0],
+						hitOffset: [-3, -3],
+						pressedOffset: [13, 13]
+					});
+					noteAnimMap.set(noteName, noteDataJson);
+				}
+
+				// var widthBetween = SongNote.noteWidth;
+				var newStrumNote:StrumLineNote = new StrumLineNote(((middleScroll && p == 0 && i >= keyCount / 2.0) ? (FlxG.width / 4) * 3 : strumMid)
+					+ ((SongNote.noteWidth * SongNote.noteScaling) * (i - (keyCount / 2.0) + 0.5)),
+					strumLine
+					- 35, i, noteName, noteDataJson);
+				strumNoteList.add(newStrumNote);
+				newStrumNote.alpha = 0;
+
+				newStrumNote.x -= ((SongNote.noteWidth * SongNote.noteScaling) / 2) + 35;
+
+				FlxTween.tween(newStrumNote, {alpha: (middleScroll && p == 0) ? 0.5 : 1, y: strumLine}, 1.75, {ease: FlxEase.circOut, startDelay: i * 0.15});
 			}
+		}
 	}
 
 	private function regenerateSong()
@@ -148,6 +228,42 @@ class PlayState extends MusicBeatState
 			voices.loadEmbedded(Paths.songVoices(curSong.songName), false, false);
 
 		FlxG.sound.list.add(voices);
+
+		var songNoteDataMap:Map<String, SongNoteData> = new Map<String, SongNoteData>();
+		for (section in curSong.notes)
+			for (notes in section.theNotes)
+			{
+				var isBFNote:Bool = notes.noteData >= keyCount;
+				if (section.mustHitSection)
+					isBFNote = !isBFNote;
+				var curData:SongNoteData;
+				var noteName:String = getNoteName(notes.noteData, isBFNote);
+				if (songNoteDataMap.exists(noteName))
+					curData = songNoteDataMap.get(noteName);
+				else
+				{
+					curData = Paths.imageJson('ui/notes/scrolling/$noteName', 'shared', {
+						scale: 1,
+						scrollOffsetCyan: [0, 0],
+						sustainEndCyan: [40, 0],
+						sustainHoldCyan: [40, 0],
+						scrollOffsetLime: [0, 0],
+						sustainEndLime: [40, 0],
+						sustainHoldLime: [40, 0],
+						scrollOffsetPink: [0, 0],
+						sustainEndPink: [40, 0],
+						sustainHoldPink: [40, 0],
+						scrollOffsetRed: [0, 0],
+						sustainEndRed: [40, 0],
+						sustainHoldRed: [40, 0]
+					});
+					songNoteDataMap.set(noteName, curData);
+				}
+				var theNote:SongNote = new SongNote(0, 0, notes.strumTime, notes.noteData % keyCount, isBFNote, notes.noteType, noteName, curData);
+				displayedNotes.add(theNote);
+			}
+
+		genMusic = true;
 	}
 
 	private function startCountdown()
@@ -215,36 +331,42 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 	}
 
+	var dirtyNotes:Array<SongNote> = [];
+
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
+		if (genMusic)
+		{
+			dirtyNotes.wipeArray();
+
+			for (i in displayedNotes)
+			{
+				var strumNoteList:FlxTypedSpriteGroup<StrumLineNote> = !i.boyfriendNote ? opponentStrums : playerStrums;
+				var strumNote:StrumLineNote = strumNoteList.members[i.noteData % strumNoteList.members.length];
+				i.x = strumNote.x;
+				i.y = (strumNote.y - (Conductor.songPosition - i.strumTime) * (0.45 * FlxMath.roundDecimal(curSpeed, 2)));
+
+				if (songStarted && i.strumTime <= Conductor.songPosition)
+				{
+					dirtyNotes.push(i);
+
+					var curChar:Character = i.boyfriendNote ? charRight : charLeft;
+					curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+					strumNote.hit();
+				}
+			}
+
+			for (i in dirtyNotes)
+			{
+				displayedNotes.remove(i);
+				i.destroy();
+			}
+		}
+
 		if (FlxG.keys.justPressed.ESCAPE)
 			Sys.exit(0);
-		else if (FlxG.keys.justPressed.S)
-		{
-			charLeft.playAnim('singLEFT', true);
-			charMid.playAnim('singLEFT', true);
-			charRight.playAnim('singLEFT', true);
-		}
-		else if (FlxG.keys.justPressed.D)
-		{
-			charLeft.playAnim('singDOWN', true);
-			charMid.playAnim('singDOWN', true);
-			charRight.playAnim('singDOWN', true);
-		}
-		else if (FlxG.keys.justPressed.K)
-		{
-			charLeft.playAnim('singUP', true);
-			charMid.playAnim('singUP', true);
-			charRight.playAnim('singUP', true);
-		}
-		else if (FlxG.keys.justPressed.L)
-		{
-			charLeft.playAnim('singRIGHT', true);
-			charMid.playAnim('singRIGHT', true);
-			charRight.playAnim('singRIGHT', true);
-		}
 		else if (FlxG.keys.justPressed.ONE)
 		{
 			// StateManager.load(CharacterEditorState);

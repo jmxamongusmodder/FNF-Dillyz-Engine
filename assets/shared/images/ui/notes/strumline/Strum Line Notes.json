@@ -1,0 +1,15 @@
+{
+	"scale": 1,
+	"staticOffset": [
+		0,
+		0
+	],
+	"hitOffset": [
+		-3,
+		-3
+	],
+	"pressedOffset": [
+		-60,
+		-60
+	]
+}
