@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Poison Notes.png">
+	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Scrolling Note Cyan0000" x="159" y="0" width="157" height="154"/>
+	<SubTexture name="Scrolling Note Lime0000" x="0" y="161" width="157" height="154"/>
+	<SubTexture name="Scrolling Note Pink0000" x="161" y="158" width="154" height="156"/>
+	<SubTexture name="Scrolling Note Red0000" x="0" y="0" width="155" height="157"/>
+	<SubTexture name="Sustain End Cyan0000" x="319" y="158" width="50" height="64"/>
+	<SubTexture name="Sustain End Lime0000" x="319" y="158" width="50" height="64"/>
+	<SubTexture name="Sustain End Pink0000" x="319" y="158" width="50" height="64"/>
+	<SubTexture name="Sustain End Red0000" x="319" y="158" width="50" height="64"/>
+	<SubTexture name="Sustain Hold Cyan0000" x="320" y="0" width="50" height="44"/>
+	<SubTexture name="Sustain Hold Lime0000" x="320" y="0" width="50" height="44"/>
+	<SubTexture name="Sustain Hold Pink0000" x="320" y="0" width="50" height="44"/>
+	<SubTexture name="Sustain Hold Red0000" x="320" y="0" width="50" height="44"/>
+</TextureAtlas>

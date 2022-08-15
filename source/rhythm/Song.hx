@@ -91,6 +91,8 @@ class Song
 				oldChar = 'boyfriend';
 			case 'dad':
 				oldChar = 'daddy dearest';
+			case 'spooky':
+				oldChar = 'spooky kids';
 			default:
 				if (oldChar.startsWith('bf-'))
 					oldChar = oldChar.replace('bf-', 'boyfriend-');

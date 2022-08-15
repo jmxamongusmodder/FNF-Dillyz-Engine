@@ -2,6 +2,8 @@ package gamestates;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.system.debug.console.Console;
 import flixel.util.FlxTimer;
@@ -13,6 +15,8 @@ import managers.BGMusicManager;
 import objects.FunkySprite;
 import objects.FunkyStage;
 import objects.characters.Character;
+import objects.ui.SongNote;
+import objects.ui.StrumLineNote;
 import openfl.media.Sound;
 import rhythm.Conductor;
 import rhythm.Song;
@@ -58,6 +62,13 @@ class PlayState extends MusicBeatState
 	// song stuff
 	private var instData:Sound;
 	private var voices:FlxSound;
+
+	// strum note stuff
+	private var strumLine:Float = 50;
+	private var opponentStrums:FlxTypedSpriteGroup<StrumLineNote>;
+	private var playerStrums:FlxTypedSpriteGroup<StrumLineNote>;
+
+	public static var keyCount:Int = 4; // future support
 
 	override public function create()
 	{
@@ -110,6 +121,23 @@ class PlayState extends MusicBeatState
 		startCountdown();
 
 		postCreate();
+	}
+
+	private function prepareStrumLineNotes()
+	{
+		opponentStrums = new FlxTypedSpriteGroup<StrumLineNote>();
+		playerStrums = new FlxTypedSpriteGroup<StrumLineNote>();
+
+		SongNote.resetVariables();
+
+		for (p in 0...2)
+			for (i in 0...keyCount)
+			{
+				var strumNoteList:FlxTypedSpriteGroup<StrumLineNote> = (p == 0) ? opponentStrums : playerStrums;
+				var strumMid:Float = FlxG.width / 4;
+				if (p == 0)
+					strumMid *= 3;
+			}
 	}
 
 	private function regenerateSong()

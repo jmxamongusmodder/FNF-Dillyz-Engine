@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Strum Line Notes.png">
+	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Strum Note Hit Down0000" x="708" y="233" width="228" height="225"/>
+	<SubTexture name="Strum Note Hit Down0001" x="0" y="234" width="228" height="225"/>
+	<SubTexture name="Strum Note Hit Down0002" x="0" y="463" width="221" height="217" frameX="-3" frameY="-3" frameWidth="228" frameHeight="225"/>
+	<SubTexture name="Strum Note Hit Down0003" x="0" y="463" width="221" height="217" frameX="-3" frameY="-3" frameWidth="228" frameHeight="225"/>
+	<SubTexture name="Strum Note Hit Pink0000" x="474" y="0" width="230" height="232"/>
+	<SubTexture name="Strum Note Hit Pink0001" x="460" y="236" width="220" height="222" frameX="-5" frameY="-5" frameWidth="230" frameHeight="232"/>
+	<SubTexture name="Strum Note Hit Pink0002" x="232" y="234" width="224" height="228" frameX="-3" frameY="-1" frameWidth="230" frameHeight="232"/>
+	<SubTexture name="Strum Note Hit Pink0003" x="232" y="234" width="224" height="228" frameX="-3" frameY="-1" frameWidth="230" frameHeight="232"/>
+	<SubTexture name="Strum Note Hit Red0000" x="460" y="462" width="219" height="223" frameX="-4" frameY="-3" frameWidth="226" frameHeight="229"/>
+	<SubTexture name="Strum Note Hit Red0001" x="683" y="462" width="219" height="223" frameX="-4" frameY="-3" frameWidth="226" frameHeight="229"/>
+	<SubTexture name="Strum Note Hit Red0002" x="708" y="0" width="226" height="229"/>
+	<SubTexture name="Strum Note Hit Red0003" x="708" y="0" width="226" height="229"/>
+	<SubTexture name="Strum Note Hit Up0000" x="0" y="0" width="233" height="230"/>
+	<SubTexture name="Strum Note Hit Up0001" x="237" y="0" width="233" height="230"/>
+	<SubTexture name="Strum Note Hit Up0002" x="225" y="466" width="214" height="211" frameX="-10" frameY="-9" frameWidth="233" frameHeight="230"/>
+	<SubTexture name="Strum Note Hit Up0003" x="225" y="466" width="214" height="211" frameX="-10" frameY="-9" frameWidth="233" frameHeight="230"/>
+	<SubTexture name="Strum Note Pressed Down0000" x="852" y="844" width="142" height="140" frameX="-3" frameY="-3" frameWidth="149" frameHeight="146"/>
+	<SubTexture name="Strum Note Pressed Down0001" x="852" y="844" width="142" height="140" frameX="-3" frameY="-3" frameWidth="149" frameHeight="146"/>
+	<SubTexture name="Strum Note Pressed Down0002" x="161" y="841" width="149" height="146"/>
+	<SubTexture name="Strum Note Pressed Down0003" x="161" y="841" width="149" height="146"/>
+	<SubTexture name="Strum Note Pressed Left0000" x="314" y="847" width="139" height="142" frameX="-4" frameY="-3" frameWidth="146" frameHeight="149"/>
+	<SubTexture name="Strum Note Pressed Left0001" x="314" y="847" width="139" height="142" frameX="-4" frameY="-3" frameWidth="146" frameHeight="149"/>
+	<SubTexture name="Strum Note Pressed Left0002" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0003" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0004" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0005" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0006" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0007" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0008" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0009" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0010" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0011" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0012" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0013" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0014" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0015" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0016" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0017" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0018" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Left0019" x="0" y="842" width="146" height="149"/>
+	<SubTexture name="Strum Note Pressed Red0000" x="457" y="850" width="139" height="141" frameX="-4" frameY="-5" frameWidth="148" frameHeight="151"/>
+	<SubTexture name="Strum Note Pressed Red0001" x="457" y="850" width="139" height="141" frameX="-4" frameY="-5" frameWidth="148" frameHeight="151"/>
+	<SubTexture name="Strum Note Pressed Red0002" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0003" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0004" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0005" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0006" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0007" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0008" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0009" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0010" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0011" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0012" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0013" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0014" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0015" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0016" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0017" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0018" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0019" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0020" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0021" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0022" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0023" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0024" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0025" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Red0026" x="860" y="689" width="148" height="151"/>
+	<SubTexture name="Strum Note Pressed Up0000" x="703" y="843" width="145" height="142" frameX="-4" frameY="-4" frameWidth="153" frameHeight="150"/>
+	<SubTexture name="Strum Note Pressed Up0001" x="703" y="843" width="145" height="142" frameX="-4" frameY="-4" frameWidth="153" frameHeight="150"/>
+	<SubTexture name="Strum Note Pressed Up0002" x="703" y="689" width="153" height="150"/>
+	<SubTexture name="Strum Note Pressed Up0003" x="703" y="689" width="153" height="150"/>
+	<SubTexture name="Strum Note Static Cyan0000" x="0" y="684" width="157" height="154"/>
+	<SubTexture name="Strum Note Static Lime0000" x="384" y="689" width="157" height="154"/>
+	<SubTexture name="Strum Note Static Pink0000" x="225" y="681" width="155" height="156"/>
+	<SubTexture name="Strum Note Static Red0000" x="545" y="689" width="154" height="157"/>
+</TextureAtlas>
