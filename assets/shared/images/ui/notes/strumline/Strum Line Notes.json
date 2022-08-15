@@ -4,12 +4,24 @@
 		0,
 		0
 	],
-	"hitOffset": [
-		-3,
-		-3
+	"hitOffsetCyan": [
+		27,
+		23
+	],
+	"hitOffsetLime": [
+		28,
+		26
+	],
+	"hitOffsetPink": [
+		28,
+		25
+	],
+	"hitOffsetRed": [
+		28,
+		25
 	],
 	"pressedOffset": [
-		-60,
-		-60
+		3,
+		3
 	]
 }
