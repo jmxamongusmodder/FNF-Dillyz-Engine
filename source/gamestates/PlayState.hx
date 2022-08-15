@@ -331,6 +331,53 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 	}
 
+	public function setCamTarget(char:String)
+	{
+		var offsetX:Float = 25;
+		var offsetY:Float = -100;
+		var curCharLol:Character;
+		curCamZoom = theStage.camZoom;
+
+		switch (char)
+		{
+			case 'bf':
+				offsetX = -100;
+				offsetY = -100;
+				curCharLol = charRight;
+				curCamZoom *= theStage.zoomMultiBF;
+				offsetX += theStage.camOffBF.x;
+				offsetY += theStage.camOffBF.x;
+			case 'dad':
+				offsetX = 150;
+				offsetY = -100;
+				curCharLol = charLeft;
+				curCamZoom *= theStage.zoomMultiDad;
+				offsetX += theStage.camOffDad.x;
+				offsetY += theStage.camOffDad.x;
+			default:
+				curCharLol = charMid;
+				curCamZoom *= theStage.zoomMultiGF;
+				offsetX += theStage.camOffGF.x;
+				offsetY += theStage.camOffGF.x;
+		}
+
+		offsetX += curCharLol.camOffset.x;
+		offsetY += curCharLol.camOffset.y;
+		curCamZoom *= curCharLol.camZoomMultiplier;
+
+		@:privateAccess {
+			for (i in curCharLol.charData.animData)
+				if (i.name == curCharLol.getAnim())
+				{
+					offsetX += i.cameraOffset[0];
+					offsetY += i.cameraOffset[1];
+					curCamZoom *= i.camZoomMulti;
+				}
+		}
+
+		camFollow.setPosition(curCharLol.getMidpoint().x + offsetX, curCharLol.getMidpoint().y + offsetY);
+	}
+
 	var dirtyNotes:Array<SongNote> = [];
 
 	override public function update(elapsed:Float)
@@ -363,6 +410,11 @@ class PlayState extends MusicBeatState
 				displayedNotes.remove(i);
 				i.destroy();
 			}
+
+			if (curSong.notes[Std.int(curStep / 16)].mustHitSection)
+				setCamTarget('bf');
+			else
+				setCamTarget('dad');
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)

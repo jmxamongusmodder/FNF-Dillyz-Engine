@@ -63,7 +63,7 @@ class MusicBeatState extends FlxState
 		// FlxG.camera.fade(FlxColor.BLACK, 0.5, true);
 
 		camFollow = new FlxObject(FlxG.width / 2, FlxG.height / 2, 1, 1);
-		FlxG.camera.follow(camFollow, LOCKON, 0.02 / (60 / FlxG.updateFramerate));
+		FlxG.camera.follow(camFollow, LOCKON, 0.01 / (60 / FlxG.updateFramerate));
 		followingPosition = camFollow.getPosition();
 		FlxG.camera.focusOn(followingPosition);
 	}
