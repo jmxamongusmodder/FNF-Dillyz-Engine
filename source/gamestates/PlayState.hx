@@ -14,6 +14,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
+import gamestates.menus.FreeplayState;
 import gamestates.menus.MainMenuState;
 import haxe.Json;
 import managers.BGMusicManager;
@@ -49,6 +50,10 @@ class PlayState extends MusicBeatState
 	private var charRight:Character;
 
 	// the song
+	public static var loadFromChartEditorInstead:Bool = false;
+	public static var cameFromFreeplay:Bool = false;
+	public static var songToLoad:String = 'Bopeebo';
+	public static var diffToLoad:String = 'Hard';
 	public static var curSong:Song;
 
 	// song control
@@ -88,7 +93,8 @@ class PlayState extends MusicBeatState
 		super.create();
 		BGMusicManager.stop();
 
-		curSong = Song.songFromName('Bopeebo', 'Hard');
+		if (!loadFromChartEditorInstead)
+			curSong = Song.songFromName(songToLoad, diffToLoad);
 		Conductor.mapBPMChanges(curSong);
 		Conductor.changeBPM(curSong.bpm);
 
@@ -349,7 +355,7 @@ class PlayState extends MusicBeatState
 		voices.play();
 		FlxG.sound.music.onComplete = function()
 		{
-			switchState(MainMenuState, [], false, FunkinTransitionType.Black);
+			endSong();
 		};
 		songLength = FlxG.sound.music.length;
 	}
@@ -549,24 +555,35 @@ class PlayState extends MusicBeatState
 		}
 
 		if (FlxG.keys.justPressed.ESCAPE)
-			Sys.exit(0);
-		else if (FlxG.keys.justPressed.ONE)
-		{
-			// StateManager.load(CharacterEditorState);
-			switchState(CharacterEditorState, [], false);
-		}
-		else if (FlxG.keys.justPressed.TWO)
-		{
-			// StateManager.loadAndClearMemory(CharacterEditorState);
-			switchState(CharacterEditorState, [], true);
-		}
-		else if (FlxG.keys.justPressed.THREE)
-		{
-			// StateManager.loadAndClearMemory(CharacterEditorState);
-			switchState(MainMenuState, [], false, FunkinTransitionType.Black);
-		}
+			endSong();
 
 		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);
+	}
+
+	function endSong()
+	{
+		dirtyNotes.wipeArray();
+
+		for (i in hiddenNotes)
+			dirtyNotes.push(i);
+
+		for (i in dirtyNotes)
+		{
+			hiddenNotes.remove(i);
+			i.destroy();
+		}
+
+		for (i in displayedNotes)
+			dirtyNotes.push(i);
+
+		for (i in dirtyNotes)
+		{
+			displayedNotes.remove(i);
+			i.destroy();
+		}
+		dirtyNotes.wipeArray();
+
+		switchState(cameFromFreeplay ? MainMenuState : FreeplayState, [], false, FunkinTransitionType.Black);
 	}
 
 	override public function beatHit()

@@ -239,23 +239,15 @@ class FreeplayState extends MusicBeatState
 			// FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
 			camHUD.flash(FlxColor.WHITE, 0.5);
 
-			Paths.curMod = optionArray[curIndex].text;
-			FlxG.save.data.lastMod = Paths.curMod;
-
-			for (i in 0...optionArray.length)
-			{
-				var curOption:Alphabet = optionArray[i];
-				var rightOption:Bool = i == curIndex;
-
-				if (!rightOption)
-					curOption.text = '...';
-			}
+			PlayState.loadFromChartEditorInstead = false;
+			PlayState.cameFromFreeplay = true;
+			PlayState.songToLoad = optionArray[curIndex].text;
+			PlayState.diffToLoad = 'Hard';
 
 			// thisis cooler bc it plays the custom sound and shows your custom sprite
-			FlxG.sound.play(Sound.fromFile(Paths.asset('sounds/menus/confirmMenu', null, 'ogg')));
+			FlxG.sound.play(Paths.sound('sounds/menus/confirmMenu', null));
 
-			var selectOverlay = new FlxSprite()
-				.loadGraphic(FlxGraphic.fromBitmapData(BitmapData.fromBytes(File.getBytes(Paths.asset('images/menus/selectOverlay', null, 'png')))));
+			var selectOverlay = new FlxSprite().loadGraphic(Paths.png('images/menus/selectOverlay', null));
 			selectOverlay.antialiasing = true;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD];
@@ -263,7 +255,7 @@ class FreeplayState extends MusicBeatState
 			new FlxTimer().start(1.5, function(t:FlxTimer)
 			{
 				FlxG.sound.music.fadeOut(0.5);
-				switchState(MainMenuState, [], true, FunkinTransitionType.Normal);
+				switchState(PlayState, [], true, FunkinTransitionType.Normal);
 			});
 		}
 		else if (FlxG.keys.justPressed.UP)
