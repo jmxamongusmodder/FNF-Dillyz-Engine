@@ -31,6 +31,63 @@ class Paths
 	public static var loadedFrames:Map<String, FlxAtlasFrames> = [];
 
 	// public static var loadedFonts:Map<String, Font> = [];
+	public static function clearSpecificMemory(thingstoClear:Array<String>) // , ?clearFonts:Bool = false)
+	{
+		DillyzLogger.log('Clearing out specific assets. Graphics? Elements: $thingstoClear', LogType.Normal);
+		var keys:Array<String> = cast(loadedGraphics.keys().toArray());
+		for (i in 0...keys.length)
+		{
+			try
+			{
+				// don't break the loading state
+				if (keys[i] != 'null:preloader' && thingstoClear.contains(keys[i]))
+				{
+					var graphic:FlxGraphic = loadedGraphics.get(keys[i]);
+					loadedGraphics.remove(keys[i]);
+					graphic.persist = false;
+					graphic.destroy();
+				}
+			}
+			catch (e:Exception)
+			{
+				DillyzLogger.log('Could not clear graphic asset \'${keys[i]}\'; ${e.toString()}\n${e.message}', LogType.Error);
+			}
+		}
+		var keys:Array<String> = cast(loadedSounds.keys().toArray());
+		for (i in 0...keys.length)
+		{
+			try
+			{
+				if (thingstoClear.contains(keys[i]))
+				{
+					var sound:Sound = loadedSounds.get(keys[i]);
+					loadedSounds.remove(keys[i]);
+					sound.close();
+				}
+			}
+			catch (e:Exception)
+			{
+				DillyzLogger.log('Could not clear sound asset \'${keys[i]}\'; ${e.toString()}\n${e.message}', LogType.Error);
+			}
+		}
+		var keys:Array<String> = cast(loadedFrames.keys().toArray());
+		for (i in 0...keys.length)
+		{
+			try
+			{
+				if (thingstoClear.contains(keys[i]))
+				{
+					var frames:FlxAtlasFrames = loadedFrames.get(keys[i]);
+					loadedFrames.remove(keys[i]);
+					frames.destroy();
+				}
+			}
+			catch (e:Exception)
+			{
+				DillyzLogger.log('Could not clear atlas frames \'${keys[i]}\'; ${e.toString()}\n${e.message}', LogType.Error);
+			}
+		}
+	}
 
 	public static function clearMemory(?clearGraphics:Bool = true, ?clearSound:Bool = true, ?clearFrames:Bool = true) // , ?clearFonts:Bool = false)
 	{

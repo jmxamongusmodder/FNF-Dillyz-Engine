@@ -543,7 +543,9 @@ class PlayState extends MusicBeatState
 				i.destroy();
 			}
 
-			if (curSong.notes[Std.int(curStep / 16)].mustHitSection)
+			if (curSong.notes != null
+				&& curSong.notes[Std.int(curStep / 16)] != null
+				&& curSong.notes[Std.int(curStep / 16)].mustHitSection)
 				setCamTarget('bf');
 			else
 				setCamTarget('dad');

@@ -2,7 +2,7 @@
 	"songs": [
 		{
 			"name": "Bopeebo",
-			"icon": "default",
+			"icon": "daddy dearest",
 			"bgColor": [
 				50,
 				50,
@@ -13,7 +13,18 @@
 		},
 		{
 			"name": "Fresh",
-			"icon": "default",
+			"icon": "daddy dearest",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		},
+		{
+			"name": "Dad Battle",
+			"icon": "daddy dearest",
 			"bgColor": [
 				50,
 				50,

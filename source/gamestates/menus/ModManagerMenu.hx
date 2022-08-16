@@ -171,11 +171,11 @@ class ModManagerMenu extends MusicBeatState
 					curOption.text = '...';
 			}
 
+			Paths.clearSpecificMemory(['null:sounds/menus/confirmMenu.ogg', 'null:images/menus/selectOverlay.png']);
 			// thisis cooler bc it plays the custom sound and shows your custom sprite
-			FlxG.sound.play(Sound.fromFile(Paths.asset('sounds/menus/confirmMenu', null, 'ogg')));
+			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 
-			var selectOverlay = new FlxSprite()
-				.loadGraphic(FlxGraphic.fromBitmapData(BitmapData.fromBytes(File.getBytes(Paths.asset('images/menus/selectOverlay', null, 'png')))));
+			var selectOverlay = new FlxSprite().loadGraphic(Paths.png('menuu/selectOverlay', null));
 			selectOverlay.antialiasing = true;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD];

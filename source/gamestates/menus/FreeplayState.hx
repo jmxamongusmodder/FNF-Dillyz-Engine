@@ -245,9 +245,9 @@ class FreeplayState extends MusicBeatState
 			PlayState.diffToLoad = 'Hard';
 
 			// thisis cooler bc it plays the custom sound and shows your custom sprite
-			FlxG.sound.play(Paths.sound('sounds/menus/confirmMenu', null));
+			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 
-			var selectOverlay = new FlxSprite().loadGraphic(Paths.png('images/menus/selectOverlay', null));
+			var selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay', null));
 			selectOverlay.antialiasing = true;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD];
