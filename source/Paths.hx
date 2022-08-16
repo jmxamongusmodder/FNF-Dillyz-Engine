@@ -237,14 +237,17 @@ class Paths
 		}
 	}
 
-	inline public static function json(path:String, ?lib:Null<String>, ?defaultThing:Null<Dynamic> = null):Dynamic
+	inline private static function baseJson(folder:String, path:String, ?lib:Null<String>, ?defaultThing:Null<Dynamic> = null):Dynamic
 	{
 		try
 		{
-			if (assetExists('data/$path', lib, 'json'))
-				return Json.parse(File.getContent(asset('data/$path', lib, 'json')));
+			if (assetExists('$folder/$path', lib, 'json'))
+				return Json.parse(File.getContent(asset('$folder/$path', lib, 'json')));
 			else
+			{
+				DillyzLogger.log('Json Missing: $folder/$path.json not found or missing.', LogType.Error);
 				return Json.parse(Json.stringify(defaultThing));
+			}
 		}
 		catch (e:Exception)
 		{
@@ -253,42 +256,26 @@ class Paths
 				defaultThing = {name: 'Default', value: 0};
 			return Json.parse(Json.stringify(defaultThing));
 		}
+	}
+
+	inline public static function weekJson(path:String, ?lib:Null<String>, ?defaultThing:Null<Dynamic> = null):Dynamic
+	{
+		return baseJson('weeks', path, lib, defaultThing);
+	}
+
+	inline public static function json(path:String, ?lib:Null<String>, ?defaultThing:Null<Dynamic> = null):Dynamic
+	{
+		return baseJson('data', path, lib, defaultThing);
 	}
 
 	inline public static function imageJson(path:String, ?lib:Null<String>, ?defaultThing:Null<Dynamic> = null):Dynamic
 	{
-		try
-		{
-			if (assetExists('images/$path', lib, 'json'))
-				return Json.parse(File.getContent(asset('images/$path', lib, 'json')));
-			else
-				return Json.parse(Json.stringify(defaultThing));
-		}
-		catch (e:Exception)
-		{
-			DillyzLogger.log('Json Missing; ${e.toString()}\n${e.message}', LogType.Error);
-			if (defaultThing == null)
-				defaultThing = {name: 'Default', value: 0};
-			return Json.parse(Json.stringify(defaultThing));
-		}
+		return baseJson('images', path, lib, defaultThing);
 	}
 
 	inline public static function menuButtonJson(path:String, ?defaultThing:Null<Dynamic> = null):Dynamic
 	{
-		try
-		{
-			if (assetExists('images/menus/main menu buttons/$path', null, 'json'))
-				return Json.parse(File.getContent(asset('images/menus/main menu buttons/$path', null, 'json')));
-			else
-				return Json.parse(Json.stringify(defaultThing));
-		}
-		catch (e:Exception)
-		{
-			DillyzLogger.log('Json Missing; ${e.toString()}\n${e.message}', LogType.Error);
-			if (defaultThing == null)
-				defaultThing = {name: 'Default', value: 0};
-			return Json.parse(Json.stringify(defaultThing));
-		}
+		return baseJson('images/menus/main menu buttons', path, null, defaultThing);
 	}
 
 	inline public static function stageSettingsJson(stage:String):Dynamic

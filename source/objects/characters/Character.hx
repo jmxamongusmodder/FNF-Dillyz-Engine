@@ -37,6 +37,7 @@ typedef CharacterData =
 	var antialiasing:Bool;
 	var idleLoop:Array<String>;
 	var holdTimer:Float;
+	var healthIcon:Null<String>;
 }
 
 class Character extends FunkySprite
@@ -60,7 +61,7 @@ class Character extends FunkySprite
 		};
 	}
 
-	private static var charDefault:CharacterData = {
+	public static var charDefault:CharacterData = {
 		animData: [charAnimDefault()],
 		groundOffset: [0, 350],
 		cameraOffset: [0, 0],
@@ -74,6 +75,7 @@ class Character extends FunkySprite
 		antialiasing: true,
 		idleLoop: ["idle"],
 		holdTimer: 6.1,
+		healthIcon: "boyfriend"
 	};
 
 	@:allow(CharacterEditorState)

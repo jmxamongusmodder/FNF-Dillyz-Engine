@@ -14,20 +14,37 @@ import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import objects.FunkyText;
 import objects.ui.Alphabet;
+import objects.ui.health.HealthIcon;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
 import sys.FileSystem;
 import sys.io.File;
 
 using DillyzUtil;
+using StringTools;
 
-class ModManagerMenu extends MusicBeatState
+typedef WeekSongData =
+{
+	var name:String;
+	var icon:String;
+	var bgColor:Array<Int>;
+	var hiddenFromFreeplay:Bool;
+	var hiddenFromStory:Bool;
+}
+
+typedef WeekData =
+{
+	var songs:Array<WeekSongData>;
+}
+
+class FreeplayState extends MusicBeatState
 {
 	// private var bgFlash:FlxSprite;
 	private var funnyBG:FlxSprite;
 	private var funnyBGAlt:FlxSprite;
 	private var funnyGayText:FunkyText;
 	var optionArray:Array<Alphabet>;
+	var iconArray:Array<HealthIcon>;
 
 	private var curIndex:Int;
 
@@ -35,12 +52,12 @@ class ModManagerMenu extends MusicBeatState
 	{
 		super.create();
 
-		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_orange'));
+		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_blue'));
 		funnyBG.antialiasing = true;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBG);
 
-		funnyBGAlt = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_blue'));
+		funnyBGAlt = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_lime'));
 		funnyBGAlt.antialiasing = true;
 		funnyBGAlt.visible = false;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
@@ -60,17 +77,74 @@ class ModManagerMenu extends MusicBeatState
 		// funnyGayText.x += 35;
 		funnyGayText.antialiasing = true;
 
+		trace('holy crap lois, i\'m in a debug build!');
+		optionArray = new Array<Alphabet>();
+		iconArray = new Array<HealthIcon>();
+
 		// add(bgFlash);
 		// bgFlash.cameras = [camHUD];
+		var newAlphabet:Alphabet = new Alphabet(0, 0, 'Tutorial');
+		add(newAlphabet);
+		optionArray.push(newAlphabet);
 
-		var fileList:Array<String> = FileSystem.readDirectory('./mods/');
-		optionArray = new Array<Alphabet>();
-		for (i in 0...fileList.length)
+		var newIcon:HealthIcon = new HealthIcon(0, 0, 'girlfriend', false);
+		add(newIcon);
+		iconArray.push(newIcon);
+
+		var fileList:Array<String> = FileSystem.readDirectory('./assets/weeks/');
+		for (u in 0...fileList.length)
 		{
-			trace(fileList[i]);
-			var newAlphabet:Alphabet = new Alphabet(0, i * 75, fileList[i]);
-			add(newAlphabet);
-			optionArray.push(newAlphabet);
+			var dynamWeek = Paths.weekJson(fileList[u].replace('.json', ''), null, {
+				songs: [
+					{
+						name: "tutorial 2",
+						icon: "divorce",
+						bgColors: [0, 0, 0],
+						hiddenFromFreeplay: false,
+						hiddenFromStory: false
+					}
+				]
+			});
+			trace(dynamWeek);
+			var curWeekData:WeekData = cast dynamWeek;
+			trace(curWeekData);
+			trace(fileList[u]);
+			for (i in curWeekData.songs)
+			{
+				// if (!i.hiddenFromFreeplay)
+				// {
+				var newAlphabet:Alphabet = new Alphabet(0, 0, i.name);
+				add(newAlphabet);
+				optionArray.push(newAlphabet);
+
+				var newIcon:HealthIcon = new HealthIcon(0, 0, i.icon, false);
+				add(newIcon);
+				iconArray.push(newIcon);
+				// }
+			}
+		}
+		if (Paths.curMod != '' && FileSystem.exists('./mods/${Paths.curMod}/weeks/'))
+		{
+			var fileListMods:Array<String> = FileSystem.readDirectory('./mods/${Paths.curMod}/weeks/');
+			for (u in 0...fileListMods.length)
+			{
+				var curWeekData:WeekData = Paths.weekJson(fileListMods[u].replace('.json', ''), null, {songs: []});
+				trace(curWeekData);
+				trace(fileListMods[u]);
+				for (i in curWeekData.songs)
+				{
+					// if (!i.hiddenFromFreeplay)
+					// {
+					var newAlphabet:Alphabet = new Alphabet(0, 0, i.name);
+					add(newAlphabet);
+					optionArray.push(newAlphabet);
+
+					var newIcon:HealthIcon = new HealthIcon(0, 0, i.icon, false);
+					add(newIcon);
+					iconArray.push(newIcon);
+					// }
+				}
+			}
 		}
 
 		curIndex = 0;
@@ -111,13 +185,19 @@ class ModManagerMenu extends MusicBeatState
 		for (i in 0...optionArray.length)
 		{
 			var curOption:Alphabet = optionArray[i];
+			var curIcon:HealthIcon = iconArray[i];
 			var intendedMulti:Int = i - curIndex;
 			var intY:Float = FlxG.height / 2 - 30 + (165 * intendedMulti);
 			var intX:Float = 240 + (-165 * Math.abs(intendedMulti));
 			var intAlpha:Float = (1 - (Math.abs(intendedMulti) / 3.25)).snapFloat(0, 1);
+
 			curOption.y = FlxMath.lerp(intY, curOption.y, e * 114);
-			curOption.x = FlxMath.lerp(intX, curOption.x, e * 114);
+			curOption.x = FlxMath.lerp(intX + 175, curOption.x, e * 114);
 			curOption.alpha = FlxMath.lerp(intAlpha, curOption.alpha, e * (114 * 0.65));
+
+			curIcon.y = FlxMath.lerp(intY - 35, curIcon.y, e * 114);
+			curIcon.x = FlxMath.lerp(intX, curIcon.x, e * 114);
+			curIcon.alpha = FlxMath.lerp(intAlpha, curIcon.alpha, e * (114 * 0.65));
 
 			// curOption.x = FlxMath.lerp(intX, curOption.x, e * 144);
 			#if debug

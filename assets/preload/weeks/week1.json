@@ -1,0 +1,26 @@
+{
+	"songs": [
+		{
+			"name": "Bopeebo",
+			"icon": "default",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		},
+		{
+			"name": "Fresh",
+			"icon": "default",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		}
+	]
+}
