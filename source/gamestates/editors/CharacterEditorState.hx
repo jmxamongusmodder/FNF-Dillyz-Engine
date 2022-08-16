@@ -14,6 +14,7 @@ import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import gamestates.menus.MainMenuState;
 import haxe.Exception;
 import haxe.Json;
 import objects.FunkyStage;
@@ -1127,7 +1128,7 @@ class CharacterEditorState extends MusicBeatState
 								curCamZoom = 3.25;
 						// number inputs
 						case 6 | 7:
-							switchState(PlayState, [], i == 7);
+							switchState(i == 6 ? PlayState : MainMenuState, [], false);
 						case 8:
 							refreshCharacter(false);
 						// animation force play
