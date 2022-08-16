@@ -23,6 +23,8 @@ enum FunkinTransitionType
 
 class MusicBeatState extends FlxState
 {
+	public static var instance:MusicBeatState;
+
 	public var curSection:Int = 0;
 	public var curBeat:Int = 0;
 	public var curStep:Int = 0;
@@ -52,6 +54,7 @@ class MusicBeatState extends FlxState
 			Paths.clearMemory();
 		intendedToClearMemory = false;
 		super.create();
+		instance = this;
 		// get the first camera in action
 		camGame = new FlxCamera();
 		// camGame.bgColor.alpha = 0;
@@ -164,6 +167,8 @@ class MusicBeatState extends FlxState
 		}
 
 		BGMusicManager.soundMemCleared = intendedToClearMemory;
+
+		closeSubState();
 
 		preloaderTween = FlxTween.tween(preloaderArt, {alpha: 1}, 0.5, {
 			ease: FlxEase.cubeInOut,

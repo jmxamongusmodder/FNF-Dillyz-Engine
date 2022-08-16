@@ -15,6 +15,8 @@ import gamestates.MusicBeatState.FunkinTransitionType;
 import managers.BGMusicManager;
 import objects.FunkySprite;
 import objects.FunkyText;
+import openfl.Lib;
+import openfl.events.UncaughtErrorEvent;
 
 using DillyzUtil;
 
@@ -207,7 +209,7 @@ class MainMenuState extends MusicBeatState
 					case 'Story Mode':
 						switchState(PlayState, [], false, FunkinTransitionType.Normal);
 					case 'Freeplay':
-						switchState(FreeplayState, [], false, FunkinTransitionType.Normal);
+						switchState(FreeplayState, [], false, FunkinTransitionType.Black);
 					case 'Options':
 						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					case 'Donate':
@@ -216,7 +218,9 @@ class MainMenuState extends MusicBeatState
 					case 'Mods':
 						switchState(ModManagerMenu, [], false, FunkinTransitionType.Black);
 					case 'Debug':
-						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
+						var nullSpr:FlxSprite = null;
+						nullSpr.clone();
+					// switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					default:
 						Sys.exit(0);
 				}

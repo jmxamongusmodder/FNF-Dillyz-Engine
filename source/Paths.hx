@@ -11,6 +11,7 @@ import haxe.Json;
 import objects.FunkyStage;
 import openfl.display.BitmapData;
 import openfl.media.Sound;
+import openfl.system.System;
 import openfl.text.Font;
 import sys.FileSystem;
 import sys.io.File;
@@ -151,6 +152,7 @@ class Paths
 				}
 			}
 		}
+		System.gc();
 
 		/*if (clearFonts)
 			{

@@ -16,11 +16,13 @@ import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
 import gamestates.menus.FreeplayState;
 import gamestates.menus.MainMenuState;
+import gamesubstates.PauseSubState;
 import haxe.Json;
 import managers.BGMusicManager;
 import objects.FunkySprite;
 import objects.FunkyStage;
 import objects.characters.Character;
+import objects.ui.Alphabet;
 import objects.ui.SongNote;
 import objects.ui.StrumLineNote;
 import openfl.media.Sound;
@@ -232,6 +234,11 @@ class PlayState extends MusicBeatState
 	private function regenerateSong()
 	{
 		instData = Paths.songInst(curSong.songName);
+		if (voices != null)
+		{
+			FlxG.sound.list.remove(voices);
+			voices.destroy();
+		}
 		voices = new FlxSound();
 		if (curSong.needsVoices)
 			voices.loadEmbedded(Paths.songVoices(curSong.songName), false, false);
@@ -556,13 +563,15 @@ class PlayState extends MusicBeatState
 			//	hiddenNotes.sort(hiddenSort);
 		}
 
-		if (FlxG.keys.justPressed.ESCAPE)
-			endSong();
+		if (songStarted && FlxG.keys.justPressed.ENTER)
+		{
+			openSubState(new PauseSubState());
+		}
 
 		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);
 	}
 
-	function endSong()
+	function wipeAllNotes()
 	{
 		dirtyNotes.wipeArray();
 
@@ -584,8 +593,23 @@ class PlayState extends MusicBeatState
 			i.destroy();
 		}
 		dirtyNotes.wipeArray();
+	}
 
-		switchState(cameFromFreeplay ? MainMenuState : FreeplayState, [], false, FunkinTransitionType.Black);
+	function endSong(?overrideState:Class<MusicBeatState> = null, ?overrideTrans:FunkinTransitionType = FunkinTransitionType.Black)
+	{
+		wipeAllNotes();
+
+		var dirtyOptions:Array<Alphabet> = [];
+		for (i in PauseSubState.optionInstances)
+			dirtyOptions.push(i);
+		for (i in dirtyOptions)
+		{
+			i.destroy();
+			PauseSubState.optionInstances.remove(i);
+		}
+		PauseSubState.optionInstances = dirtyOptions = null;
+
+		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], false, overrideTrans);
 	}
 
 	override public function beatHit()
@@ -595,7 +619,7 @@ class PlayState extends MusicBeatState
 			charLeft.dance();
 			charMid.dance();
 			charRight.dance();
+			camGame.zoom *= 1.025;
 		}
-		camGame.zoom *= 1.05;
 	}
 }
