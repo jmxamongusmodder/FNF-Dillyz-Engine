@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dillyzEngine-Windows64
-          path: export/release/windows/bin
+          path: export/windows/bin
           
   buildLinux:
     runs-on: ubuntu-latest
@@ -125,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dillyzEngine-linuxLatest
-          path: export/release/linux/bin
+          path: export/linux/bin
           
   buildMac:
     runs-on: macos-latest
@@ -181,4 +181,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: dillyzEngine-macOSLatest
-          path: export/release/macos/bin
+          path: export/macos/bin
