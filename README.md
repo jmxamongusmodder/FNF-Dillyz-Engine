@@ -12,7 +12,7 @@
 </p>
 
 # Friday Night Funkin': Dillyz Engine
-![](https://img.shields.io/github/v/release/DillyzThe1/FNF-Dillyz-Engine)](../../releases/latest) [![](https://img.shields.io/github/repo-size/DillyzThe1/FNF-Dillyz-Engine)](../../archive/refs/heads/main.zip)<br/>
+[![](https://img.shields.io/github/v/release/DillyzThe1/FNF-Dillyz-Engine)](../../releases/latest) [![](https://img.shields.io/github/repo-size/DillyzThe1/FNF-Dillyz-Engine)](../../archive/refs/heads/main.zip)<br/>
 Ah, the classic FNF rhythm game! What terrible programing!<br>
 That's why I've personally gone out of my way to open a new HaxeFlixel project and make it from scratch!<br>
 Well, for the programming and custom art/animation atleast.<br>
