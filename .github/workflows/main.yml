@@ -1,0 +1,184 @@
+# Taken directly from https://github.com/DillyzThe1/ColorCove/blob/main/.github/workflows/main.yml and uncommented
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  buildWindows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Cache
+        id: haxe-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            C:/haxelib
+            C:/hostedtoolcache/windows/haxe/4.2.4/
+            export/release/windows/haxe
+            export/release/windows/obj
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/Project.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-haxelib-
+      
+      - uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.2.4
+
+      - name: Haxeflixel Libraries Installer
+        if: steps.haxe-cache.outputs.cache-hit != 'true'
+        run: |
+          haxelib setup C:/haxelib
+          haxelib install hxcpp > nul
+          haxelib install lime
+          haxelib run lime setup
+          haxelib install openfl
+          haxelib install flixel
+          haxelib run lime setup flixel
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install hxcpp-debug-server
+        shell: cmd
+
+      - name: Haxeflixel Libraries Updater
+        run: |
+            haxelib update hxcpp
+            haxelib update lime
+            haxelib update openfl
+            haxelib update flixel
+            haxelib update flixel-tools
+            haxelib update hxcpp-debug-server
+            haxelib update flixel-ui
+            haxelib update flixel-addons
+            haxelib list
+        shell: cmd
+
+      - name: Build Game
+        run: haxelib run lime build windows -release
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dillyzEngine-Windows64
+          path: export/release/windows/bin
+          
+  buildLinux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Cache
+        id: haxe-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/haxelib
+            ~/haxelib/opt/hostedtoolcache/haxe/4.2.4/
+            export/release/linux/haxe
+            export/release/linux/obj
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/Project.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-haxelib-
+      
+      - uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.2.4
+
+      - name: Haxeflixel Libraries Installer
+        if: steps.haxe-cache.outputs.cache-hit != 'true'
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install hxcpp > /dev/null
+          haxelib install lime
+          haxelib run lime setup
+          haxelib install openfl
+          haxelib install flixel
+          haxelib run lime setup flixel
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install hxcpp-debug-server
+      - name: Haxeflixel Libraries Updater
+        run: |
+            haxelib update hxcpp
+            haxelib update lime
+            haxelib update openfl
+            haxelib update flixel
+            haxelib update flixel-tools
+            haxelib update hxcpp-debug-server
+            haxelib update flixel-ui
+            haxelib update flixel-addons
+            haxelib list
+      - name: Build Game
+        run: haxelib run lime build Project.xml linux -release
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dillyzEngine-linuxLatest
+          path: export/release/linux/bin
+          
+  buildMac:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Cache
+        id: haxe-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/haxelib
+            /Users/runner/hostedtoolcache/haxe/4.2.4/
+            export/release/macos/haxe
+            export/release/macos/obj
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/Project.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-haxelib-
+      
+      - uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: 4.2.4
+
+      - name: Haxeflixel Libraries Installer
+        if: steps.haxe-cache.outputs.cache-hit != 'true'
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install hxcpp > /dev/null
+          haxelib install lime
+          haxelib run lime setup
+          haxelib install openfl
+          haxelib install flixel
+          haxelib run lime setup flixel
+          haxelib install flixel-ui
+          haxelib install flixel-addons
+          haxelib install hxcpp-debug-server
+      - name: Haxeflixel Libraries Updater
+        run: |
+            haxelib update hxcpp
+            haxelib update lime
+            haxelib update openfl
+            haxelib update flixel
+            haxelib update flixel-tools
+            haxelib update hxcpp-debug-server
+            haxelib update flixel-ui
+            haxelib update flixel-addons
+            haxelib list
+      - name: Build Game
+        run: haxelib run lime build mac -release
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dillyzEngine-macOSLatest
+          path: export/release/macos/bin
