@@ -183,6 +183,7 @@ class ModManagerMenu extends MusicBeatState
 			new FlxTimer().start(1.5, function(t:FlxTimer)
 			{
 				FlxG.sound.music.fadeOut(0.5);
+				MainMenuState.reloadingMod = true;
 				switchState(MainMenuState, [], true, FunkinTransitionType.Normal);
 			});
 		}
