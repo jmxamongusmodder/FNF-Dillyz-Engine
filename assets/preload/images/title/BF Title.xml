@@ -2,18 +2,32 @@
 <TextureAtlas imagePath="BF Title.png">
 	<!-- Created with Adobe Animate version 22.0.7.214 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="BF Title Beat Hit0000" x="852" y="0" width="421" height="393" frameX="-4" frameY="-21" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0001" x="852" y="0" width="421" height="393" frameX="-4" frameY="-21" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0002" x="429" y="404" width="423" height="395" frameX="-3" frameY="-19" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0003" x="429" y="404" width="423" height="395" frameX="-3" frameY="-19" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0004" x="428" y="0" width="420" height="400" frameX="-3" frameY="-14" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0005" x="428" y="0" width="420" height="400" frameX="-3" frameY="-14" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0006" x="0" y="418" width="425" height="412" frameX="0" frameY="-2" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0007" x="0" y="418" width="425" height="412" frameX="0" frameY="-2" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0008" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0009" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0010" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0011" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0012" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
-	<SubTexture name="BF Title Beat Hit0013" x="0" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0000" x="855" y="418" width="421" height="393" frameX="-4" frameY="-21" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0001" x="855" y="418" width="421" height="393" frameX="-4" frameY="-21" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0002" x="1301" y="416" width="423" height="395" frameX="-3" frameY="-19" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0003" x="1301" y="416" width="423" height="395" frameX="-3" frameY="-19" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0004" x="0" y="416" width="420" height="400" frameX="-3" frameY="-14" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0005" x="0" y="416" width="420" height="400" frameX="-3" frameY="-14" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0006" x="1301" y="0" width="425" height="412" frameX="0" frameY="-2" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0007" x="1301" y="0" width="425" height="412" frameX="0" frameY="-2" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0008" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0009" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0010" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0011" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0012" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Beat Hit0013" x="873" y="0" width="424" height="414" frameX="0" frameY="0" frameWidth="426" frameHeight="414"/>
+	<SubTexture name="BF Title Hey0000" x="437" y="415" width="414" height="417" frameX="0" frameY="0" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0001" x="437" y="415" width="414" height="417" frameX="0" frameY="0" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0002" x="437" y="0" width="432" height="411" frameX="-1" frameY="-8" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0003" x="437" y="0" width="432" height="411" frameX="-1" frameY="-8" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0004" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0005" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0006" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0007" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0008" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0009" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0010" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0011" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0012" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
+	<SubTexture name="BF Title Hey0013" x="0" y="0" width="433" height="412" frameX="-1" frameY="-7" frameWidth="434" frameHeight="419"/>
 </TextureAtlas>

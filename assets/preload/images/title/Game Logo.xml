@@ -2,19 +2,19 @@
 <TextureAtlas imagePath="Game Logo.png">
 	<!-- Created with Adobe Animate version 22.0.7.214 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="Logo Beat Hit0000" x="0" y="707" width="894" height="670" frameX="-22" frameY="-16" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0001" x="0" y="0" width="939" height="703"/>
-	<SubTexture name="Logo Beat Hit0002" x="0" y="0" width="939" height="703"/>
-	<SubTexture name="Logo Beat Hit0003" x="943" y="0" width="911" height="683" frameX="-14" frameY="-10" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0004" x="943" y="0" width="911" height="683" frameX="-14" frameY="-10" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0005" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0006" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0007" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0008" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0009" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0010" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0011" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0012" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0013" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
-	<SubTexture name="Logo Beat Hit0014" x="943" y="687" width="905" height="679" frameX="-17" frameY="-12" frameWidth="939" frameHeight="703"/>
+	<SubTexture name="Logo Beat Hit0000" x="943" y="0" width="894" height="710" frameX="-22" frameY="-16" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0001" x="0" y="0" width="939" height="745"/>
+	<SubTexture name="Logo Beat Hit0002" x="0" y="0" width="939" height="745"/>
+	<SubTexture name="Logo Beat Hit0003" x="0" y="749" width="911" height="719" frameX="-14" frameY="-10" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0004" x="0" y="749" width="911" height="719" frameX="-14" frameY="-10" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0005" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0006" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0007" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0008" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0009" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0010" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0011" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0012" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0013" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
+	<SubTexture name="Logo Beat Hit0014" x="915" y="749" width="905" height="710" frameX="-17" frameY="-12" frameWidth="939" frameHeight="745"/>
 </TextureAtlas>

@@ -6,6 +6,7 @@ import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import gamestates.MusicBeatState;
 import gamestates.PlayState;
+import gamestates.editors.CharacterEditorState;
 import gamestates.menus.MainMenuState;
 import objects.ui.Alphabet;
 import rhythm.Conductor;
@@ -16,7 +17,7 @@ class PauseSubState extends MusicBeatSubState
 {
 	private var bg:FlxSprite;
 
-	private static var options:Array<String> = ['Resume Song', 'Restart Song', 'Exit To Menu'];
+	private static var options:Array<String> = ['Resume Song', 'Restart Song', 'Character Editor', 'Exit To Menu'];
 
 	public static var optionInstances:Array<Alphabet>;
 
@@ -69,6 +70,9 @@ class PauseSubState extends MusicBeatSubState
 		{
 			case 'Restart Song':
 				overrideState = PlayState;
+				overrideTranstion = Normal;
+			case 'Character Editor':
+				overrideState = CharacterEditorState;
 				overrideTranstion = Normal;
 			case 'Exit To Menu':
 				overrideState = MainMenuState;
@@ -149,8 +153,9 @@ class PauseSubState extends MusicBeatSubState
 			else
 				playState.endSong(overrideState, overrideTranstion);
 		}
-		for (i in optionInstances)
-			remove(i);
+		if (optionInstances != null)
+			for (i in optionInstances)
+				remove(i);
 		super.trulyEndState();
 	}
 }

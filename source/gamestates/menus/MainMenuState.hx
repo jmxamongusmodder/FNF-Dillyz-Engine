@@ -227,6 +227,8 @@ class MainMenuState extends MusicBeatState
 			changeSelection(-1);
 		else if (FlxG.keys.justPressed.DOWN)
 			changeSelection(1);
+		else if (FlxG.keys.justPressed.ESCAPE)
+			switchState(TitleScreenState, [], false, FunkinTransitionType.Black);
 	}
 
 	override public function beatHit()

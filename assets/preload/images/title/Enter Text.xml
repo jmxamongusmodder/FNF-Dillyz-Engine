@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Enter Text.png">
+	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ET Select0000" x="0" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0001" x="1481" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0002" x="0" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0003" x="1481" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0004" x="0" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0005" x="1481" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0006" x="1481" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0007" x="0" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Select0008" x="1481" y="2100" width="1477" height="79"/>
+	<SubTexture name="ET Static0000" x="0" y="0" width="1495" height="96"/>
+	<SubTexture name="ET Static0001" x="1499" y="0" width="1495" height="96"/>
+	<SubTexture name="ET Static0002" x="0" y="100" width="1495" height="96"/>
+	<SubTexture name="ET Static0003" x="1499" y="100" width="1495" height="96"/>
+	<SubTexture name="ET Static0004" x="0" y="200" width="1495" height="96"/>
+	<SubTexture name="ET Static0005" x="1499" y="200" width="1495" height="96"/>
+	<SubTexture name="ET Static0006" x="0" y="300" width="1495" height="96"/>
+	<SubTexture name="ET Static0007" x="1499" y="300" width="1495" height="96"/>
+	<SubTexture name="ET Static0008" x="0" y="400" width="1495" height="96"/>
+	<SubTexture name="ET Static0009" x="1499" y="400" width="1495" height="96"/>
+	<SubTexture name="ET Static0010" x="0" y="500" width="1495" height="96"/>
+	<SubTexture name="ET Static0011" x="1499" y="500" width="1495" height="96"/>
+	<SubTexture name="ET Static0012" x="0" y="600" width="1495" height="96"/>
+	<SubTexture name="ET Static0013" x="1499" y="600" width="1495" height="96"/>
+	<SubTexture name="ET Static0014" x="0" y="700" width="1495" height="96"/>
+	<SubTexture name="ET Static0015" x="1499" y="700" width="1495" height="96"/>
+	<SubTexture name="ET Static0016" x="0" y="800" width="1495" height="96"/>
+	<SubTexture name="ET Static0017" x="1499" y="800" width="1495" height="96"/>
+	<SubTexture name="ET Static0018" x="0" y="900" width="1495" height="96"/>
+	<SubTexture name="ET Static0019" x="1499" y="900" width="1495" height="96"/>
+	<SubTexture name="ET Static0020" x="0" y="1000" width="1495" height="96"/>
+	<SubTexture name="ET Static0021" x="1499" y="1000" width="1495" height="96"/>
+	<SubTexture name="ET Static0022" x="0" y="1100" width="1495" height="96"/>
+	<SubTexture name="ET Static0023" x="0" y="1100" width="1495" height="96"/>
+	<SubTexture name="ET Static0024" x="1499" y="1100" width="1495" height="96"/>
+	<SubTexture name="ET Static0025" x="0" y="1000" width="1495" height="96"/>
+	<SubTexture name="ET Static0026" x="0" y="1200" width="1495" height="96"/>
+	<SubTexture name="ET Static0027" x="1499" y="1200" width="1495" height="96"/>
+	<SubTexture name="ET Static0028" x="0" y="1300" width="1495" height="96"/>
+	<SubTexture name="ET Static0029" x="1499" y="1300" width="1495" height="96"/>
+	<SubTexture name="ET Static0030" x="0" y="1400" width="1495" height="96"/>
+	<SubTexture name="ET Static0031" x="1499" y="1400" width="1495" height="96"/>
+	<SubTexture name="ET Static0032" x="0" y="1500" width="1495" height="96"/>
+	<SubTexture name="ET Static0033" x="1499" y="1500" width="1495" height="96"/>
+	<SubTexture name="ET Static0034" x="0" y="1600" width="1495" height="96"/>
+	<SubTexture name="ET Static0035" x="1499" y="1600" width="1495" height="96"/>
+	<SubTexture name="ET Static0036" x="0" y="1700" width="1495" height="96"/>
+	<SubTexture name="ET Static0037" x="1499" y="1700" width="1495" height="96"/>
+	<SubTexture name="ET Static0038" x="0" y="1800" width="1495" height="96"/>
+	<SubTexture name="ET Static0039" x="1499" y="1800" width="1495" height="96"/>
+	<SubTexture name="ET Static0040" x="0" y="1900" width="1495" height="96"/>
+	<SubTexture name="ET Static0041" x="1499" y="1900" width="1495" height="96"/>
+	<SubTexture name="ET Static0042" x="0" y="2000" width="1495" height="96"/>
+	<SubTexture name="ET Static0043" x="1499" y="2000" width="1495" height="96"/>
+	<SubTexture name="ET Static0044" x="0" y="0" width="1495" height="96"/>
+</TextureAtlas>

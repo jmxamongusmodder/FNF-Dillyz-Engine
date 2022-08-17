@@ -2,32 +2,46 @@
 <TextureAtlas imagePath="GF Title.png">
 	<!-- Created with Adobe Animate version 22.0.7.214 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="GF Title Beat Hit0000" x="2192" y="2571" width="725" height="635" frameX="-2" frameY="-15" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0001" x="2916" y="1290" width="730" height="635" frameX="0" frameY="-15" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0002" x="729" y="1937" width="730" height="633" frameX="0" frameY="-17" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0003" x="2921" y="2571" width="725" height="633" frameX="-2" frameY="-17" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0004" x="1463" y="1937" width="725" height="636" frameX="-2" frameY="-14" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0005" x="0" y="1940" width="725" height="636" frameX="-2" frameY="-14" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0006" x="729" y="1295" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0007" x="729" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0008" x="729" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0009" x="729" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0010" x="0" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0011" x="0" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0012" x="0" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0013" x="1458" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0014" x="1458" y="1295" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0015" x="2916" y="648" width="730" height="638" frameX="0" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0016" x="729" y="653" width="730" height="638" frameX="0" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0017" x="2187" y="1295" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0018" x="0" y="1298" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0019" x="2916" y="1929" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0020" x="0" y="654" width="725" height="640" frameX="-2" frameY="-10" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0021" x="2187" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0022" x="2187" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0023" x="2187" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0024" x="2916" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0025" x="2916" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0026" x="2916" y="0" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
-	<SubTexture name="GF Title Beat Hit0027" x="2187" y="648" width="725" height="643" frameX="-2" frameY="-7" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0000" x="729" y="2599" width="725" height="635" frameX="-2" frameY="-15" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0001" x="735" y="1318" width="730" height="635" frameX="0" frameY="-15" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0002" x="2933" y="2590" width="730" height="633" frameX="0" frameY="-17" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0003" x="0" y="2605" width="725" height="633" frameX="-2" frameY="-17" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0004" x="2198" y="2591" width="725" height="636" frameX="-2" frameY="-14" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0005" x="1458" y="2596" width="725" height="636" frameX="-2" frameY="-14" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0006" x="2204" y="1949" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0007" x="2944" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0008" x="2944" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0009" x="2944" y="0" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0010" x="2215" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0011" x="2215" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0012" x="2215" y="0" width="725" height="650" frameX="-2" frameY="0" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0013" x="2944" y="653" width="725" height="649" frameX="-2" frameY="-1" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0014" x="1469" y="1954" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0015" x="2933" y="1306" width="730" height="638" frameX="0" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0016" x="2933" y="1948" width="730" height="638" frameX="0" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0017" x="0" y="1321" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0018" x="729" y="1957" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0019" x="0" y="1963" width="725" height="638" frameX="-2" frameY="-12" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0020" x="1475" y="1310" width="725" height="640" frameX="-2" frameY="-10" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0021" x="2215" y="654" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0022" x="2215" y="654" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0023" x="2215" y="654" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0024" x="1475" y="662" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0025" x="1475" y="662" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0026" x="1475" y="662" width="725" height="644" frameX="-2" frameY="-6" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Beat Hit0027" x="2204" y="1302" width="725" height="643" frameX="-2" frameY="-7" frameWidth="730" frameHeight="650"/>
+	<SubTexture name="GF Title Hey0000" x="1480" y="0" width="731" height="658" frameX="-2" frameY="0" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0001" x="0" y="0" width="736" height="658"/>
+	<SubTexture name="GF Title Hey0002" x="740" y="0" width="736" height="655" frameX="0" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0003" x="740" y="659" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0004" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0005" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0006" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0007" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0008" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0009" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0010" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0011" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0012" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
+	<SubTexture name="GF Title Hey0013" x="0" y="662" width="731" height="655" frameX="-2" frameY="-3" frameWidth="736" frameHeight="658"/>
 </TextureAtlas>

@@ -3,6 +3,7 @@ package;
 import DillyzLogger.LogType;
 import flixel.FlxGame;
 import gamestates.PlayState;
+import gamestates.TitleScreenState;
 import gamestates.menus.MainMenuState;
 import haxe.CallStack;
 import haxe.CallStack;
@@ -23,7 +24,7 @@ class Main extends Sprite
 		super();
 		DillyzLogger.setLogDate();
 		fpsCounter = new FPS(10, 10, 0xFFFFFFFF);
-		var curGame:FlxGame = new FlxGame(0, 0, MainMenuState, 1, 120, 120, true, false);
+		var curGame:FlxGame = new FlxGame(0, 0, TitleScreenState, 1, 120, 120, true, false);
 		addChild(curGame);
 		addChild(fpsCounter);
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, Main.onUncaughtError);

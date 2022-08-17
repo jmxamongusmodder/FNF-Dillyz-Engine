@@ -1,0 +1,54 @@
+{
+	"characters": [
+		{
+			"charName": "boyfriend-title",
+			"position": [
+				-35,
+				40
+			],
+			"shouldFlip": false
+		},
+		{
+			"charName": "girlfriend-title",
+			"position": [
+				775,
+				220
+			],
+			"shouldFlip": false
+		}
+	],
+	"logoImage": "title/Game Logo",
+	"bopAnimName": "Logo Beat Hit",
+	"bopFPS": 24,
+	"bopFlip": [
+		false,
+		false
+	],
+	"beatsToBop": 2,
+	"logoInFrontOfChar": 1,
+	"logoPos": [
+		160,
+		-110
+	],
+	"heyBeats": [
+		7,
+		23,
+		39,
+		55,
+		71,
+		87,
+		103,
+		135,
+		151,
+		167,
+		183
+	],
+	"enterImage": "title/Enter Text",
+	"enterStaticName": "ET Static",
+	"enterSelectName": "ET Select",
+	"enterFPS": 24,
+	"enterPos": [
+		135,
+		610
+	]
+}

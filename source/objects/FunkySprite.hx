@@ -15,6 +15,12 @@ class FunkySprite extends FlxSprite
 
 	public var debugEnabled:Bool = true;
 
+	public function new(?xx:Float = 0, ?yy:Float = 0)
+	{
+		super(xx, yy);
+		antialiasing = true;
+	}
+
 	public function setOffset(name:String, x:Int, y:Int)
 	{
 		animOffsets.set(name, new FlxPoint(x, y));

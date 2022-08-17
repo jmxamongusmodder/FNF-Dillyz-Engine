@@ -183,10 +183,12 @@ class Paths
 			return modPath;
 		#end
 
-		var pathThing:String;
-		if (lib == null)
-			pathThing = 'assets/$path.${fileExt.toLowerCase()}';
-		else
+		// check preload
+		var pathThing:String = 'assets/$path.${fileExt.toLowerCase()}';
+		if (FileSystem.exists(pathThing))
+			return pathThing;
+
+		if (lib != null)
 			pathThing = 'assets/$lib/$path.${fileExt.toLowerCase()}';
 
 		if (FileSystem.exists(pathThing))
@@ -205,10 +207,12 @@ class Paths
 			return true;
 		#end
 
-		var pathThing:String;
-		if (lib == null)
-			pathThing = 'assets/$path.${fileExt.toLowerCase()}';
-		else
+		// check preload
+		var pathThing:String = 'assets/$path.${fileExt.toLowerCase()}';
+		if (FileSystem.exists(pathThing))
+			return true;
+
+		if (lib != null)
 			pathThing = 'assets/$lib/$path.${fileExt.toLowerCase()}';
 
 		if (FileSystem.exists(pathThing))
