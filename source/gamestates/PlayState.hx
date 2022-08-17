@@ -609,6 +609,7 @@ class PlayState extends MusicBeatState
 		}
 		PauseSubState.optionInstances = dirtyOptions = null;
 
+		BGMusicManager.play('freakyMenu', 102);
 		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], false, overrideTrans);
 	}
 

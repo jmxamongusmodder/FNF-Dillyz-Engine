@@ -78,9 +78,6 @@ class MainMenuState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
-		if (FlxG.save.data.lastMod != null)
-			Paths.curMod = FlxG.save.data.lastMod;
-		BGMusicManager.play('freakyMenu', 102);
 
 		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_yellow'));
 		funnyBG.antialiasing = true;
