@@ -108,9 +108,12 @@ class DillyzLogger
 			+ '> Operating System: ${newSystemData.osName} (Version ${newSystemData.osVersion})\n'
 			+ '> CPU: ${newSystemData.cpuName}\n'
 			+ '> GPU: ${newSystemData.gpuName} (Driver Version ${newSystemData.gpuDriverVersion})\n'
-			+ '> Day: $startUpDayDate\n'
-			+ '> Time: $startUpDayTime\n'
-			+ '> Current Library: ${Paths.curLib}\n' #if MODS_ACTIVE + '> Current Mod: ${Paths.curMod}\n' #end
+			+ '> Initial Day: $startUpDayDate\n'
+			+ '> Initial Time: $startUpDayTime\n'
+			+ '> Last Log Day: ${(Date.now().getUTCMonth() + 1)}-${Date.now().getUTCDate()}-${Date.now().getUTCFullYear()}\n'
+			+
+			'> Last Log Time: ${(Date.now().getUTCHours() % 12) + 1}-${Date.now().getUTCMinutes()}-${Date.now().getUTCSeconds()}${Date.now().getUTCHours() >= 12 ? 'PM' : 'AM'}\n' /*+ '> Current Library: ${Paths.curLib}\n'*/ #if MODS_ACTIVE +
+		'> Current Mod: ${Paths.curMod}\n' #end
 		+ '\nIf the game has crashed, send this report to https://github.com/DillyzThe1/Dillyz-Engine/issues\n\n\n-----== LOGS START HERE ==-----\n';
 
 		for (i in allLogs)
@@ -154,8 +157,8 @@ class DillyzLogger
 			+ '> Initial Time: $startUpDayTime\n'
 			+ '> Crash Day: ${(Date.now().getUTCMonth() + 1)}-${Date.now().getUTCDate()}-${Date.now().getUTCFullYear()}\n'
 			+
-			'> Crash Time: ${(Date.now().getUTCHours() % 12) + 1}-${Date.now().getUTCMinutes()}-${Date.now().getUTCSeconds()}${Date.now().getUTCHours() >= 12 ? 'PM' : 'AM'}\n'
-			+ '> Current Library: ${Paths.curLib}\n' #if MODS_ACTIVE + '> Current Mod: ${Paths.curMod}\n' #end
+			'> Crash Time: ${(Date.now().getUTCHours() % 12) + 1}-${Date.now().getUTCMinutes()}-${Date.now().getUTCSeconds()}${Date.now().getUTCHours() >= 12 ? 'PM' : 'AM'}\n' /*+ '> Current Library: ${Paths.curLib}\n'*/ #if MODS_ACTIVE +
+		'> Current Mod: ${Paths.curMod}\n' #end
 		+ '\nWhoops, the game has Crashed! ${randomFunnies[FlxG.random.int(0, randomFunnies.length - 1)]}'
 		+ '\nPlease send this report to https://github.com/DillyzThe1/Dillyz-Engine/issues\n\n\n-----== LOGS START HERE ==-----\n';
 

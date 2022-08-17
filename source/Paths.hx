@@ -21,8 +21,7 @@ using StringTools;
 
 class Paths
 {
-	public static var curLib:String = 'shared';
-
+	// public static var curLib:String = 'shared';
 	#if MODS_ACTIVE
 	public static var curMod:String = '_TEMPLATE';
 	#end

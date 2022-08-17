@@ -75,9 +75,17 @@ class MainMenuState extends MusicBeatState
 
 	var bgFlash:FlxSprite;
 
+	public static var reloadingMod:Bool = false;
+
 	override public function create()
 	{
 		super.create();
+
+		if (FlxG.sound == null || FlxG.sound.music == null || !FlxG.sound.music.playing || reloadingMod)
+		{
+			BGMusicManager.play('freakyMenu', 102);
+			reloadingMod = true;
+		}
 
 		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_yellow'));
 		funnyBG.antialiasing = true;

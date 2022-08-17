@@ -599,15 +599,18 @@ class PlayState extends MusicBeatState
 	{
 		wipeAllNotes();
 
-		var dirtyOptions:Array<Alphabet> = [];
-		for (i in PauseSubState.optionInstances)
-			dirtyOptions.push(i);
-		for (i in dirtyOptions)
+		if (PauseSubState.optionInstances != null)
 		{
-			i.destroy();
-			PauseSubState.optionInstances.remove(i);
+			var dirtyOptions:Array<Alphabet> = [];
+			for (i in PauseSubState.optionInstances)
+				dirtyOptions.push(i);
+			for (i in dirtyOptions)
+			{
+				i.destroy();
+				PauseSubState.optionInstances.remove(i);
+			}
+			PauseSubState.optionInstances = dirtyOptions = null;
 		}
-		PauseSubState.optionInstances = dirtyOptions = null;
 
 		BGMusicManager.play('freakyMenu', 102);
 		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], false, overrideTrans);
