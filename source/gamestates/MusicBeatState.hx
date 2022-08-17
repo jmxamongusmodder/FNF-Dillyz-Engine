@@ -155,6 +155,7 @@ class MusicBeatState extends FlxState
 
 		intendedToClearMemory = clearMemory;
 
+		preloaderArt.visible = true;
 		switch (transType)
 		{
 			case Normal:

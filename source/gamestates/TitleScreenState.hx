@@ -1,6 +1,7 @@
 package gamestates;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
@@ -8,6 +9,7 @@ import gamestates.menus.MainMenuState;
 import managers.BGMusicManager;
 import objects.FunkySprite;
 import objects.characters.Character;
+import objects.ui.Alphabet;
 
 typedef TitleScreenCharData =
 {
@@ -41,6 +43,11 @@ class TitleScreenState extends MusicBeatState
 	var grossHeterosexuals:Array<Character>;
 	var logoImage:FunkySprite;
 	var enterImage:FunkySprite;
+
+	// flx and not funky bc custom functions are unwanted
+	var ogLogo:FlxSprite;
+
+	public static var hasSkippedBefore:Bool = false;
 
 	override public function create()
 	{
@@ -113,6 +120,19 @@ class TitleScreenState extends MusicBeatState
 		}
 		add(enterImage);
 		postCreate();
+
+		if (!hasSkippedBefore)
+		{
+			camHUD.bgColor = FlxColor.BLACK;
+			preloaderArt.visible = false;
+
+			ogLogo = new FlxSprite(0, 250, Paths.png('title/Original FNF Logo', null));
+			ogLogo.screenCenter(X);
+			add(ogLogo);
+			ogLogo.cameras = [camHUD];
+			ogLogo.visible = false;
+		}
+		preloaderArt.color = FlxColor.BLACK;
 	}
 
 	public var stopSpammingMadEmoji:Bool = false;
@@ -123,20 +143,28 @@ class TitleScreenState extends MusicBeatState
 
 		if (!stopSpammingMadEmoji && FlxG.keys.justPressed.ENTER)
 		{
-			stopSpammingMadEmoji = true;
-			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
-			camGame.flash(FlxColor.WHITE, 0.85);
-
-			enterImage.playAnim('Select', true);
-			for (i in grossHeterosexuals)
-				i.playAnim('hey', true);
-
-			new FlxTimer().start(1.5, function(t:FlxTimer)
+			if (!hasSkippedBefore)
+				skipIntro();
+			else
 			{
-				switchState(MainMenuState, [], false, FunkinTransitionType.Black);
-			});
+				stopSpammingMadEmoji = true;
+				FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
+				camGame.flash(FlxColor.WHITE, 0.85);
+
+				enterImage.playAnim('Select', true);
+				for (i in grossHeterosexuals)
+					i.playAnim('hey', true);
+
+				new FlxTimer().start(1.5, function(t:FlxTimer)
+				{
+					switchState(MainMenuState, [], false, FunkinTransitionType.Black);
+				});
+			}
 		}
 	}
+
+	public static var textStart:Int = 125;
+	public static var textSpacing:Int = 75;
 
 	override public function beatHit()
 	{
@@ -154,5 +182,83 @@ class TitleScreenState extends MusicBeatState
 		if (titleJson.heyBeats.contains(curBeat))
 			for (i in grossHeterosexuals)
 				i.playAnim('hey', true);
+
+		// maybe i'll make this moddable later
+		if (!hasSkippedBefore)
+		{
+			switch (curBeat)
+			{
+				case 1:
+					// trace('DillyzThe1');
+					addText(textStart, 'DillyzThe1');
+				case 3:
+					addText(textStart + textSpacing, 'presents');
+				case 4:
+					delText();
+				case 5:
+					addText(textStart, 'A recreation');
+					addText(textStart + textSpacing, 'of');
+				case 7:
+					// addText(textStart + (textSpacing * 3), 'FNF');
+					trace('fnf logo vis');
+					ogLogo.visible = true;
+				case 8:
+					delText();
+					trace('fnf logo invis');
+					ogLogo.visible = false;
+				case 9:
+					addText(textStart, 'ayo');
+				case 11:
+					addText(textStart + textSpacing, 'da pizza here');
+				case 12:
+					delText();
+				case 13:
+					addText(textStart, 'FNF');
+				case 14:
+					addText(textStart + textSpacing, 'Dillyz');
+				case 15:
+					addText(textStart + (textSpacing * 2), 'Engine');
+				case 16:
+					skipIntro();
+			}
+		}
+	}
+
+	public function skipIntro()
+	{
+		hasSkippedBefore = true;
+		camHUD.bgColor = FlxColor.TRANSPARENT;
+		camGame.flash(FlxColor.WHITE, 2.5);
+		delText();
+	}
+
+	public var youKnowWhoElseHasDementia:Array<Alphabet>;
+
+	public function addText(y:Float, text:String)
+	{
+		if (youKnowWhoElseHasDementia == null)
+			youKnowWhoElseHasDementia = new Array<Alphabet>();
+		var newAlphabet:Alphabet = new Alphabet(0, y, text);
+		newAlphabet.screenCenter(X);
+		add(newAlphabet);
+		newAlphabet.cameras = [camHUD];
+		youKnowWhoElseHasDementia.push(newAlphabet);
+		newAlphabet.x -= 15;
+	}
+
+	public function delText()
+	{
+		if (youKnowWhoElseHasDementia == null)
+			return;
+
+		var dirtyVars:Array<Alphabet> = new Array<Alphabet>();
+
+		for (i in youKnowWhoElseHasDementia)
+			dirtyVars.push(i);
+		for (i in dirtyVars)
+		{
+			youKnowWhoElseHasDementia.remove(i);
+			i.destroy();
+		}
 	}
 }
