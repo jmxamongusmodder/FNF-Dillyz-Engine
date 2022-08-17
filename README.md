@@ -1,5 +1,5 @@
 <p align="center">
-  <img align="center" src="art/engine logo.png">
+  <img align="center" src="art/Dillyz-Engine.png">
 </p>
 <p align="center">
   An organized recreation of Friday Night Funkin' by <a href="https://www.github.com/DillyzThe1">DillyzThe1</a>.<br>
@@ -12,7 +12,7 @@
 </p>
 
 # Friday Night Funkin': Dillyz Engine
-[![](https://img.shields.io/github/v/release/DillyzThe1/FNF-Dillyz-Engine)](../../releases/latest) [![](https://img.shields.io/github/repo-size/DillyzThe1/FNF-Dillyz-Engine)](../../archive/refs/heads/main.zip)<br/>
+![](https://img.shields.io/github/v/release/DillyzThe1/FNF-Dillyz-Engine)](../../releases/latest) [![](https://img.shields.io/github/repo-size/DillyzThe1/FNF-Dillyz-Engine)](../../archive/refs/heads/main.zip)<br/>
 Ah, the classic FNF rhythm game! What terrible programing!<br>
 That's why I've personally gone out of my way to open a new HaxeFlixel project and make it from scratch!<br>
 Well, for the programming and custom art/animation atleast.<br>
@@ -22,7 +22,8 @@ The original music and Adobe Animate project files were taken from the original 
 <b><i>You may reference the source code, though. I don't care as long as you add credit.</i></b><br>
 
 ## How To Play
-Download the latest release from <a href="https://gamebanana.com/members/2088207">GameBanana</a> by using the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Google Drive</a> link.<br>
+<s>Download the latest release from <a href="https://gamebanana.com/members/2088207">GameBanana</a> by using the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Google Drive</a> link.</s><br>
+<i>NOTE: Not actually released on any other website</i><br>
 If you're not on windows, then you may actually wanna check the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Actions</a> page for a release, however, it may be a pre-release.<br>
 Extract the zip or whatever & open the exe.<br>
 <i>Note: You may or may not get a warning for the software considering I do not sign my software, but just allow it through the firewall by hitting show more. If you don't trust me, read the source code.</i><br>
