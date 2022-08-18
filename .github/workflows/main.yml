@@ -48,7 +48,6 @@ jobs:
           haxelib install flixel-addons
           haxelib install hxcpp-debug-server
         shell: cmd
-
       - name: Haxeflixel Libraries Updater
         run: |
             haxelib update hxcpp
@@ -59,7 +58,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
-           haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
+            haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
             haxelib list
         shell: cmd
 
