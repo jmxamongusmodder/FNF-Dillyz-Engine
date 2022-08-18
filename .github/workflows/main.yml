@@ -59,6 +59,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
+           haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
             haxelib list
         shell: cmd
 
@@ -117,6 +118,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
+            haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
             haxelib list
       - name: Build Game
         run: haxelib run lime build Project.xml linux -release
@@ -173,6 +175,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
+            haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit
             haxelib list
       - name: Build Game
         run: haxelib run lime build mac -release

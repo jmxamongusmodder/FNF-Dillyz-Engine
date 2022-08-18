@@ -356,6 +356,25 @@ class Paths
 		}
 	}
 
+	inline public static function stageLuaExists(stage:String):Bool
+	{
+		return assetExists('stages/$stage/stage', null, 'lua');
+	}
+
+	public static function stageLua(stage:String):String
+	{
+		try
+		{
+			if (assetExists('stages/$stage/stage', null, 'lua'))
+				return File.getContent(asset('stages/$stage/stage', null, 'lua'));
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Stage Lua Missing; ${e.toString()}\n${e.message}', LogType.Error);
+		}
+		return 'function onCreatePost() log("what am i doing", LogType.Normal) end';
+	}
+
 	inline public static function music(path:String):Sound
 	{
 		try

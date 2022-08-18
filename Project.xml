@@ -79,6 +79,9 @@
 	<!--In case you want to use nape with flixel-->
 	<!--<haxelib name="nape-haxe4" />-->
 
+	<!--Lua script support-->
+	<haxelib name="linc_luajit" />
+
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->
@@ -114,7 +117,7 @@
 	<!-- _________________________________ Haxeflags _______________________________ -->
 
 	<!-- https://haxe.org/manual/cr-dce.html -->
-	<haxeflag name="-dce full" />
+	<!--haxeflag name="-dce full" /-->
 	<haxeflag name="--no-traces" if="release"/>
 
 	<!-- _________________________________ Custom _______________________________ -->

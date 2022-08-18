@@ -6,6 +6,7 @@
 -lib flixel
 -lib openfl
 -lib lime
+-lib linc_luajit
 -dce full
 --define MODS_ACTIVE=true
 --define LOGS_ENABLED=true

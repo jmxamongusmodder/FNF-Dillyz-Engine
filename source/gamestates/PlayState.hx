@@ -43,6 +43,8 @@ typedef CountdownJson =
 // import managers.StateManager;
 class PlayState extends MusicBeatState
 {
+	public static var instance:PlayState;
+
 	// stage
 	private var theStage:FunkyStage;
 
@@ -95,6 +97,8 @@ class PlayState extends MusicBeatState
 		super.create();
 		BGMusicManager.stop();
 
+		instance = this;
+
 		if (!loadFromChartEditorInstead)
 			curSong = Song.songFromName(songToLoad, diffToLoad);
 		Conductor.mapBPMChanges(curSong);
@@ -113,6 +117,8 @@ class PlayState extends MusicBeatState
 
 		charRight = new Character(theStage.posBF.x, theStage.posBF.y, curSong.boyfriend, true, true, false);
 		add(charRight);
+
+		theStage.setupLua();
 
 		prepareStrumLineNotes();
 
@@ -159,6 +165,19 @@ class PlayState extends MusicBeatState
 		startCountdown();
 
 		postCreate();
+		callLua('onCreatePost', []);
+	}
+
+	public function callLua(functionName:String, arguments:Array<Dynamic>)
+	{
+		if (theStage.stageLua != null)
+			theStage.stageLua.callFunction(functionName, arguments);
+	}
+
+	public function setLua(varName:String, value:Dynamic)
+	{
+		if (theStage.stageLua != null)
+			theStage.stageLua.setVar(varName, value);
 	}
 
 	// this function is for future usage with songs
@@ -332,6 +351,7 @@ class PlayState extends MusicBeatState
 
 		new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
+			callLua('onCountdown', [tmr.elapsedLoops]);
 			switch (tmr.elapsedLoops)
 			{
 				case 1:
@@ -365,6 +385,7 @@ class PlayState extends MusicBeatState
 			endSong();
 		};
 		songLength = FlxG.sound.music.length;
+		callLua('onStartSong', []);
 	}
 
 	public function setCamTarget(char:String)
@@ -412,6 +433,7 @@ class PlayState extends MusicBeatState
 		}
 
 		camFollow.setPosition(curCharLol.getMidpoint().x + offsetX, curCharLol.getMidpoint().y + offsetY);
+		callLua('onCamTarget', [char]);
 	}
 
 	var dirtyNotes:Array<SongNote> = [];
@@ -429,6 +451,7 @@ class PlayState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		callLua('onUpdate', [elapsed]);
 
 		// yes ik this gets set off even when hitting a note but shut up it's just ghost tapping rn
 		for (i in 0...SongNote.keyArray.length)
@@ -571,6 +594,7 @@ class PlayState extends MusicBeatState
 		}
 
 		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);
+		callLua('onUpdatePost', [elapsed]);
 	}
 
 	function wipeAllNotes()
@@ -599,6 +623,7 @@ class PlayState extends MusicBeatState
 
 	function endSong(?overrideState:Class<MusicBeatState> = null, ?overrideTrans:FunkinTransitionType = FunkinTransitionType.Black)
 	{
+		callLua('onEndSong', []);
 		wipeAllNotes();
 
 		if (PauseSubState.optionInstances != null)
@@ -620,6 +645,8 @@ class PlayState extends MusicBeatState
 
 	override public function beatHit()
 	{
+		setLua('curBeat', curBeat);
+		callLua('onBeatHit', []);
 		if (curBeat % 2 == 0)
 		{
 			charLeft.dance();
@@ -627,5 +654,12 @@ class PlayState extends MusicBeatState
 			charRight.dance();
 			camGame.zoom *= 1.025;
 		}
+		// callLua('onBeatHitPost', []);
+	}
+
+	override public function stepHit()
+	{
+		// callLua('onStepHit', []);
+		// setLua('curStep', curStep);
 	}
 }

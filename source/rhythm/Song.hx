@@ -124,9 +124,6 @@ class Song
 		{
 			// just write the engine name
 			newData.engineType = 'Dillyz Engine';
-			newData.girlfriend == 'girlfriend';
-			newData.stage == 'stage';
-			newData.countdownSuffix = '';
 
 			newData.player1 = oldCharToDillyz(newData.player1);
 			newData.player2 = oldCharToDillyz(newData.player2);
@@ -145,6 +142,13 @@ class Song
 				i.sectionNotes.wipeArray();
 			}
 		}
+
+		if (newData.girlfriend == null)
+			newData.girlfriend == 'girlfriend';
+		if (newData.stage == null)
+			newData.stage == 'stage';
+		if (newData.countdownSuffix == null)
+			newData.countdownSuffix = '';
 
 		return newData;
 	}

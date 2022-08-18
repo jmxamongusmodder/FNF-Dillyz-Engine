@@ -4,6 +4,7 @@ import DillyzLogger.LogType;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxPoint;
 import haxe.Exception;
+import managers.FunkyLuaManager;
 
 using DillyzUtil;
 
@@ -110,6 +111,8 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 
 	public var curData:StageData;
 
+	public var stageLua:FunkyLuaManager;
+
 	public function new(?stageName:String = 'stage')
 	{
 		super();
@@ -146,6 +149,17 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 		}
 	}
 
+	public function setupLua()
+	{
+		if (stageLua != null)
+			return;
+		if (Paths.stageLuaExists(stageName))
+		{
+			stageLua = new FunkyLuaManager('$stageName.lua', Paths.stageLua(stageName));
+			stageLua.callFunction('onCreate', []);
+		}
+	}
+
 	override public function destroy()
 	{
 		var keys:Array<String> = cast(bgAssets.keys().toArray());
@@ -163,6 +177,8 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 				DillyzLogger.log('Could not clear graphic asset \'${keys[i]}\'; ${e.toString()}\n${e.message}', LogType.Error);
 			}
 		}
+		if (stageLua != null)
+			stageLua.stopLua();
 		super.destroy();
 	}
 }
