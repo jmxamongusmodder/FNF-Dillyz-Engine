@@ -120,7 +120,7 @@ jobs:
             haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
             haxelib list
       - name: Build Game
-        run: haxelib run lime build Project.xml linux -release
+        run: haxelib run lime build Project.xml linux -release -D HXCPP_VERBOSE
 
       - name: Create Artifact
         uses: actions/upload-artifact@v3
