@@ -58,7 +58,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
-            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
             haxelib list
         shell: cmd
 
@@ -86,9 +86,9 @@ jobs:
             ~/haxelib/opt/hostedtoolcache/haxe/4.2.4/
             export/linux/haxe
             export/linux/obj
-          key: ${{ runner.os }}-alt-haxelib-${{ hashFiles('**/Project.xml') }}
+          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/Project.xml') }}
           restore-keys: |
-            ${{ runner.os }}-alt-haxelib-
+            ${{ runner.os }}-haxelib-
       
       - uses: krdlab/setup-haxe@master
         with:
@@ -117,7 +117,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
-            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
             haxelib list
       - name: Build Game
         run: haxelib run lime build Project.xml linux -release
@@ -174,7 +174,7 @@ jobs:
             haxelib update hxcpp-debug-server
             haxelib update flixel-ui
             haxelib update flixel-addons
-            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit
+            haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
             haxelib list
       - name: Build Game
         run: haxelib run lime build mac -release
