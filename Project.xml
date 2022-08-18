@@ -56,10 +56,10 @@
 	<assets path="assets/shared" library="shared"/>
 	<assets path="assets/stages" library="stages"/>
 
-	<!-- catching any crashed causd by missing assets -->
+	<!-- catching any crashed caused by missing assets -->
 	<assets path="assets/catch" library="catch"/>
 
-	<!-- funny fonts you can\'t screw with-->
+	<!-- funny fonts you can screw with-->
 	<assets path="assets/fonts" library="fonts" embed="false"/>
 
 	<section if="MODS_ACTIVE">
@@ -81,6 +81,10 @@
 
 	<!--Lua script support-->
 	<haxelib name="linc_luajit" />
+
+        <!--try not to go insane challenge (gone terribly wrong)-->
+        <haxelib name="hxcpp-debug-server"/>
+        <haxelib name="hxcpp"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
