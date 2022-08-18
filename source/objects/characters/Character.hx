@@ -110,10 +110,10 @@ class Character extends FunkySprite
 			LogType.Warning);
 	}
 
-	override public function playAnim(name:String, ?forced:Bool = false)
+	override public function playAnim(name:String, ?forced:Bool = false, ?shouldLog:Bool = true)
 	{
 		holdTimer = Conductor.stepCrochet * charData.holdTimer * 0.001;
-		super.playAnim(name, forced);
+		super.playAnim(name, forced, shouldLog);
 	}
 
 	public var danceIndex:Int = 0;

@@ -51,7 +51,7 @@ class FunkySprite extends FlxSprite
 
 	public var lastOffset:FlxPoint = new FlxPoint();
 
-	public function playAnim(name:String, ?forced:Bool = false)
+	public function playAnim(name:String, ?forced:Bool = false, ?shouldLog:Bool = true)
 	{
 		if (animation.exists(name))
 		{
@@ -70,7 +70,8 @@ class FunkySprite extends FlxSprite
 			return;
 		}
 
-		animationError(name, forced);
+		if (shouldLog)
+			animationError(name, forced);
 	}
 
 	public function getAnim()

@@ -1,0 +1,37 @@
+{
+	"songs": [
+		{
+			"name": "Spookeez",
+			"icon": "spooky kids",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		},
+		{
+			"name": "South",
+			"icon": "spooky kids",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		},
+		{
+			"name": "Monster",
+			"icon": "monster",
+			"bgColor": [
+				50,
+				50,
+				50
+			],
+			"hiddenFromFreeplay": false,
+			"hiddenFromStory": false
+		}
+	]
+}

@@ -498,7 +498,8 @@ class PlayState extends MusicBeatState
 							{
 								dirtyNotes.push(i);
 
-								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true,
+									!i.sustainNote);
 								strumNote.hit();
 								i.deletedOnScroll = true;
 							}
@@ -511,7 +512,8 @@ class PlayState extends MusicBeatState
 								// dirtyNotes.push(i);
 								FlxG.sound.play(Paths.sound('notes/missnote${FlxG.random.int(1, 3)}', 'shared'), 0.85);
 
-								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}miss', true);
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}miss', true,
+									!i.sustainNote);
 								// strumNote.fail();
 								i.deletedOnScroll = true;
 								i.alpha /= 2;
@@ -522,7 +524,7 @@ class PlayState extends MusicBeatState
 							{
 								dirtyNotes.push(i);
 
-								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
+								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true, false);
 								strumNote.hit();
 								i.deletedOnScroll = true;
 							}
