@@ -6,6 +6,9 @@
 
 	<app title="Friday Night Funkin': Dillyz Engine" file="FNF Dillyz Engine" main="Main" version="0.0.7" company="DillyzThe1" />
 
+        <!-- to be completely honest i just stole this line from psych engine to fix linux -->
+        <haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB"/>
+
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
 	<app preloader="flixel.system.FlxPreloader" />
