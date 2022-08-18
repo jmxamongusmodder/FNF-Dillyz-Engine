@@ -3,8 +3,7 @@ function onCreate()
 end
 
 function onBeatHit()
-	if curBeat % 8 == 7 and string.lower(songName) == 'bopeebo 'then
-		funkyLog('Curbeat is ' .. curBeat .. '! (a multiple of 4!)','normal')
+	if curBeat % 8 == 7 and string.lower(songName) == 'bopeebo' then
 		playAnim('bf','hey',true)
 		playAnim('gf','hey',true)
 	end
