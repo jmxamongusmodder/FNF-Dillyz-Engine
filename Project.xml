@@ -85,6 +85,7 @@
         <!--try not to go insane challenge (gone terribly wrong)-->
         <haxelib name="hxcpp-debug-server"/>
         <haxelib name="hxcpp"/>
+        <set name="NO_PRECOMPILED_HEADERS" value="1" if="linux"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
