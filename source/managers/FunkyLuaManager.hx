@@ -9,7 +9,10 @@ import llua.Convert;
 import llua.Lua;
 import llua.LuaL;
 import llua.State;
+import objects.FunkySprite;
 import objects.characters.Character;
+
+using StringTools;
 
 class FunkyLuaManager
 {
@@ -55,19 +58,8 @@ class FunkyLuaManager
 			Lua_helper.add_callback(lua, 'playAnim', function(sprite:String, animation:String, forced:Bool)
 			{
 				trace(sprite + ' ' + animation + ' ' + forced);
-				var curChar:Character;
 
-				switch (sprite)
-				{
-					case 'dad' | 'charLeft' | 'daddy' | 'dearest' | 'd':
-						curChar = PlayState.instance.charLeft;
-					case 'gf' | 'charMid' | 'girlfriend' | 'girl' | 'g':
-						curChar = PlayState.instance.charMid;
-					default:
-						curChar = PlayState.instance.charRight;
-				}
-
-				curChar.playAnim(animation, forced);
+				getSpr(sprite).playAnim(animation, forced);
 			});
 
 			Lua_helper.add_callback(lua, 'funkyLog', function(message:String, logType:String)
@@ -109,6 +101,24 @@ class FunkyLuaManager
 		catch (e:Exception)
 		{
 			DillyzLogger.log('Failed to find lua function $functionName! arguments: $arguments', LogType.Warning);
+		}
+	}
+
+	public function getSpr(spr:String):FunkySprite
+	{
+		@:privateAccess {
+			var curChar:Character;
+
+			switch (spr.toLowerCase())
+			{
+				case 'dad' | 'charleft' | 'daddy' | 'dearest' | 'd':
+					curChar = PlayState.instance.charLeft;
+				case 'gf' | 'charmid' | 'girlfriend' | 'girl' | 'g':
+					curChar = PlayState.instance.charMid;
+				default:
+					curChar = PlayState.instance.charRight;
+			}
+			return curChar;
 		}
 	}
 
