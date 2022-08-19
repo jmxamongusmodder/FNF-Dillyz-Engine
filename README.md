@@ -7,7 +7,7 @@
 </p>
 <p align="center">
   Original game (of which the source code was unused) can be found on <a href="https://github.com/ninjamuffin99/Funkin">NinjaMuffin99</a>'s Github.<br>
-  The original artist an animators of the game consists of <a href="https://twitter.com/phantomarcade3k">Phantom Arcade</a> & <a href="https://twitter.com/evilsk8r">EvilSk8r</a>.<br>
+  The original artist and animators of the game consists of <a href="https://twitter.com/phantomarcade3k">Phantom Arcade</a> & <a href="https://twitter.com/evilsk8r">EvilSk8r</a>.<br>
   The original musician of the game was <a href="https://twitter.com/kawaisprite">KawaiSprite</a>.
 </p>
 
@@ -22,9 +22,9 @@ The original music and Adobe Animate project files were taken from the original 
 <b><i>You may reference the source code, though. I don't care as long as you add credit.</i></b><br>
 
 ## How To Play
-<s>Download the latest release from <a href="https://gamebanana.com/members/2088207">GameBanana</a> by using the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Google Drive</a> link.</s><br>
+<s>Download the latest release from <a href="https://gamebanana.com/wips/69825">GameBanana</a> by using the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Google Drive</a> link.</s><br>
 <i>NOTE: Not actually released on any other website</i><br>
-If you're not on windows, then you may actually wanna check the <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Actions</a> page for a release, however, it may be a pre-release.<br>
+If you're not on windows, then you may actually wanna check the <a href="https://github.com/DillyzThe1/FNF-Dillyz-Engine/actions">Actions</a> page for a release, however, it may be a pre-release.<br>
 Extract the zip or whatever & open the exe.<br>
 <i>Note: You may or may not get a warning for the software considering I do not sign my software, but just allow it through the firewall by hitting show more. If you don't trust me, read the source code.</i><br>
 
@@ -60,3 +60,28 @@ Now, edit modIcon.png by adding your icon or mod logo and hue shifting the bg.<b
  (Other) Extract the zip somewhere & install the following haxelibs: flixel, flixel-addons, & flixel-ui.<br>
  Open the source code folder in Visual Studio Code and start programming!<br>
  Oh, and run build.bat to compile.
+
+# Credits
+## Dillyz Engine
+### Main Team
+* <a href="https://github.com/DillyzThe1">DillyzThe1<a/> - Programming, Custom Art, & Custom Animation
+### Contributors
+* <a href="https://github.com/Impostor5878">Impostor5875<a/> - Created getSpr() in FunkyLuaManager.hx
+### Special Thanks
+* <a href="https://github.com/AlekEagle">AlekEagle<a/> - Submitted <a href="https://github.com/ninjamuffin99/Funkin/issues/625#issuecomment-805200377">a comment on an issue at NinjaMuffin99/Funkin<a/> that solved my linux builds.
+## Sourced Repositories
+### Programming
+* <a href="https://github.com/ninjamuffin99/Funkin">NinjaMuffin99/Funkin<a/> - Original Rythm Code (Song.hx, Section.hx, Conductor.hx)
+* <a href="https://github.com/ShadowMario/FNF-PsychEngine/">ShadowMario/FNF-Psych-Engine<a/> - Lua implementation I based mine off of.
+* <a href="https://github.com/gedehari/IzzyEngine">Gedehari/Izzy-Engine<a/> - Original Crash Handler (although mine is still wip)
+* <a href="https://github.com/KadeDev/Kade-Engine">KadeDev/Kade-Engine<a/> - I attempted to use some commits to fix linux builds, which failed, but I'm still giving credit.
+### Assets (Unedited)
+* <a href="https://github.com/ninjamuffin99/Funkin">NinjaMuffin99/Funkin<a/> - The art folder & songs folder contain everything that was modified in some way here.
+## Friday Night Funkin' Original Assets
+### Original Programming
+* <a href="https://github.com/ninjamuffin99">NinjaMuffin99<a/> - Created the mess of a haxe project called FNF. The source code is almost entirely unused in this engine.
+### Original Art/Animation
+* <a href="https://twitter.com/phantomarcade3k">PhantomArcade<a/> - Created most of the art & animation seen in the original game
+* <a href="https://twitter.com/evilsk8r">EvilSk8r<a/> - Created some of the art for the original game
+### Original Music
+* <a href="https://twitter.com/kawaisprite">KawaiSprite<a/> - Created all of the original music.
