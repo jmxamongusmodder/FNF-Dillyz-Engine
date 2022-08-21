@@ -19,6 +19,7 @@ import gamestates.menus.MainMenuState;
 import gamesubstates.PauseSubState;
 import haxe.Json;
 import managers.BGMusicManager;
+import managers.FunkyLuaManager;
 import objects.FunkySprite;
 import objects.FunkyStage;
 import objects.characters.Character;
@@ -46,6 +47,7 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState;
 
 	// lua stuff
+	public var songLua:FunkyLuaManager;
 	public var spriteMap:Map<String, FunkySprite>;
 
 	// stage
@@ -110,6 +112,9 @@ class PlayState extends MusicBeatState
 		spriteMap = new Map<String, FunkySprite>();
 		theStage = new FunkyStage(curSong.stage);
 		add(theStage);
+
+		if (Paths.songLuaExists(curSong.songName))
+			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
 
 		FlxG.camera.zoom = theStage.camZoom;
 
@@ -197,6 +202,8 @@ class PlayState extends MusicBeatState
 	{
 		if (theStage.stageLua != null)
 			theStage.stageLua.setVar(varName, value);
+		if (songLua != null)
+			songLua.setVar(varName, value);
 	}
 
 	// this function is for future usage with songs
