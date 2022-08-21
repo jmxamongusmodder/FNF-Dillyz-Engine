@@ -3,6 +3,7 @@ package objects;
 import DillyzLogger.LogType;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxPoint;
+import gamestates.PlayState;
 import haxe.Exception;
 import managers.FunkyLuaManager;
 
@@ -146,6 +147,9 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 			newStaticAsset.antialiasing = !pixelStage;
 			bgAssets.set(i.name, newStaticAsset);
 			add(newStaticAsset);
+
+			if (PlayState.instance != null && PlayState.instance.spriteMap != null)
+				PlayState.instance.spriteMap.set(i.name, newStaticAsset);
 		}
 	}
 
@@ -154,10 +158,7 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 		if (stageLua != null)
 			return;
 		if (Paths.stageLuaExists(stageName))
-		{
 			stageLua = new FunkyLuaManager('$stageName.lua', Paths.stageLua(stageName));
-			stageLua.callFunction('onCreate', []);
-		}
 	}
 
 	override public function destroy()
@@ -170,6 +171,8 @@ class FunkyStage extends FlxTypedSpriteGroup<FunkySprite>
 				var graphic:FunkySprite = bgAssets.get(keys[i]);
 				remove(graphic);
 				bgAssets.remove(keys[i]);
+				if (PlayState.instance != null && PlayState.instance.spriteMap != null && PlayState.instance.spriteMap.exists(keys[i]))
+					PlayState.instance.spriteMap.remove(keys[i]);
 				graphic.destroy();
 			}
 			catch (e:Exception)

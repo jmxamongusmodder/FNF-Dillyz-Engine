@@ -356,6 +356,20 @@ class Paths
 		}
 	}
 
+	inline public static function stageXML(path:String):String
+	{
+		try
+		{
+			return File.getContent(asset(path, null, 'xml'));
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('A Stage\'s Xml-Based Text Asset Is Missing; ${e.toString()}\n${e.message}', LogType.Error);
+			return
+				'<?xml version="1.0" encoding="utf-8"?>\n<TextureAtlas imagePath="png.png">\n	<SubTexture name="caught0000" x="0" y="0" width="1" height="1"/>\n</TextureAtlas>';
+		}
+	}
+
 	inline public static function stageLuaExists(stage:String):Bool
 	{
 		return assetExists('stages/$stage/stage', null, 'lua');
@@ -372,7 +386,26 @@ class Paths
 		{
 			DillyzLogger.log('Stage Lua Missing; ${e.toString()}\n${e.message}', LogType.Error);
 		}
-		return 'function onCreatePost() log("what am i doing", LogType.Normal) end';
+		return 'function onCreatePost() funkyLog("what am i doing", LogType.Normal) end';
+	}
+
+	inline public static function songLuaExists(song:String):Bool
+	{
+		return assetExists('data/songs/$song/song', null, 'lua');
+	}
+
+	public static function songLua(song:String):String
+	{
+		try
+		{
+			if (assetExists('data/songs/$song/song', null, 'lua'))
+				return File.getContent(asset('data/songs/$song/song', null, 'lua'));
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Song Lua Missing; ${e.toString()}\n${e.message}', LogType.Error);
+		}
+		return 'function onCreatePost() funkyLog("what am i doing", LogType.Normal) end';
 	}
 
 	inline public static function music(path:String):Sound
@@ -485,6 +518,26 @@ class Paths
 				return loadedFrames.get(assetID);
 
 			var newFrames:FlxAtlasFrames = FlxAtlasFrames.fromSparrow(png(path, lib), xml(path, lib));
+			loadedFrames.set(assetID, newFrames);
+			return newFrames;
+		}
+		catch (e:Exception)
+		{
+			DillyzLogger.log('Sparrow V2 SpriteSheet Missing OR Invalid; ${e.toString()}\n${e.message}', LogType.Error);
+			return PathDefaults.getFrames();
+		}
+	}
+
+	inline public static function stageSparrowV2(path:String, stage:String):FlxAtlasFrames
+	{
+		try
+		{
+			var assetID:String = 'null:stages/$stage/$path';
+
+			if (loadedFrames.exists(assetID))
+				return loadedFrames.get(assetID);
+
+			var newFrames:FlxAtlasFrames = FlxAtlasFrames.fromSparrow(stageSprite('stages/$stage/$path'), stageXML('stages/$stage/$path'));
 			loadedFrames.set(assetID, newFrames);
 			return newFrames;
 		}

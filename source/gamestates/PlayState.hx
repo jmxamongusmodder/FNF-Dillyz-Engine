@@ -45,6 +45,9 @@ class PlayState extends MusicBeatState
 {
 	public static var instance:PlayState;
 
+	// lua stuff
+	public var spriteMap:Map<String, FunkySprite>;
+
 	// stage
 	private var theStage:FunkyStage;
 
@@ -104,6 +107,7 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(curSong);
 		Conductor.changeBPM(curSong.bpm);
 
+		spriteMap = new Map<String, FunkySprite>();
 		theStage = new FunkyStage(curSong.stage);
 		add(theStage);
 
@@ -117,6 +121,20 @@ class PlayState extends MusicBeatState
 
 		charRight = new Character(theStage.posBF.x, theStage.posBF.y, curSong.boyfriend, true, true, false);
 		add(charRight);
+
+		// set lua access with multiple references
+		spriteMap.set('charMid', charMid);
+		spriteMap.set('gf', charMid);
+		spriteMap.set('girlfriend', charMid);
+
+		spriteMap.set('charLeft', charLeft);
+		spriteMap.set('dad', charLeft);
+		spriteMap.set('daddy', charLeft);
+		spriteMap.set('dearest', charLeft);
+
+		spriteMap.set('charRight', charRight);
+		spriteMap.set('bf', charRight);
+		spriteMap.set('boyfriend', charRight);
 
 		theStage.setupLua();
 
@@ -645,6 +663,10 @@ class PlayState extends MusicBeatState
 			}
 			PauseSubState.optionInstances = dirtyOptions = null;
 		}
+
+		// prevent the unfunny character editor from trolling
+		spriteMap.clear();
+		spriteMap = null;
 
 		BGMusicManager.play('freakyMenu', 102);
 		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], false, overrideTrans);

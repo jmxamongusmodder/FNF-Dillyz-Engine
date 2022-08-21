@@ -2,6 +2,8 @@ package managers;
 
 import DillyzLogger.LogType;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
+import flixel.util.FlxColor;
 import gamestates.PlayState;
 import haxe.Exception;
 import lime.app.Application;
@@ -59,7 +61,7 @@ class FunkyLuaManager
 			setVar('gfName', PlayState.instance.charMid.charName);
 			setVar('bfName', PlayState.instance.charRight.charName);
 
-			Lua_helper.add_callback(lua, 'playAnim', function(sprite:String, animation:String, forced:Bool)
+			Lua_helper.add_callback(lua, 'spr_playAnim', function(sprite:String, animation:String, forced:Bool)
 			{
 				trace(sprite + ' ' + animation + ' ' + forced);
 
@@ -82,7 +84,142 @@ class FunkyLuaManager
 
 				DillyzLogger.log('From "${luaFileNameForDebugging}": $message', curLogType);
 			});
+
+			Lua_helper.add_callback(lua, 'changeCharacter', function(charToGet:String, newChar:String)
+			{
+				var funnySpr = getSpr(charToGet);
+				if (Std.isOfType(funnySpr, Character))
+					cast(funnySpr, Character).loadCharacter(newChar, true);
+				else
+					DillyzLogger.log('Sprite "$charToGet" is NOT a character!', LogType.Warning);
+			});
+
+			Lua_helper.add_callback(lua, 'spr_init', function(sprName:String, ?x:Float = 0, ?y:Float = 0)
+			{
+				var newSprite:FunkySprite = new FunkySprite(x, y);
+				PlayState.instance.spriteMap.set(sprName, newSprite);
+			});
+
+			Lua_helper.add_callback(lua, 'spr_loadGraphic', function(sprName:String, graphicPath:String, ?isStageAsset:Bool = false)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				newSprite.loadGraphic(isStageAsset ? Paths.stageSprite(graphicPath) : Paths.png(graphicPath, 'shared'));
+			});
+
+			Lua_helper.add_callback(lua, 'spr_loadSpriteSheet', function(sprName:String, graphicPath:String, ?isStageAsset:Bool = false)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				@:privateAccess {
+					newSprite.frames = (isStageAsset ? Paths.stageSparrowV2(graphicPath,
+						PlayState.instance.theStage.stageName) : Paths.sparrowV2(graphicPath, 'shared'));
+				}
+			});
+
+			Lua_helper.add_callback(lua, 'spr_addAnimationByPrefix',
+				function(sprName:String, newAnimName:String, newAnimPrefix:String, ?newAnimFramerate:Int = 24, ?newAnimLooped:Bool = false)
+				{
+					var newSprite:FunkySprite = getSpr(sprName);
+					if (newSprite == null)
+					{
+						DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+						return;
+					}
+					newSprite.animation.addByPrefix(newAnimName, newAnimPrefix, newAnimFramerate, newAnimLooped, false, false);
+				});
+
+			Lua_helper.add_callback(lua, 'spr_addAnimationByIndices',
+				function(sprName:String, newAnimName:String, newAnimPrefix:String, indicies:Array<Int>, ?newAnimFramerate:Int = 24,
+						?newAnimLooped:Bool = false)
+				{
+					var newSprite:FunkySprite = getSpr(sprName);
+					if (newSprite == null)
+					{
+						DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+						return;
+					}
+					newSprite.animation.addByIndices(newAnimName, newAnimPrefix, indicies, "", newAnimFramerate, newAnimLooped, false, false);
+				});
+
+			Lua_helper.add_callback(lua, 'spr_addAnimationOffsets', function(sprName:String, animName:String, offX:Int, offY:Int)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				newSprite.animOffsets.set(animName, new FlxPoint(offX, offY));
+			});
+
+			Lua_helper.add_callback(lua, 'spr_add', function(sprName:String)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				PlayState.instance.add(newSprite);
+			});
+
+			Lua_helper.add_callback(lua, 'spr_remove', function(sprName:String)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				PlayState.instance.remove(newSprite);
+			});
+
+			Lua_helper.add_callback(lua, 'spr_visible', function(sprName:String, isVisible:Bool)
+			{
+				var newSprite:FunkySprite = getSpr(sprName);
+				if (newSprite == null)
+				{
+					DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+					return;
+				}
+				newSprite.visible = isVisible;
+			});
+
+			Lua_helper.add_callback(lua, 'random_bool', function(chance:Float)
+			{
+				return FlxG.random.bool(chance);
+			});
+
+			Lua_helper.add_callback(lua, 'random_int', function(bottom:Int, top:Int)
+			{
+				return FlxG.random.int(bottom, top);
+			});
+
+			Lua_helper.add_callback(lua, 'random_float', function(bottom:Float, top:Float)
+			{
+				return FlxG.random.float(bottom, top);
+			});
+
+			Lua_helper.add_callback(lua, 'sound_play', function(theSound:String, volume:Float)
+			{
+				FlxG.sound.play(Paths.sound(theSound, 'shared'), volume);
+			});
+
+			Lua_helper.add_callback(lua, 'camera_flash', function(curCam:String, flashDur:Float = 1)
+			{
+				PlayState.instance.camGame.flash(FlxColor.WHITE, flashDur);
+			});
 		}
+		callFunction('onCreate', []);
 	}
 
 	public function callFunction(functionName:String, arguments:Array<Dynamic>):Dynamic
@@ -143,20 +280,9 @@ class FunkyLuaManager
 
 	public function getSpr(spr:String):FunkySprite
 	{
-		@:privateAccess {
-			var curChar:Character;
-
-			switch (spr.toLowerCase())
-			{
-				case 'dad' | 'charleft' | 'daddy' | 'dearest' | 'd':
-					curChar = PlayState.instance.charLeft;
-				case 'gf' | 'charmid' | 'girlfriend' | 'girl' | 'g':
-					curChar = PlayState.instance.charMid;
-				default:
-					curChar = PlayState.instance.charRight;
-			}
-			return curChar;
-		}
+		if (PlayState.instance.spriteMap.exists(spr))
+			return PlayState.instance.spriteMap.get(spr);
+		return null;
 	}
 
 	// https://github.com/ShadowMario/FNF-PsychEngine/blob/main/source/FunkinLua.hx#L3185
