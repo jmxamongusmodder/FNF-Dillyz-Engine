@@ -18,6 +18,10 @@ class FunkyLuaManager
 {
 	var lua:State;
 
+	public static var funcRet_Proceed:Int = 0;
+	public static var funcRet_Block:Int = 1;
+	public static var funcRet_Terminate:Int = 2;
+
 	public function new(luaFileNameForDebugging:String, luaContents:String)
 	{
 		try
@@ -81,27 +85,60 @@ class FunkyLuaManager
 		}
 	}
 
-	public function callFunction(functionName:String, arguments:Array<Dynamic>)
+	public function callFunction(functionName:String, arguments:Array<Dynamic>):Dynamic
 	{
 		if (lua == null)
-			return;
+			return funcRet_Proceed;
 
 		try
 		{
 			Lua.getglobal(lua, functionName);
 			if (Lua.type(lua, -1) != Lua.LUA_TFUNCTION)
-				return;
+				return funcRet_Proceed;
 
 			for (argument in arguments)
 				Convert.toLua(lua, argument);
 
-			Lua.pcall(lua, arguments.length, 1, 0);
-			Lua.pop(lua, -1);
+			var possibleRet:Null<Int> = Lua.pcall(lua, arguments.length, 1, 0);
+			if (!canGetResult(possibleRet))
+				Lua.pop(lua, -1);
+			else
+			{
+				var newRet:Dynamic = cast getLuaFuncRet(possibleRet);
+				Lua.pop(lua, -1);
+				if (newRet == null)
+					return funcRet_Proceed;
+				return newRet;
+			}
 		}
 		catch (e:Exception)
 		{
 			DillyzLogger.log('Failed to find lua function $functionName! arguments: $arguments', LogType.Warning);
 		}
+		return funcRet_Proceed;
+	}
+
+	function canGetResult(res:Int)
+	{
+		var luaType:Int = Lua.type(lua, res);
+		return luaType >= Lua.LUA_TNIL && luaType < Lua.LUA_TTABLE && luaType != Lua.LUA_TLIGHTUSERDATA;
+	}
+
+	function getLuaFuncRet(res:Int):Any
+	{
+		var newRet:Any = null;
+
+		switch (Lua.type(lua, res))
+		{
+			case Lua.LUA_TBOOLEAN:
+				newRet = Lua.toboolean(lua, -1);
+			case Lua.LUA_TNUMBER:
+				newRet = Lua.tonumber(lua, -1);
+			case Lua.LUA_TSTRING:
+				newRet = Lua.tostring(lua, -1);
+		}
+
+		return newRet;
 	}
 
 	public function getSpr(spr:String):FunkySprite

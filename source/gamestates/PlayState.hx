@@ -171,7 +171,8 @@ class PlayState extends MusicBeatState
 	public function callLua(functionName:String, arguments:Array<Dynamic>)
 	{
 		if (theStage.stageLua != null)
-			theStage.stageLua.callFunction(functionName, arguments);
+			return theStage.stageLua.callFunction(functionName, arguments);
+		return null;
 	}
 
 	public function setLua(varName:String, value:Dynamic)
@@ -183,11 +184,17 @@ class PlayState extends MusicBeatState
 	// this function is for future usage with songs
 	public function getStrumNoteName(player:Int, index:Int)
 	{
+		var funnyReturn:Dynamic = callLua('getStrumNoteName', [player, index]);
+		if (Std.isOfType(funnyReturn, String))
+			return funnyReturn;
 		return 'Strum Line Notes';
 	}
 
-	public function getNoteName(noteData:Int, mustHit:Bool)
+	public function getNoteName(noteData:Int, noteType:String, mustHit:Bool):String
 	{
+		var funnyReturn:Dynamic = callLua('getNoteName', [noteData, noteType, mustHit]);
+		if (Std.isOfType(funnyReturn, String))
+			return funnyReturn;
 		return 'Scrolling Notes';
 	}
 
@@ -267,13 +274,13 @@ class PlayState extends MusicBeatState
 		var lastNote:SongNote = null;
 		var songNoteDataMap:Map<String, SongNoteData> = new Map<String, SongNoteData>();
 		for (section in curSong.notes)
-			for (notes in section.theNotes)
+			for (note in section.theNotes)
 			{
-				var isBFNote:Bool = notes.noteData >= keyCount;
+				var isBFNote:Bool = note.noteData >= keyCount;
 				if (section.mustHitSection)
 					isBFNote = !isBFNote;
 				var curData:SongNoteData;
-				var noteName:String = getNoteName(notes.noteData, isBFNote);
+				var noteName:String = getNoteName(note.noteData, note.noteType, isBFNote);
 				if (songNoteDataMap.exists(noteName))
 					curData = songNoteDataMap.get(noteName);
 				else
@@ -295,17 +302,17 @@ class PlayState extends MusicBeatState
 					});
 					songNoteDataMap.set(noteName, curData);
 				}
-				var theNote:SongNote = new SongNote(0, 0, lastNote, notes.strumTime, notes.noteData % keyCount, isBFNote, false, notes.noteType, noteName,
+				var theNote:SongNote = new SongNote(0, 0, lastNote, note.strumTime, note.noteData % keyCount, isBFNote, false, note.noteType, noteName,
 					curData);
 
 				lastNote = theNote;
 
 				var susDiv:Float = 64;
-				var susCut:Float = notes.sustainLength / susDiv;
+				var susCut:Float = note.sustainLength / susDiv;
 				for (i in 0...Std.int(susCut))
 				{
-					var sustainNote:SongNote = new SongNote(0, 0, lastNote, notes.strumTime + (i * susDiv), notes.noteData % keyCount, isBFNote, true,
-						notes.noteType, noteName, curData);
+					var sustainNote:SongNote = new SongNote(0, 0, lastNote, note.strumTime + (i * susDiv), note.noteData % keyCount, isBFNote, true,
+						note.noteType, noteName, curData);
 					hiddenNotes.push(sustainNote);
 					lastNote = sustainNote;
 					sustainNote.alpha = 0.5;
@@ -654,12 +661,12 @@ class PlayState extends MusicBeatState
 			charRight.dance();
 			camGame.zoom *= 1.025;
 		}
-		// callLua('onBeatHitPost', []);
+		callLua('onBeatHitPost', []);
 	}
 
 	override public function stepHit()
 	{
-		// callLua('onStepHit', []);
-		// setLua('curStep', curStep);
+		setLua('curStep', curStep);
+		callLua('onStepHit', []);
 	}
 }
