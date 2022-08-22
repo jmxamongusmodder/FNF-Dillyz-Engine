@@ -77,6 +77,8 @@ class DillyzLogger
 					return LogType.Unknown;
 			}
 	}*/
+	static var lastLogTime:Float = -2;
+
 	inline public static function log(newLine:String, ?logType:LogType = LogType.Normal)
 	{
 		if (newLine.contains('\n'))
@@ -95,13 +97,15 @@ class DillyzLogger
 		#if LOGS_ENABLED
 		allLogs.push(loggedLine);
 
-		writeLog();
+		if (Sys.time() >= lastLogTime + 2)
+			writeLog();
 		#end
 	}
 
 	#if LOGS_ENABLED
 	inline public static function writeLog()
 	{
+		lastLogTime = Sys.time();
 		if (!FileSystem.exists('logs/'))
 			FileSystem.createDirectory('logs/');
 		var logText:String = '--==<( Friday Night Funkin\': Dillyz Engine 2022 Log )>==--\n'

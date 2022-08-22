@@ -143,10 +143,17 @@ class SongNote extends FunkySprite
 				noteDirections.push('Right');
 				// get controls
 				keyArray.wipeArray();
+				#if debug
 				keyArray.push(FlxKey.fromString('S'));
 				keyArray.push(FlxKey.fromString('D'));
 				keyArray.push(FlxKey.fromString('K'));
 				keyArray.push(FlxKey.fromString('L'));
+				#else
+				keyArray.push(FlxKey.fromString('LEFT'));
+				keyArray.push(FlxKey.fromString('DOWN'));
+				keyArray.push(FlxKey.fromString('UP'));
+				keyArray.push(FlxKey.fromString('RIGHT'));
+				#end
 		}
 	}
 }

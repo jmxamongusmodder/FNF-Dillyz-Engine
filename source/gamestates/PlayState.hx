@@ -14,6 +14,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.editors.CharacterEditorState;
+import gamestates.editors.ChartEditorState;
 import gamestates.menus.FreeplayState;
 import gamestates.menus.MainMenuState;
 import gamesubstates.PauseSubState;
@@ -115,9 +116,6 @@ class PlayState extends MusicBeatState
 		theStage = new FunkyStage(curSong.stage);
 		add(theStage);
 
-		if (Paths.songLuaExists(curSong.songName))
-			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
-
 		FlxG.camera.zoom = theStage.camZoom;
 
 		charMid = new Character(theStage.posGF.x, theStage.posGF.y, curSong.girlfriendYouDontHave, false, false, false);
@@ -144,6 +142,9 @@ class PlayState extends MusicBeatState
 		spriteMap.set('boyfriend', charRight);
 
 		theStage.setupLua();
+
+		if (Paths.songLuaExists(curSong.songName))
+			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
 
 		prepareStrumLineNotes();
 
@@ -622,12 +623,16 @@ class PlayState extends MusicBeatState
 			//	hiddenNotes.sort(hiddenSort);
 		}
 
-		if (songStarted && FlxG.keys.justPressed.ENTER)
+		if (songStarted)
 		{
-			openSubState(new PauseSubState());
+			if (FlxG.keys.justPressed.ENTER)
+				openSubState(new PauseSubState());
+			else if (FlxG.keys.justPressed.SEVEN)
+				endSong(ChartEditorState, FunkinTransitionType.Normal);
+			// switchState(PlayState, [], false, FunkinTransitionType.Normal);
 		}
 
-		charRight.holdingControls = (FlxG.keys.pressed.S || FlxG.keys.pressed.D || FlxG.keys.pressed.K || FlxG.keys.pressed.L);
+		charRight.holdingControls = FlxG.keys.anyPressed(SongNote.keyArray);
 		callLua('onUpdatePost', [elapsed]);
 	}
 
