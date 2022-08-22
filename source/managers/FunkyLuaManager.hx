@@ -58,6 +58,10 @@ class FunkyLuaManager
 		}
 
 		@:privateAccess {
+			setVar('funcRet_Proceed', funcRet_Proceed);
+			setVar('funcRet_Block', funcRet_Block);
+			setVar('funcRet_Terminate', funcRet_Terminate);
+
 			setVar('songName', PlayState.curSong.songName);
 			setVar('dadName', PlayState.instance.charLeft.charName);
 			setVar('gfName', PlayState.instance.charMid.charName);
