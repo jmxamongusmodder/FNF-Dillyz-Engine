@@ -437,19 +437,19 @@ class PlayState extends MusicBeatState
 				curCharLol = charRight;
 				curCamZoom *= theStage.zoomMultiBF;
 				offsetX += theStage.camOffBF.x;
-				offsetY += theStage.camOffBF.x;
+				offsetY += theStage.camOffBF.y;
 			case 'dad':
 				offsetX = 150;
 				offsetY = -100;
 				curCharLol = charLeft;
 				curCamZoom *= theStage.zoomMultiDad;
 				offsetX += theStage.camOffDad.x;
-				offsetY += theStage.camOffDad.x;
+				offsetY += theStage.camOffDad.y;
 			default:
 				curCharLol = charMid;
 				curCamZoom *= theStage.zoomMultiGF;
 				offsetX += theStage.camOffGF.x;
-				offsetY += theStage.camOffGF.x;
+				offsetY += theStage.camOffGF.y;
 		}
 
 		offsetX += curCharLol.camOffset.x;
