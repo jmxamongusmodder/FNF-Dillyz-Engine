@@ -104,6 +104,8 @@ class PlayState extends MusicBeatState
 
 		instance = this;
 
+		PauseSubState.initOptions();
+
 		if (!loadFromChartEditorInstead)
 			curSong = Song.songFromName(songToLoad, diffToLoad);
 		Conductor.mapBPMChanges(curSong);

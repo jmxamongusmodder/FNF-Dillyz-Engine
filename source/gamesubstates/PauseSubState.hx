@@ -21,15 +21,8 @@ class PauseSubState extends MusicBeatSubState
 
 	public static var optionInstances:Array<Alphabet>;
 
-	override public function create()
+	public static function initOptions()
 	{
-		super.create();
-
-		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		add(bg);
-		bg.cameras = [newHUD];
-		bg.alpha = 0.5;
-
 		if (optionInstances == null)
 		{
 			trace('optionInstances was null lmao');
@@ -44,6 +37,19 @@ class PauseSubState extends MusicBeatSubState
 		}
 		else
 			trace('optionInstances wasn\'t null lmao');
+	}
+
+	override public function create()
+	{
+		super.create();
+
+		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		add(bg);
+		bg.cameras = [newHUD];
+		bg.alpha = 0.5;
+
+		initOptions();
+
 		for (i in optionInstances)
 		{
 			add(i);
