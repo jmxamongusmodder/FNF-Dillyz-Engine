@@ -59,6 +59,8 @@ class PauseSubState extends MusicBeatSubState
 			i.visible = i.active = true;
 		}
 
+		FlxG.camera.zoom = 1.25;
+
 		changeSelection();
 
 		FlxG.sound.music.pause();
