@@ -204,7 +204,7 @@
 			"prefix": "GF Scared",
 			"looped": false,
 			"flipX": false,
-			"name": "idle-scared",
+			"name": "scared",
 			"offset": [
 				-2,
 				-8

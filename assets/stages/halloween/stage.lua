@@ -33,7 +33,7 @@ function onBeatHit()
 		spr_playAnim("bg_overlay", "strike", true)
 		strikeBeat = curBeat
 		strikeOffset = random_int(0, 24)
-		spr_playAnim("bf", "scared", true)
+		spr_playAnim("bf", "idle-scared", true)
 		spr_playAnim("gf", "scared", true)
 		spr_visible("bg_overlay",true)
 		camera_flash("camGame",0.5)
