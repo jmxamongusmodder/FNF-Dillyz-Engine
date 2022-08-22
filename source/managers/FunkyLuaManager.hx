@@ -3,6 +3,8 @@ package managers;
 import DillyzLogger.LogType;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import gamestates.PlayState;
 import haxe.Exception;
@@ -60,6 +62,8 @@ class FunkyLuaManager
 			setVar('dadName', PlayState.instance.charLeft.charName);
 			setVar('gfName', PlayState.instance.charMid.charName);
 			setVar('bfName', PlayState.instance.charRight.charName);
+			setVar('nextTweenValue', 'alpha');
+			setVar('nextTweenDelay', 0);
 
 			Lua_helper.add_callback(lua, 'spr_playAnim', function(sprite:String, animation:String, forced:Bool)
 			{
@@ -218,6 +222,19 @@ class FunkyLuaManager
 			{
 				PlayState.instance.camGame.flash(FlxColor.WHITE, flashDur);
 			});
+
+			Lua_helper.add_callback(lua, 'spr_tweenValue',
+				function(tweenName:String, sprName:String, newValue:Dynamic, duration:Float, ease:String, startDelayyy:Float)
+				{
+					var newSprite:FunkySprite = getSpr(sprName);
+					if (newSprite == null)
+					{
+						DillyzLogger.log('Sprite "$sprName" does NOT exist!', LogType.Warning);
+						return;
+					}
+					FlxTween.tween(newSprite, {'${getString("nextTweenValue", "alpha")}': newValue}, duration,
+						{ease: FlxEase.fromString(ease), startDelay: getFloat("nextTweenDelay", 0)});
+				});
 		}
 		callFunction('onCreate', []);
 	}
