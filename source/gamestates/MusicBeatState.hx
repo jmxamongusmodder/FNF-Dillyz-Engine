@@ -12,6 +12,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import managers.BGMusicManager;
+import managers.PreferenceManager;
 import rhythm.Conductor;
 
 enum FunkinTransitionType
