@@ -93,7 +93,7 @@ class KeybindSubState extends MusicBeatSubState
 		81 => 'Q',
 		222 => 'Qoute',
 		82 => 'R',
-		// 221 => 'RBracket'm
+		// 221 => 'RBracket'
 		39 => 'Right',
 		83 => 'S',
 		186 => 'SemiColon',
@@ -107,6 +107,7 @@ class KeybindSubState extends MusicBeatSubState
 		// 51 => 'Three',
 		// 50 => 'Two'
 		38 => 'Up',
+		85 => 'U',
 		86 => 'V',
 		87 => 'W',
 		88 => 'X',

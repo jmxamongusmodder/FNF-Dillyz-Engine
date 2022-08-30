@@ -101,6 +101,7 @@ class PlayState extends MusicBeatState
 	private var hiddenNotes:Array<SongNote>;
 
 	// ui elements
+	private var curHealth:Float = 1;
 	private var healthBar:HealthBar;
 
 	override public function create()
@@ -204,6 +205,26 @@ class PlayState extends MusicBeatState
 
 		postCreate();
 		callLua('onCreatePost', []);
+	}
+
+	public function addHealth(newHealth:Float)
+	{
+		curHealth += newHealth;
+		if (curHealth >= 2)
+			curHealth = 2;
+		else if (curHealth <= 0)
+			curHealth = 0;
+		healthBar.updateHealth(curHealth);
+	}
+
+	public function setHealth(newHealth:Float)
+	{
+		curHealth = newHealth;
+		if (curHealth >= 2)
+			curHealth = 2;
+		else if (curHealth <= 0)
+			curHealth = 0;
+		healthBar.updateHealth(curHealth);
 	}
 
 	public function callLua(functionName:String, arguments:Array<Dynamic>)
@@ -572,6 +593,7 @@ class PlayState extends MusicBeatState
 									!i.sustainNote);
 								strumNote.hit();
 								i.deletedOnScroll = true;
+								voices.volume = 1;
 							}
 						}
 						else
@@ -587,6 +609,9 @@ class PlayState extends MusicBeatState
 								// strumNote.fail();
 								i.deletedOnScroll = true;
 								i.alpha /= 2;
+
+								addHealth(i.sustainNote ? -0.0125 : -0.0475);
+								voices.volume = 0;
 							}
 							else if (i.sustainNote
 								&& i.strumTime <= Conductor.songPosition
@@ -597,6 +622,8 @@ class PlayState extends MusicBeatState
 								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true, false);
 								strumNote.hit();
 								i.deletedOnScroll = true;
+								addHealth(0.00625);
+								voices.volume = 1;
 							}
 							else if (!i.sustainNote
 								&& i.strumTime <= Conductor.songPosition + Conductor.safeZoneOffset
@@ -608,6 +635,8 @@ class PlayState extends MusicBeatState
 								curChar.playAnim('sing${SongNote.noteDirections[i.noteData % SongNote.noteDirections.length].toUpperCase()}', true);
 								strumNote.hit();
 								i.deletedOnScroll = alreadyHitNote[i.noteData % alreadyHitNote.length] = true;
+								addHealth(0.025);
+								voices.volume = 1;
 							}
 						}
 					}

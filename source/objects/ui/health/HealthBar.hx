@@ -2,14 +2,15 @@ package objects.ui.health;
 
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.math.FlxMath;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import objects.characters.Character;
 
 class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 {
-	var playerHealth:Float = 1;
-
+	var intendedHealth:Float = 5000;
+	var playerHealth:Float = 0;
 	var healthBar:FlxBar;
 	var healthBarOverlay:FlxSprite;
 
@@ -19,8 +20,8 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 
 		healthBarOverlay = new FlxSprite(0, 0).loadGraphic(Paths.png('ui/Health Bar Overlay', 'shared'));
 
-		healthBar = new FlxBar(2, 2, FlxBarFillDirection.RIGHT_TO_LEFT, Std.int(healthBarOverlay.width - 2), Std.int(healthBarOverlay.height - 2), null,
-			"playerHealth", 0, 2, false);
+		healthBar = new FlxBar(2, 2, FlxBarFillDirection.RIGHT_TO_LEFT, Std.int(healthBarOverlay.width - 2), Std.int(healthBarOverlay.height - 2), this,
+			"playerHealth", 0, 10000, false);
 
 		healthBar.createFilledBar(FlxColor.fromRGB(161, 161, 161), FlxColor.fromRGB(161, 161, 161));
 
@@ -29,6 +30,8 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 
 		add(healthBar);
 		add(healthBarOverlay);
+
+		updateHealth(1);
 	}
 
 	public function updateHealthIconsAndColors(charLeft:Character, charRight:Character)
@@ -48,11 +51,14 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 
 	public function updateHealth(realHealth:Float)
 	{
-		this.playerHealth = realHealth;
+		// this.playerHealth = realHealth;
+		// healthBar.parent = realHealth * 50;
+		this.intendedHealth = realHealth * 5000;
 	}
 
 	override public function update(e:Float)
 	{
 		super.update(e);
+		playerHealth = FlxMath.lerp(intendedHealth, playerHealth, e * 114);
 	}
 }
