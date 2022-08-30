@@ -158,15 +158,20 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 	{
 		var deathList:Array<AlphabetCharacter> = [];
 		for (i in 0...letterList.length)
-			if (_text.length < i)
+		{
+			if (_text.length <= i)
 				deathList.push(letterList[i]);
+			// trace((letterList[i].animation.curAnim != null ? letterList[i].animation.curAnim.name : 'null')
+			//	+ ' $i ${_text.length} ${letterList.length} ${_text.length <= i}');
+		}
 		for (i in deathList)
 		{
-			remove(i);
+			// trace('deleting ' + (i.animation.curAnim != null ? i.animation.curAnim.name : 'null'));
 			letterList.remove(i);
+			remove(i);
 			i.destroy();
 		}
-		letterList.wipeArray();
+		// letterList.wipeArray();
 	}
 
 	public function getWidth()
@@ -192,18 +197,26 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 		for (i in 0..._text.length)
 		{
 			var newAlphabetChar:AlphabetCharacter;
-			if (i >= letterList.length)
+
+			var whatAmIDoing:Bool = (i >= letterList.length);
+			// trace('${_text.charAt(i)} $i ${letterList.length} ${whatAmIDoing}');
+			if (whatAmIDoing)
 			{
 				newAlphabetChar = new AlphabetCharacter(_text.charAt(i), true);
 				letterList.push(newAlphabetChar);
 				add(newAlphabetChar);
 				newAlphabetChar.antialiasing = true;
-				trace(_text.charAt(i));
-
-				newAlphabetChar.alpha = 0.25;
+				// trace('more fortnite');
 			}
 			else
+			{
 				newAlphabetChar = letterList[i];
+				newAlphabetChar.setCurChar(_text.charAt(i), true);
+				// trace('no fortnite');
+			}
+
+			// trace('${_text.charAt(i)} $i ${letterList.length} ${whatAmIDoing}');
+			newAlphabetChar.alpha = 0.25;
 
 			newAlphabetChar.x = this.x + (i * 50);
 		}

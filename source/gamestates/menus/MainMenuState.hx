@@ -222,9 +222,12 @@ class MainMenuState extends MusicBeatState
 						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					case 'Mods':
 						switchState(ModManagerMenu, [], false, FunkinTransitionType.Black);
+					#if debug
 					case 'Debug':
-						var nullSpr:FlxSprite = null;
-						nullSpr.clone();
+						// var nullSpr:FlxSprite = null;
+						// nullSpr.clone();
+						switchState(DebugMenu, [], false, FunkinTransitionType.Black);
+					#end
 					// switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 					default:
 						Sys.exit(0);

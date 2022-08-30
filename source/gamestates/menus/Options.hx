@@ -20,7 +20,17 @@ class OptionBase extends Alphabet
 
 	public function updateValue()
 	{
-		this.text = '$baseName: N/A';
+		var bruhInt:Int = flixel.FlxG.random.int(0, 3);
+		switch (bruhInt)
+		{
+			case 1:
+				bruhInt = 10;
+			case 2:
+				bruhInt = 100;
+			case 3:
+				bruhInt = 1000;
+		}
+		this.text = '$baseName: N/A ' + bruhInt;
 	}
 }
 
