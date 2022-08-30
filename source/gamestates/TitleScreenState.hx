@@ -7,6 +7,7 @@ import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
 import gamestates.menus.MainMenuState;
 import managers.BGMusicManager;
+import managers.PreferenceManager;
 import objects.FunkySprite;
 import objects.characters.Character;
 import objects.ui.Alphabet;
@@ -52,6 +53,7 @@ class TitleScreenState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
+		PreferenceManager.load();
 		if (FlxG.save.data.lastMod != null)
 			Paths.curMod = FlxG.save.data.lastMod;
 		BGMusicManager.play('freakyMenu', 102);
