@@ -91,7 +91,7 @@ class PauseSubState extends MusicBeatSubState
 		FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 
 		var selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay', null));
-		selectOverlay.antialiasing = true;
+		selectOverlay.antialiasing = managers.PreferenceManager.antialiasing;
 		add(selectOverlay);
 		selectOverlay.cameras = [newHUD];
 	}

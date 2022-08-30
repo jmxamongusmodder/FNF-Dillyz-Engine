@@ -65,7 +65,7 @@ class SongNote extends FunkySprite
 		this.noteType = noteType;
 		this.sustainNote = sustainNote;
 		reloadNote(textureName, textureJson);
-		this.antialiasing = true;
+		this.antialiasing = managers.PreferenceManager.antialiasing;
 	}
 
 	public function reloadNote(?textureName:String = 'Scrolling Notes', ?textureJson:Null<SongNoteData>)

@@ -131,7 +131,7 @@ class TitleScreenState extends MusicBeatState
 			add(ogLogo);
 			ogLogo.cameras = [camHUD];
 			ogLogo.visible = false;
-			ogLogo.antialiasing = true;
+			ogLogo.antialiasing = managers.PreferenceManager.antialiasing;
 		}
 		preloaderArt.color = FlxColor.BLACK;
 	}

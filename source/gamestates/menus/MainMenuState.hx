@@ -88,18 +88,18 @@ class MainMenuState extends MusicBeatState
 		}
 
 		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_yellow'));
-		funnyBG.antialiasing = true;
+		funnyBG.antialiasing = managers.PreferenceManager.antialiasing;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBG);
 
 		funnyBGAlt = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_magenta'));
-		funnyBGAlt.antialiasing = true;
+		funnyBGAlt.antialiasing = managers.PreferenceManager.antialiasing;
 		funnyBGAlt.visible = false;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBGAlt);
 
 		bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
-		bgFlash.antialiasing = true;
+		bgFlash.antialiasing = managers.PreferenceManager.antialiasing;
 		bgFlash.alpha = 0;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 
@@ -124,7 +124,7 @@ class MainMenuState extends MusicBeatState
 			newMenuOption.playAnim(i == 0 ? 'hover' : 'static', true);
 			add(newMenuOption);
 			optionDisplay.push(newMenuOption);
-			newMenuOption.antialiasing = true;
+			newMenuOption.antialiasing = managers.PreferenceManager.antialiasing;
 
 			newMenuOption.x = ((FlxG.width / 2) - (newMenuOption.width / 2)) + newMenuOption.posOffset.x + 60;
 		}
@@ -139,7 +139,7 @@ class MainMenuState extends MusicBeatState
 		funnyGayText.cameras = [camHUD];
 		funnyGayText.screenCenter(X);
 		// funnyGayText.x += 20;
-		funnyGayText.antialiasing = true;
+		funnyGayText.antialiasing = managers.PreferenceManager.antialiasing;
 
 		add(bgFlash);
 		bgFlash.cameras = [camHUD];

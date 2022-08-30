@@ -205,7 +205,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 				newAlphabetChar = new AlphabetCharacter(_text.charAt(i), true);
 				letterList.push(newAlphabetChar);
 				add(newAlphabetChar);
-				newAlphabetChar.antialiasing = true;
+				newAlphabetChar.antialiasing = managers.PreferenceManager.antialiasing;
 				// trace('more fortnite');
 			}
 			else

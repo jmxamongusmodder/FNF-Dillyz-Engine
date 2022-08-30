@@ -87,12 +87,12 @@ class OptionsMenuState extends MusicBeatState
 		super.create();
 
 		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_orange'));
-		funnyBG.antialiasing = true;
+		funnyBG.antialiasing = managers.PreferenceManager.antialiasing;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBG);
 
 		funnyBGAlt = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_blue'));
-		funnyBGAlt.antialiasing = true;
+		funnyBGAlt.antialiasing = managers.PreferenceManager.antialiasing;
 		funnyBGAlt.visible = false;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBGAlt);
@@ -109,7 +109,7 @@ class OptionsMenuState extends MusicBeatState
 		funnyGayText.cameras = [camHUD];
 		funnyGayText.screenCenter(X);
 		// funnyGayText.x += 35;
-		funnyGayText.antialiasing = true;
+		funnyGayText.antialiasing = managers.PreferenceManager.antialiasing;
 
 		// add(bgFlash);
 		// bgFlash.cameras = [camHUD];

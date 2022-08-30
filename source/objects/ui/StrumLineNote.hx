@@ -28,7 +28,7 @@ class StrumLineNote extends FunkySprite
 		this.ogY = y;
 		this.noteData = noteData;
 		reloadNote(textureName, textureJson);
-		this.antialiasing = true;
+		this.antialiasing = managers.PreferenceManager.antialiasing;
 	}
 
 	public function reloadNote(?textureName:String = 'Strum Line Notes', ?textureJson:Null<StrumLineNoteData>)

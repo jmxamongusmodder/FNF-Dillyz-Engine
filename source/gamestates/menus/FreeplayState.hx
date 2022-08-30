@@ -53,18 +53,18 @@ class FreeplayState extends MusicBeatState
 		super.create();
 
 		funnyBG = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_blue'));
-		funnyBG.antialiasing = true;
+		funnyBG.antialiasing = managers.PreferenceManager.antialiasing;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBG);
 
 		funnyBGAlt = new FlxSprite().loadGraphic(Paths.png('menus/menuBG_lime'));
-		funnyBGAlt.antialiasing = true;
+		funnyBGAlt.antialiasing = managers.PreferenceManager.antialiasing;
 		funnyBGAlt.visible = false;
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 		add(funnyBGAlt);
 
 		/*bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
-			bgFlash.antialiasing = true;
+			bgFlash.antialiasing = managers.PreferenceManager.antialiasing ;
 			bgFlash.alpha = 0; */
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 
@@ -75,7 +75,7 @@ class FreeplayState extends MusicBeatState
 		funnyGayText.cameras = [camHUD];
 		funnyGayText.screenCenter(X);
 		// funnyGayText.x += 35;
-		funnyGayText.antialiasing = true;
+		funnyGayText.antialiasing = managers.PreferenceManager.antialiasing;
 
 		trace('holy crap lois, i\'m in a debug build!');
 		optionArray = new Array<Alphabet>();
@@ -151,7 +151,7 @@ class FreeplayState extends MusicBeatState
 		changeSelection();
 
 		/*selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay'));
-			selectOverlay.antialiasing = true;
+			selectOverlay.antialiasing = managers.PreferenceManager.antialiasing ;
 			selectOverlay.alpha = 0;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD]; */
@@ -248,7 +248,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
 
 			var selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay', null));
-			selectOverlay.antialiasing = true;
+			selectOverlay.antialiasing = managers.PreferenceManager.antialiasing;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD];
 
