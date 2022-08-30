@@ -233,6 +233,8 @@ class TitleScreenState extends MusicBeatState
 		camHUD.bgColor = FlxColor.TRANSPARENT;
 		camGame.flash(FlxColor.WHITE, 2.5);
 		delText();
+		if (ogLogo != null)
+			remove(ogLogo);
 	}
 
 	public var youKnowWhoElseHasDementia:Array<Alphabet>;
