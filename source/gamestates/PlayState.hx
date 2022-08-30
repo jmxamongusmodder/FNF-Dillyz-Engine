@@ -7,6 +7,8 @@ import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.system.debug.console.Console;
+import flixel.text.FlxText.FlxTextAlign;
+import flixel.text.FlxText.FlxTextBorderStyle;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -19,11 +21,13 @@ import gamestates.menus.FreeplayState;
 import gamestates.menus.MainMenuState;
 import gamesubstates.PauseSubState;
 import haxe.Json;
+import lime.app.Application;
 import managers.BGMusicManager;
 import managers.FunkyLuaManager;
 import managers.PreferenceManager;
 import objects.FunkySprite;
 import objects.FunkyStage;
+import objects.FunkyText;
 import objects.characters.Character;
 import objects.ui.Alphabet;
 import objects.ui.SongNote;
@@ -103,6 +107,12 @@ class PlayState extends MusicBeatState
 	// ui elements
 	private var curHealth:Float = 1;
 	private var healthBar:HealthBar;
+	private var curScore:Int = 0;
+	private var missCount:Int = 0;
+	private var accuracyCount:Float = 0;
+	private var accuracyPrecalc:Float = 0;
+	private var accuracyPrecalcAmount:Float = 0;
+	private var scoreInfo:FunkyText;
 
 	override public function create()
 	{
@@ -161,6 +171,14 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 		healthBar.cameras = [camHUD];
 
+		scoreInfo = new FunkyText(0, 650, 0, 'I', 24);
+		scoreInfo.setFormat(Paths.font('vcr'), 24, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreInfo.borderSize = 1;
+		add(scoreInfo);
+		scoreInfo.cameras = [camHUD];
+		scoreInfo.antialiasing = managers.PreferenceManager.antialiasing;
+		scoreInfo.screenCenter(X);
+
 		// this is used for cloning
 		countdownSprite = new FlxSprite();
 		countdownSprite.frames = Paths.sparrowV2('ui/countdown' + curSong.countdownSuffix, 'shared');
@@ -205,6 +223,15 @@ class PlayState extends MusicBeatState
 
 		postCreate();
 		callLua('onCreatePost', []);
+		updateScore();
+	}
+
+	public function updateScore(?funnyBounce:Bool = true)
+	{
+		accuracyCount = (accuracyPrecalc / accuracyPrecalcAmount);
+		scoreInfo.text = '$curScore Score \\\\ ${missCount > 0 ? '$missCount ${missCount == 1 ? 'Miss' : 'Misses'}' : 'No Misses'} \\\\ Composed by ${curSong.songComposer} // ${accuracyPrecalc > 0 ? '${Std.int(accuracyCount * 10) / 10.0}%' : 'Invalid'} Accuracy // $diffToLoad Mode';
+		if (funnyBounce)
+			scoreInfo.scale.x = scoreInfo.scale.y = 1.1;
 	}
 
 	public function addHealth(newHealth:Float)
@@ -521,6 +548,9 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 		callLua('onUpdate', [elapsed]);
 
+		scoreInfo.scale.x = scoreInfo.scale.y = FlxMath.lerp(1, scoreInfo.scale.x, elapsed * 114);
+		scoreInfo.screenCenter(X);
+
 		// yes ik this gets set off even when hitting a note but shut up it's just ghost tapping rn
 		for (i in 0...SongNote.keyArray.length)
 		{
@@ -612,6 +642,9 @@ class PlayState extends MusicBeatState
 
 								addHealth(i.sustainNote ? -0.0125 : -0.0475);
 								voices.volume = 0;
+								accuracyPrecalcAmount += (i.sustainNote ? 0.15 : 1);
+								missCount++;
+								updateScore();
 							}
 							else if (i.sustainNote
 								&& i.strumTime <= Conductor.songPosition
@@ -624,6 +657,9 @@ class PlayState extends MusicBeatState
 								i.deletedOnScroll = true;
 								addHealth(0.00625);
 								voices.volume = 1;
+
+								curScore += 50;
+								updateScore(false);
 							}
 							else if (!i.sustainNote
 								&& i.strumTime <= Conductor.songPosition + Conductor.safeZoneOffset
@@ -637,6 +673,13 @@ class PlayState extends MusicBeatState
 								i.deletedOnScroll = alreadyHitNote[i.noteData % alreadyHitNote.length] = true;
 								addHealth(0.025);
 								voices.volume = 1;
+
+								var curAcc:Float = Math.abs(((Conductor.songPosition - i.strumTime) / (Conductor.safeFrames / 10)) / 1.15).snapFloat(0, 100);
+								Application.current.window.title = '$curAcc';
+								curScore += Std.int(450 + (450 * (curAcc / 100))).snapInt(-250, 450);
+								accuracyPrecalc += 100 - curAcc;
+								accuracyPrecalcAmount++;
+								updateScore();
 							}
 						}
 					}

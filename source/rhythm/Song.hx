@@ -26,6 +26,7 @@ typedef SongData =
 	// (if you make an engine & you'd want your charts to be compatible here, just contact me. server: https://discord.gg/49NFTwcYgZ)
 	var engineType:Null<String>;
 	var countdownSuffix:Null<String>;
+	var songComposer:Null<String>;
 }
 
 class Song
@@ -44,8 +45,10 @@ class Song
 
 	public var countdownSuffix:String;
 
+	public var songComposer:String;
+
 	public function new(songName:String, notes:Array<SectionData>, bpm:Int, needsVoices:Bool, speed:Float, boyfriend:String, dad:String,
-			girlfriendYouDontHave:String, stage:String, countdownSuffix:String)
+			girlfriendYouDontHave:String, stage:String, countdownSuffix:String, songComposer:String)
 	{
 		this.songName = songName;
 		this.notes = notes;
@@ -57,6 +60,7 @@ class Song
 		this.girlfriendYouDontHave = (girlfriendYouDontHave == null || girlfriendYouDontHave == '') ? 'girlfriend' : girlfriendYouDontHave;
 		this.stage = (stage == null || stage == '') ? 'stage' : stage;
 		this.countdownSuffix = countdownSuffix;
+		this.songComposer = songComposer;
 	}
 
 	public static var defSong:SongData = {
@@ -73,14 +77,15 @@ class Song
 		stage: 'stage',
 		countdownSuffix: '',
 		// feel free to use this variable in your engine
-		engineType: 'Dillyz Engine'
+		engineType: 'Dillyz Engine',
+		songComposer: 'KawaiSprite'
 	};
 
 	public static function songFromName(songName:String, difficulty:String):Song
 	{
 		var songData:SongData = songDataFromName(songName, difficulty);
 		return new Song(songData.song, songData.notes, songData.bpm, songData.needsVoices, songData.speed, songData.player1, songData.player2,
-			songData.girlfriend, songData.stage, songData.countdownSuffix);
+			songData.girlfriend, songData.stage, songData.countdownSuffix, songData.songComposer);
 	}
 
 	public static function oldCharToDillyz(oldChar:String)
@@ -124,7 +129,6 @@ class Song
 		{
 			// just write the engine name
 			newData.engineType = 'Dillyz Engine';
-
 			newData.player1 = oldCharToDillyz(newData.player1);
 			newData.player2 = oldCharToDillyz(newData.player2);
 
@@ -149,6 +153,8 @@ class Song
 			newData.stage == 'stage';
 		if (newData.countdownSuffix == null)
 			newData.countdownSuffix = '';
+		if (newData.songComposer == null)
+			newData.songComposer = 'KawaiSprite';
 
 		return newData;
 	}
