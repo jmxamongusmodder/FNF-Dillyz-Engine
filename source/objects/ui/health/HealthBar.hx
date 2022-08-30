@@ -54,8 +54,7 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 		healthBar.createFilledBar(FlxColor.fromRGB(charLeft.healthIconColors[0], charLeft.healthIconColors[1], charLeft.healthIconColors[2]),
 			FlxColor.fromRGB(charRight.healthIconColors[0], charRight.healthIconColors[1], charRight.healthIconColors[2]));
 
-		healthBar.scale.x = 1.125;
-		healthBarOverlay.scale.x = 1.125;
+		// healthBar.scale.x = healthBarOverlay.scale.x = 1.125;
 
 		iconLeft.reloadHealthIconByIcon(charLeft.healthIcon);
 		iconRight.reloadHealthIconByIcon(charRight.healthIcon);
@@ -108,9 +107,10 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 		iconLeft.y = (healthBarOverlay.y + healthBarOverlay.height / 2) - iconLeft.height / 2;
 		iconRight.y = (healthBarOverlay.y + healthBarOverlay.height / 2) - iconRight.height / 2;
 
+		var iconOffset:Int = 25;
 		var barMid:Float = healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01);
-		iconLeft.x = healthBar.x + barMid - iconLeft.width;
-		iconRight.x = healthBar.x + barMid;
+		iconLeft.x = healthBar.x + barMid - (iconLeft.width - iconOffset);
+		iconRight.x = healthBar.x + (barMid - iconOffset);
 	}
 
 	public function iconBop()
