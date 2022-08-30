@@ -9,9 +9,9 @@ import flixel.text.FlxText.FlxTextBorderStyle;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
-import gamestates.menus.Options;
 import objects.FunkyText;
 import objects.ui.Alphabet;
+import objects.ui.Options;
 
 using DillyzUtil;
 

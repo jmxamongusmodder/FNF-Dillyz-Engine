@@ -1,6 +1,4 @@
-package gamestates.menus;
-
-import objects.ui.Alphabet;
+package objects.ui;
 
 class OptionBase extends Alphabet
 {
