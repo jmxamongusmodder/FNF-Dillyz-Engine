@@ -24,6 +24,9 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 
 		healthBar.createFilledBar(FlxColor.fromRGB(161, 161, 161), FlxColor.fromRGB(161, 161, 161));
 
+		healthBar.scale.x = 1.125;
+		healthBarOverlay.scale.x = 1.125;
+
 		add(healthBar);
 		add(healthBarOverlay);
 	}
@@ -35,6 +38,9 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 
 		healthBar.createFilledBar(FlxColor.fromRGB(charLeft.healthIconColors[0], charLeft.healthIconColors[1], charLeft.healthIconColors[2]),
 			FlxColor.fromRGB(charRight.healthIconColors[0], charRight.healthIconColors[1], charRight.healthIconColors[2]));
+
+		healthBar.scale.x = 1.125;
+		healthBarOverlay.scale.x = 1.125;
 
 		add(healthBar);
 		add(healthBarOverlay);

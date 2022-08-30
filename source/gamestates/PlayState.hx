@@ -21,6 +21,7 @@ import gamesubstates.PauseSubState;
 import haxe.Json;
 import managers.BGMusicManager;
 import managers.FunkyLuaManager;
+import managers.PreferenceManager;
 import objects.FunkySprite;
 import objects.FunkyStage;
 import objects.characters.Character;
@@ -150,9 +151,10 @@ class PlayState extends MusicBeatState
 		if (Paths.songLuaExists(curSong.songName))
 			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
 
+		middleScroll = PreferenceManager.middleScroll;
 		prepareStrumLineNotes();
 
-		healthBar = new HealthBar(0, 700);
+		healthBar = new HealthBar(0, 600);
 		healthBar.screenCenter(X);
 		healthBar.updateHealthIconsAndColors(charLeft, charRight);
 		add(healthBar);
