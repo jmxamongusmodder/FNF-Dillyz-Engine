@@ -216,7 +216,7 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 			}
 
 			// trace('${_text.charAt(i)} $i ${letterList.length} ${whatAmIDoing}');
-			newAlphabetChar.alpha = 0.25;
+			// newAlphabetChar.alpha = 0.25;
 
 			newAlphabetChar.x = this.x + (i * 50);
 		}
