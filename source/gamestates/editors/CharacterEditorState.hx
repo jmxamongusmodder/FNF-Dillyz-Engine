@@ -17,6 +17,7 @@ import flixel.util.FlxColor;
 import gamestates.menus.MainMenuState;
 import haxe.Exception;
 import haxe.Json;
+import managers.PreferenceManager;
 import objects.FunkyStage;
 import objects.characters.Character;
 import objects.ui.FlxUIDropDownMenuScrollable;
