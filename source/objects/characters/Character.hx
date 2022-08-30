@@ -4,6 +4,7 @@ import DillyzLogger.LogType;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import gamestates.editors.CharacterEditorState;
+import managers.PreferenceManager;
 import rhythm.Conductor;
 
 using StringTools;
@@ -247,7 +248,7 @@ class Character extends FunkySprite
 		this.scale.y = charData.scale[1];
 		this.flipX = charData.flipX;
 		this.flipY = charData.flipY;
-		this.antialiasing = charData.antialiasing;
+		this.antialiasing = charData.antialiasing && PreferenceManager.antialiasing;
 		this.camZoomMultiplier = charData.camZoomMulti;
 
 		if (rightSide)

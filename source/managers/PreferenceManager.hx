@@ -8,7 +8,7 @@ class PreferenceManager
 	// keybinds
 	public static var keybinds_4k:Array<String> = ['Left', 'Down', 'Up', 'Right'];
 
-	public static var antialiasing:Bool = false;
+	public static var antialiasing:Bool = true;
 
 	public static function save()
 	{
