@@ -9,6 +9,7 @@ import flixel.text.FlxText.FlxTextBorderStyle;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
+import managers.PreferenceManager;
 import objects.FunkyText;
 import objects.ui.Alphabet;
 import objects.ui.Options;
@@ -77,7 +78,7 @@ class OptionsMenuState extends MusicBeatState
 		{
 			name: 'Antialising',
 			type: OptionType.Bool,
-			saveValue: 'antialising'
+			saveValue: 'antialiasing'
 		}
 	];
 
@@ -97,7 +98,7 @@ class OptionsMenuState extends MusicBeatState
 		add(funnyBGAlt);
 
 		/*bgFlash = new FlxSprite(-1280, -720).makeGraphic(1280 * 3, 720 * 3, FlxColor.WHITE);
-			bgFlash.antialiasing = true;
+			bgFlash.PreferenceManager.antialiasing;
 			bgFlash.alpha = 0; */
 		// funnyBG.color = FlxColor.fromRGB(253, 232, 113, 255);
 
@@ -123,12 +124,28 @@ class OptionsMenuState extends MusicBeatState
 				case OptionType.Category:
 					newOption = new CategoryOption(0, i * 75, newOptions.name, newOptions.saveValue);
 				case OptionType.Keybind:
-					newOption = new KeybindOption(0, i * 75, newOptions.name, newOptions.saveValue, 'Left');
+					var defBindOpt:String = '';
+					switch (newOptions.saveValue)
+					{
+						case '4k_bindLeft':
+							defBindOpt = PreferenceManager.keybinds_4k[0];
+						case '4k_bindDown':
+							defBindOpt = PreferenceManager.keybinds_4k[1];
+						case '4k_bindUp':
+							defBindOpt = PreferenceManager.keybinds_4k[2];
+						case '4k_bindRight':
+							defBindOpt = PreferenceManager.keybinds_4k[3];
+					}
+					newOption = new KeybindOption(0, i * 75, newOptions.name, newOptions.saveValue, defBindOpt);
 				case OptionType.Bool:
-					newOption = new BooleanOption(0, i * 75, newOptions.name, newOptions.saveValue, false);
+					var defBoolOpt:Bool = false;
+					if (newOptions.saveValue == 'antialiasing')
+						defBoolOpt = PreferenceManager.antialiasing;
+					newOption = new BooleanOption(0, i * 75, newOptions.name, newOptions.saveValue, defBoolOpt);
 				default:
 					newOption = new OptionBase(0, i * 75, newOptions.name, newOptions.saveValue);
 			}
+			newOption.updateValue();
 			add(newOption);
 			optionArray.push(newOption);
 		}
@@ -137,7 +154,7 @@ class OptionsMenuState extends MusicBeatState
 		changeSelection();
 
 		/*selectOverlay = new FlxSprite().loadGraphic(Paths.png('menus/selectOverlay'));
-			selectOverlay.antialiasing = true;
+			selectOverlay.PreferenceManager.antialiasing;
 			selectOverlay.alpha = 0;
 			add(selectOverlay);
 			selectOverlay.cameras = [camHUD]; */
@@ -234,12 +251,17 @@ class OptionsMenuState extends MusicBeatState
 			switch (optionArray[curIndex].realType)
 			{
 				case 'Bool':
-					cast(optionArray[curIndex], BooleanOption).boolValue = !cast(optionArray[curIndex], BooleanOption).boolValue;
+					var boolOpt:BooleanOption = cast(optionArray[curIndex], BooleanOption);
+					boolOpt.boolValue = !boolOpt.boolValue;
+
+					if (optionArray[curIndex].saveValue == 'antialiasing')
+						PreferenceManager.antialiasing = boolOpt.boolValue;
 			}
 
 			optionArray[curIndex].updateValue();
 			camGame.zoom += 0.01;
 			FlxG.sound.play(Paths.sound('menus/scrollMenu', null));
+			PreferenceManager.save();
 			// }
 		}
 		else if (FlxG.keys.justPressed.UP)
