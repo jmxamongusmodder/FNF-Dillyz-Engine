@@ -675,7 +675,7 @@ class PlayState extends MusicBeatState
 								voices.volume = 1;
 
 								var curAcc:Float = Math.abs(((Conductor.songPosition - i.strumTime) / (Conductor.safeFrames / 10)) / 1.15).snapFloat(0, 100);
-								Application.current.window.title = '$curAcc';
+								// Application.current.window.title = '$curAcc';
 								curScore += Std.int(450 + (450 * (curAcc / 100))).snapInt(-250, 450);
 								accuracyPrecalc += 100 - curAcc;
 								accuracyPrecalcAmount++;
