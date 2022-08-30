@@ -737,6 +737,7 @@ class PlayState extends MusicBeatState
 			charMid.dance();
 			charRight.dance();
 			camGame.zoom *= 1.025;
+			healthBar.iconBop();
 		}
 		callLua('onBeatHitPost', []);
 	}
