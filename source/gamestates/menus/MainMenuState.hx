@@ -216,7 +216,7 @@ class MainMenuState extends MusicBeatState
 					case 'Freeplay':
 						switchState(FreeplayState, [], false, FunkinTransitionType.Black);
 					case 'Options':
-						switchState(MainMenuState, [], false, FunkinTransitionType.Black);
+						switchState(OptionsMenuState, [], false, FunkinTransitionType.Black);
 					case 'Donate':
 						FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
 						switchState(MainMenuState, [], false, FunkinTransitionType.Black);

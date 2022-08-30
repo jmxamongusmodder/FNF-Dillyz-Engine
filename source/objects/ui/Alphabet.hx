@@ -156,9 +156,14 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 
 	private function destroyCharacters()
 	{
-		for (i in letterList)
+		var deathList:Array<AlphabetCharacter> = [];
+		for (i in 0...letterList.length)
+			if (_text.length < i)
+				deathList.push(letterList[i]);
+		for (i in deathList)
 		{
 			remove(i);
+			letterList.remove(i);
 			i.destroy();
 		}
 		letterList.wipeArray();
@@ -186,12 +191,21 @@ class Alphabet extends FlxTypedSpriteGroup<AlphabetCharacter>
 
 		for (i in 0..._text.length)
 		{
-			var newAlphabetChar:AlphabetCharacter = new AlphabetCharacter(_text.charAt(i), true);
-			letterList.push(newAlphabetChar);
-			add(newAlphabetChar);
-			newAlphabetChar.antialiasing = true;
+			var newAlphabetChar:AlphabetCharacter;
+			if (i >= letterList.length)
+			{
+				newAlphabetChar = new AlphabetCharacter(_text.charAt(i), true);
+				letterList.push(newAlphabetChar);
+				add(newAlphabetChar);
+				newAlphabetChar.antialiasing = true;
+				trace(_text.charAt(i));
 
-			newAlphabetChar.x = i * 50;
+				newAlphabetChar.alpha = 0.25;
+			}
+			else
+				newAlphabetChar = letterList[i];
+
+			newAlphabetChar.x = this.x + (i * 50);
 		}
 
 		return this._text;
