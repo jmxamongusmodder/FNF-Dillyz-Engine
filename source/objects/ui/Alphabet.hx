@@ -67,7 +67,7 @@ class AlphabetCharacter extends FunkySprite
 		animOffsets.set('_', new FlxPoint(0, -50));
 		animOffsets.set('+', new FlxPoint(0, -10));
 		animOffsets.set(';', new FlxPoint(0, -4));
-		animOffsets.set(':', new FlxPoint(0, -4));
+		animOffsets.set(':', new FlxPoint(-13, -24));
 		animOffsets.set('=', new FlxPoint(0, -12));
 		animOffsets.set('~', new FlxPoint(0, -24));
 		animOffsets.set('-', new FlxPoint(0, -16));

@@ -9,6 +9,7 @@ import flixel.text.FlxText.FlxTextBorderStyle;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
+import gamesubstates.KeybindSubState;
 import managers.PreferenceManager;
 import objects.FunkyText;
 import objects.ui.Alphabet;
@@ -250,6 +251,10 @@ class OptionsMenuState extends MusicBeatState
 
 			switch (optionArray[curIndex].realType)
 			{
+				case 'Keybind':
+					var keyOpt:KeybindOption = cast(optionArray[curIndex], KeybindOption);
+					KeybindSubState.lastOpt = keyOpt;
+					openSubState(new KeybindSubState());
 				case 'Bool':
 					var boolOpt:BooleanOption = cast(optionArray[curIndex], BooleanOption);
 					boolOpt.boolValue = !boolOpt.boolValue;
