@@ -108,9 +108,9 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 		iconRight.y = (healthBarOverlay.y + healthBarOverlay.height / 2) - iconRight.height / 2;
 
 		var iconOffset:Int = 25;
-		var barMid:Float = healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01);
+		var barMid:Float = healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) + 12.5;
 		iconLeft.x = healthBar.x + barMid - (iconLeft.width - iconOffset);
-		iconRight.x = healthBar.x + (barMid - iconOffset);
+		iconRight.x = healthBar.x + barMid - iconOffset;
 	}
 
 	public function iconBop()
