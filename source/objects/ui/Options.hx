@@ -18,17 +18,7 @@ class OptionBase extends Alphabet
 
 	public function updateValue()
 	{
-		var bruhInt:Int = flixel.FlxG.random.int(0, 3);
-		switch (bruhInt)
-		{
-			case 1:
-				bruhInt = 10;
-			case 2:
-				bruhInt = 100;
-			case 3:
-				bruhInt = 1000;
-		}
-		this.text = '$baseName: N/A ' + bruhInt;
+		this.text = '$baseName: N/A';
 	}
 }
 
@@ -43,5 +33,39 @@ class CategoryOption extends OptionBase
 	override public function updateValue()
 	{
 		this.text = '< $baseName >'.toLowerCase();
+	}
+}
+
+class KeybindOption extends OptionBase
+{
+	public var curBind:String;
+
+	public function new(x:Float, y:Float, baseName:String, saveValue:String, curBind:String)
+	{
+		super(x, y, baseName, saveValue);
+		this.realType = 'Keybind';
+		this.curBind = curBind;
+	}
+
+	override public function updateValue()
+	{
+		this.text = '$baseName: $curBind'.toLowerCase();
+	}
+}
+
+class BooleanOption extends OptionBase
+{
+	public var boolValue:Bool;
+
+	public function new(x:Float, y:Float, baseName:String, saveValue:String, boolValue:Bool)
+	{
+		super(x, y, baseName, saveValue);
+		this.realType = 'Bool';
+		this.boolValue = boolValue;
+	}
+
+	override public function updateValue()
+	{
+		this.text = '$baseName: $boolValue'.toLowerCase();
 	}
 }

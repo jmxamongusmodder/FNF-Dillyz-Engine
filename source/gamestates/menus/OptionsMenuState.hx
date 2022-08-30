@@ -68,6 +68,16 @@ class OptionsMenuState extends MusicBeatState
 			name: 'Right Bind',
 			type: OptionType.Keybind,
 			saveValue: '4k_bindRight'
+		},
+		{
+			name: 'Visuals',
+			type: OptionType.Category,
+			saveValue: null
+		},
+		{
+			name: 'Antialising',
+			type: OptionType.Bool,
+			saveValue: 'antialising'
 		}
 	];
 
@@ -112,6 +122,10 @@ class OptionsMenuState extends MusicBeatState
 			{
 				case OptionType.Category:
 					newOption = new CategoryOption(0, i * 75, newOptions.name, newOptions.saveValue);
+				case OptionType.Keybind:
+					newOption = new KeybindOption(0, i * 75, newOptions.name, newOptions.saveValue, 'Left');
+				case OptionType.Bool:
+					newOption = new BooleanOption(0, i * 75, newOptions.name, newOptions.saveValue, false);
 				default:
 					newOption = new OptionBase(0, i * 75, newOptions.name, newOptions.saveValue);
 			}
@@ -154,6 +168,8 @@ class OptionsMenuState extends MusicBeatState
 	}
 
 	private var stopSpamming:Bool = false;
+
+	private var enterTypes:Array<String> = ['Keybind', 'String', 'Bool'];
 
 	override public function update(e:Float)
 	{
@@ -201,23 +217,30 @@ class OptionsMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('menus/cancelMenu', null), 1.25);
 			switchState(MainMenuState, [], false, FunkinTransitionType.Black);
 		}
-		else if (FlxG.keys.justPressed.ENTER)
+		else if (FlxG.keys.justPressed.ENTER && enterTypes.contains(optionArray[curIndex].realType))
 		{
-			if (optionArray[curIndex].realType != 'Category')
-			{
-				// FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
-				// stopSpamming = true;
-				// FlxFlicker.flicker(funnyBGAlt, 1.1, 0.15, false);
-				// bgFlash.alpha = 0.8;
-				// FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
-				// camHUD.flash(FlxColor.WHITE, 0.5);
+			// if (optionArray[curIndex].realType != 'Category')
+			// {
+			// FlxG.sound.play(Paths.sound('menus/confirmMenu', null));
+			// stopSpamming = true;
+			// FlxFlicker.flicker(funnyBGAlt, 1.1, 0.15, false);
+			// bgFlash.alpha = 0.8;
+			// FlxTween.tween(bgFlash, {alpha: 0}, 0.5, {ease: FlxEase.cubeInOut});
+			// camHUD.flash(FlxColor.WHITE, 0.5);
 
-				trace(optionArray[curIndex].baseName);
-				trace(optionArray[curIndex].saveValue);
-				optionArray[curIndex].updateValue();
-				camGame.zoom += 0.01;
-				FlxG.sound.play(Paths.sound('menus/scrollMenu', null));
+			// trace(optionArray[curIndex].baseName);
+			// trace(optionArray[curIndex].saveValue);
+
+			switch (optionArray[curIndex].realType)
+			{
+				case 'Bool':
+					cast(optionArray[curIndex], BooleanOption).boolValue = !cast(optionArray[curIndex], BooleanOption).boolValue;
 			}
+
+			optionArray[curIndex].updateValue();
+			camGame.zoom += 0.01;
+			FlxG.sound.play(Paths.sound('menus/scrollMenu', null));
+			// }
 		}
 		else if (FlxG.keys.justPressed.UP)
 			changeSelection(-1);
