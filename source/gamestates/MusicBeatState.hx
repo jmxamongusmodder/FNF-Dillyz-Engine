@@ -77,7 +77,7 @@ class MusicBeatState extends FlxState
 		preloaderCamera.bgColor.alpha = 0;
 		FlxG.cameras.add(preloaderCamera, false);
 		preloaderArt = new FlxSprite().loadGraphic(Paths.png('preloader'));
-		preloaderArt.antialiasing = true;
+		preloaderArt.antialiasing = PreferenceManager.antialiasing;
 		add(preloaderArt);
 		preloaderArt.cameras = [preloaderCamera];
 
