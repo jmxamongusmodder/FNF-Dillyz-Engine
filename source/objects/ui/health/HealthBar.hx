@@ -54,8 +54,7 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 		healthBar.createFilledBar(FlxColor.fromRGB(charLeft.healthIconColors[0], charLeft.healthIconColors[1], charLeft.healthIconColors[2]),
 			FlxColor.fromRGB(charRight.healthIconColors[0], charRight.healthIconColors[1], charRight.healthIconColors[2]));
 
-		healthBar.scale.x = 1.125;
-		healthBarOverlay.scale.x = 1.125;
+		// healthBar.scale.x = healthBarOverlay.scale.x = 1.125;
 
 		iconLeft.reloadHealthIconByIcon(charLeft.healthIcon);
 		iconRight.reloadHealthIconByIcon(charRight.healthIcon);
@@ -100,20 +99,28 @@ class HealthBar extends FlxTypedSpriteGroup<FlxSprite>
 		playerHealth = FlxMath.lerp(intendedHealth, playerHealth, e * 114);
 
 		var iconLerp:Float = e * 114;
-		iconLeft.setGraphicSize(Std.int(FlxMath.lerp(150, iconLeft.width, iconLerp)));
-		iconRight.setGraphicSize(Std.int(FlxMath.lerp(150, iconLeft.width, iconLerp)));
+		// iconLeft.setGraphicSize(Std.int(FlxMath.lerp(150, iconLeft.width, iconLerp)));
+		// iconRight.setGraphicSize(Std.int(FlxMath.lerp(150, iconLeft.width, iconLerp)));
+		iconLeft.scale.x = FlxMath.lerp(1, iconRight.scale.x, iconLerp);
+		iconLeft.scale.y = FlxMath.lerp(1, iconRight.scale.y, iconLerp);
+		iconRight.scale.x = FlxMath.lerp(1, iconLeft.scale.x, iconLerp);
+		iconRight.scale.y = FlxMath.lerp(1, iconLeft.scale.y, iconLerp);
 		iconLeft.updateHitbox();
 		iconRight.updateHitbox();
 
-		var barMid:Float = healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01);
-		iconLeft.x = healthBar.x + barMid - iconLeft.width;
-		iconRight.x = healthBar.x + barMid;
+		iconLeft.y = (healthBarOverlay.y + healthBarOverlay.height / 2) - iconLeft.height / 2;
+		iconRight.y = (healthBarOverlay.y + healthBarOverlay.height / 2) - iconRight.height / 2;
+		iconRight.flipX = true;
+
+		var iconOffset:Int = 25;
+		var barMid:Float = healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) + 12.5;
+		iconLeft.x = healthBar.x + barMid - (iconLeft.width - iconOffset);
+		iconRight.x = healthBar.x + barMid - iconOffset;
 	}
 
 	public function iconBop()
 	{
-		iconLeft.setGraphicSize(Std.int(180));
-		iconRight.setGraphicSize(Std.int(180));
+		iconLeft.scale.x = iconLeft.scale.y = iconRight.scale.x = iconRight.scale.y = 1.25;
 		iconLeft.updateHitbox();
 		iconRight.updateHitbox();
 	}
