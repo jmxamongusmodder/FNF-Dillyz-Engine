@@ -27,6 +27,7 @@ import objects.characters.Character;
 import objects.ui.Alphabet;
 import objects.ui.SongNote;
 import objects.ui.StrumLineNote;
+import objects.ui.health.HealthBar;
 import openfl.media.Sound;
 import rhythm.Conductor;
 import rhythm.Song;
@@ -98,6 +99,9 @@ class PlayState extends MusicBeatState
 	private var displayedNotes:FlxTypedSpriteGroup<SongNote>;
 	private var hiddenNotes:Array<SongNote>;
 
+	// ui elements
+	private var healthBar:HealthBar;
+
 	override public function create()
 	{
 		super.create();
@@ -147,6 +151,12 @@ class PlayState extends MusicBeatState
 			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
 
 		prepareStrumLineNotes();
+
+		healthBar = new HealthBar(0, 700);
+		healthBar.screenCenter(X);
+		healthBar.updateHealthIconsAndColors(charLeft, charRight);
+		add(healthBar);
+		healthBar.cameras = [camHUD];
 
 		// this is used for cloning
 		countdownSprite = new FlxSprite();

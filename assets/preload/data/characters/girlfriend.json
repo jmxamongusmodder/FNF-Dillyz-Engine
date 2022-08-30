@@ -218,5 +218,7 @@
 	"flipY": false,
 	"holdTimer": 4,
 	"sprType": "sparrow-v2",
-	"camZoomMulti": 1
+	"camZoomMulti": 1,
+	"healthIcon": "girlfriend",
+	"healthBarColor": [165, 0, 77]
 }

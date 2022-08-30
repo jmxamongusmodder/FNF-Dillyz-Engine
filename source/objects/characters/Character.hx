@@ -39,6 +39,7 @@ typedef CharacterData =
 	var idleLoop:Array<String>;
 	var holdTimer:Float;
 	var healthIcon:Null<String>;
+	var healthBarColor:Null<Array<Int>>;
 }
 
 class Character extends FunkySprite
@@ -76,7 +77,8 @@ class Character extends FunkySprite
 		antialiasing: true,
 		idleLoop: ["idle"],
 		holdTimer: 6.1,
-		healthIcon: "boyfriend"
+		healthIcon: "boyfriend",
+		healthBarColor: [49, 176, 209]
 	};
 
 	@:allow(CharacterEditorState)
@@ -93,6 +95,9 @@ class Character extends FunkySprite
 	public var charName:String;
 
 	public var camZoomMultiplier:Float;
+
+	public var healthIcon:String;
+	public var healthIconColors:Array<Int>;
 
 	public function new(x:Float, y:Float, charName:String, ?rightSide:Bool = false, ?isPlaying:Bool = false, ?gameOver:Bool = false)
 	{
@@ -250,6 +255,8 @@ class Character extends FunkySprite
 		this.flipY = charData.flipY;
 		this.antialiasing = charData.antialiasing && PreferenceManager.antialiasing;
 		this.camZoomMultiplier = charData.camZoomMulti;
+		this.healthIcon = (charData.healthIcon == null ? 'default' : charData.healthIcon);
+		this.healthIconColors = (charData.healthBarColor == null ? [161, 161, 161] : charData.healthBarColor);
 
 		if (rightSide)
 			this.flipX = !this.flipX;

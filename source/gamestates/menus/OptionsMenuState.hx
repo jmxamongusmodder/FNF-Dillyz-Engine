@@ -80,6 +80,11 @@ class OptionsMenuState extends MusicBeatState
 			name: 'Antialising',
 			type: OptionType.Bool,
 			saveValue: 'antialiasing'
+		},
+		{
+			name: 'Middle Scroll',
+			type: OptionType.Bool,
+			saveValue: 'middleScroll'
 		}
 	];
 
@@ -140,8 +145,11 @@ class OptionsMenuState extends MusicBeatState
 					newOption = new KeybindOption(0, i * 75, newOptions.name, newOptions.saveValue, defBindOpt);
 				case OptionType.Bool:
 					var defBoolOpt:Bool = false;
-					if (newOptions.saveValue == 'antialiasing')
-						defBoolOpt = PreferenceManager.antialiasing;
+					switch (newOptions.saveValue)
+					{
+						case 'antialiasing': defBoolOpt = PreferenceManager.antialiasing;
+						case 'middleScroll': defBoolOpt = PreferenceManager.middleScroll;
+					}
 					newOption = new BooleanOption(0, i * 75, newOptions.name, newOptions.saveValue, defBoolOpt);
 				default:
 					newOption = new OptionBase(0, i * 75, newOptions.name, newOptions.saveValue);
@@ -259,8 +267,11 @@ class OptionsMenuState extends MusicBeatState
 					var boolOpt:BooleanOption = cast(optionArray[curIndex], BooleanOption);
 					boolOpt.boolValue = !boolOpt.boolValue;
 
-					if (optionArray[curIndex].saveValue == 'antialiasing')
-						PreferenceManager.antialiasing = boolOpt.boolValue;
+					switch (optionArray[curIndex].saveValue)
+					{
+						case 'antialiasing': PreferenceManager.antialiasing = boolOpt.boolValue;
+						case 'middleScroll': PreferenceManager.middleScroll = boolOpt.boolValue;
+					}
 			}
 
 			optionArray[curIndex].updateValue();

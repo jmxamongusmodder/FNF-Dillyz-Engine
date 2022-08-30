@@ -1,1 +1,114 @@
-{"idleLoop":["danceLeft","danceRight"],"cameraOffset":[0,0],"deadVariant":"boyfriend","scale":[1,1],"sprPath":"title/GF Title","groundOffset":[-15,0],"flipX":false,"animData":[{"cameraOffset":[-10,0],"fps":24,"prefix":"GF Title Beat Hit","looped":false,"flipX":false,"name":"danceLeft","offset":[0,0],"flipY":false,"camZoomMulti":1,"indices":[0,1,2,3,4,5,6,7,8,9,10,11,12,13]},{"cameraOffset":[10,0],"fps":24,"prefix":"GF Title Beat Hit","looped":false,"flipX":false,"name":"danceRight","offset":[0,0],"flipY":false,"camZoomMulti":1,"indices":[14,15,16,17,18,19,20,21,22,23,24,25,26,27]},{"cameraOffset":[0,0],"fps":24,"prefix":"GF Title Hey","looped":false,"flipX":false,"name":"hey","offset":[1,7],"flipY":false,"camZoomMulti":1,"indices":[]}],"antialiasing":true,"flipY":false,"holdTimer":4,"sprType":"sparrow-v2","camZoomMulti":1}
+{
+	"idleLoop": [
+		"danceLeft",
+		"danceRight"
+	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"deadVariant": "boyfriend",
+	"scale": [
+		1,
+		1
+	],
+	"sprPath": "title/GF Title",
+	"groundOffset": [
+		-15,
+		0
+	],
+	"flipX": false,
+	"animData": [
+		{
+			"cameraOffset": [
+				-10,
+				0
+			],
+			"fps": 24,
+			"prefix": "GF Title Beat Hit",
+			"looped": false,
+			"flipX": false,
+			"name": "danceLeft",
+			"offset": [
+				0,
+				0
+			],
+			"flipY": false,
+			"camZoomMulti": 1,
+			"indices": [
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		},
+		{
+			"cameraOffset": [
+				10,
+				0
+			],
+			"fps": 24,
+			"prefix": "GF Title Beat Hit",
+			"looped": false,
+			"flipX": false,
+			"name": "danceRight",
+			"offset": [
+				0,
+				0
+			],
+			"flipY": false,
+			"camZoomMulti": 1,
+			"indices": [
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27
+			]
+		},
+		{
+			"cameraOffset": [
+				0,
+				0
+			],
+			"fps": 24,
+			"prefix": "GF Title Hey",
+			"looped": false,
+			"flipX": false,
+			"name": "hey",
+			"offset": [
+				1,
+				7
+			],
+			"flipY": false,
+			"camZoomMulti": 1,
+			"indices": []
+		}
+	],
+	"antialiasing": true,
+	"flipY": false,
+	"holdTimer": 4,
+	"sprType": "sparrow-v2",
+	"camZoomMulti": 1,
+	"healthIcon": "girlfriend",
+	"healthBarColor": [165, 0, 77]
+}

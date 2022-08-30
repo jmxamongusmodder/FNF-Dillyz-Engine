@@ -316,5 +316,6 @@
 	"healthIcon": "boyfriend",
 	"holdTimer": 4,
 	"sprType": "sparrow-v2",
-	"camZoomMulti": 1
+	"camZoomMulti": 1,
+	"healthBarColor": [49, 176, 209]
 }

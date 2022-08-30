@@ -390,7 +390,7 @@ class CharacterEditorState extends MusicBeatState
 		newText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 2, 4);
 		if (center)
 			newText.x -= newText.width / 2;
-		newText.antialiasing = true;
+		newText.antialiasing = PreferenceManager.antialiasing;
 		return newText;
 	}
 
