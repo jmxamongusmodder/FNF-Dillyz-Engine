@@ -85,6 +85,16 @@ class OptionsMenuState extends MusicBeatState
 			name: 'Middle Scroll',
 			type: OptionType.Bool,
 			saveValue: 'middleScroll'
+		},
+		{
+			name: 'Memory Management',
+			type: OptionType.Category,
+			saveValue: null
+		},
+		{
+			name: 'Clear Cache After Song',
+			type: OptionType.Bool,
+			saveValue: 'clearCacheConstantly'
 		}
 	];
 
@@ -149,6 +159,7 @@ class OptionsMenuState extends MusicBeatState
 					{
 						case 'antialiasing': defBoolOpt = PreferenceManager.antialiasing;
 						case 'middleScroll': defBoolOpt = PreferenceManager.middleScroll;
+						case 'clearCacheConstantly': defBoolOpt = PreferenceManager.clearCacheConstantly;
 					}
 					newOption = new BooleanOption(0, i * 75, newOptions.name, newOptions.saveValue, defBoolOpt);
 				default:
@@ -271,6 +282,7 @@ class OptionsMenuState extends MusicBeatState
 					{
 						case 'antialiasing': PreferenceManager.antialiasing = boolOpt.boolValue;
 						case 'middleScroll': PreferenceManager.middleScroll = boolOpt.boolValue;
+						case 'clearCacheConstantly': PreferenceManager.clearCacheConstantly = boolOpt.boolValue;
 					}
 			}
 

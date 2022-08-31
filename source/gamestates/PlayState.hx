@@ -745,7 +745,8 @@ class PlayState extends MusicBeatState
 		dirtyNotes.wipeArray();
 	}
 
-	function endSong(?overrideState:Class<MusicBeatState> = null, ?overrideTrans:FunkinTransitionType = FunkinTransitionType.Black)
+	function endSong(?overrideState:Class<MusicBeatState> = null,
+			/* gu guys i cant belv it they added gen duh to f in f*/ ?overrideTrans:FunkinTransitionType = FunkinTransitionType.Black)
 	{
 		callLua('onEndSong', []);
 		wipeAllNotes();
@@ -768,7 +769,8 @@ class PlayState extends MusicBeatState
 		spriteMap = null;
 
 		BGMusicManager.play('freakyMenu', 102);
-		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], false, overrideTrans);
+		switchState(overrideState == null ? (cameFromFreeplay ? MainMenuState : FreeplayState) : overrideState, [], PreferenceManager.clearCacheConstantly,
+			overrideTrans);
 	}
 
 	override public function beatHit()

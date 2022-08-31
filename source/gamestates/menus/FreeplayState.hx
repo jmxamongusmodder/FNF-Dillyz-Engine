@@ -12,6 +12,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import gamestates.MusicBeatState.FunkinTransitionType;
+import managers.PreferenceManager;
 import objects.FunkyText;
 import objects.ui.Alphabet;
 import objects.ui.health.HealthIcon;
@@ -255,7 +256,7 @@ class FreeplayState extends MusicBeatState
 			new FlxTimer().start(1.5, function(t:FlxTimer)
 			{
 				FlxG.sound.music.fadeOut(0.5);
-				switchState(PlayState, [], true, FunkinTransitionType.Normal);
+				switchState(PlayState, [], PreferenceManager.clearCacheConstantly, FunkinTransitionType.Normal);
 			});
 		}
 		else if (FlxG.keys.justPressed.UP)
