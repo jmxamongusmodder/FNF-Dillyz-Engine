@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas imagePath="Boyfriend.png">
-	<!-- Created with Adobe Animate version 22.0.7.214 -->
+	<!-- Created with Adobe Animate version 22.0.8.217 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="BF Combat Attack0000" x="0" y="0" width="697" height="597" frameX="0" frameY="-87" frameWidth="764" frameHeight="685"/>
 	<SubTexture name="BF Combat Attack0001" x="0" y="0" width="697" height="597" frameX="0" frameY="-87" frameWidth="764" frameHeight="685"/>
