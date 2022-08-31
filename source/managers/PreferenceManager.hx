@@ -13,11 +13,15 @@ class PreferenceManager
 
 	public static var middleScroll:Bool = false;
 
+	// memory management
+	public static var clearCacheConstantly:Bool = false;
+
 	public static function save()
 	{
 		FlxG.save.data.keybinds_4k = keybinds_4k;
 		FlxG.save.data.antialiasing = antialiasing;
 		FlxG.save.data.middleScroll = middleScroll;
+		FlxG.save.data.clearCacheConstantly = clearCacheConstantly;
 		DillyzLogger.log('Saved preferences to disk!', LogType.Normal);
 		FlxG.save.data.hasSaved = true;
 	}
@@ -32,6 +36,7 @@ class PreferenceManager
 		keybinds_4k = FlxG.save.data.keybinds_4k;
 		antialiasing = FlxG.save.data.antialiasing;
 		middleScroll = FlxG.save.data.middleScroll;
+		clearCacheConstantly = FlxG.save.data.clearCacheConstantly;
 		DillyzLogger.log('Loading preferences from disk!', LogType.Normal);
 	}
 }
