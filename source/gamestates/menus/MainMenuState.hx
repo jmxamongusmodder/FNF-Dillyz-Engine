@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.effects.FlxFlicker;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
@@ -64,6 +65,15 @@ class MainMenuState extends MusicBeatState
 	private var options:Array<String> = ['Story Mode', 'Freeplay', 'Options', 'Donate', 'Mods', #if debug 'Debug' #end];
 	private var optionDisplay:Array<MenuButtonThing>;
 	private var curIndex:Int;
+
+	#if KONAMI_CODE_SECRET
+	private var konamiCodeControls:Array<FlxKey> = [
+		FlxKey.UP, FlxKey.UP, FlxKey.DOWN, FlxKey.DOWN, FlxKey.LEFT, FlxKey.RIGHT, FlxKey.LEFT, FlxKey.RIGHT, FlxKey.B, FlxKey.A
+	];
+	private var konamiCodeIndex:Int = 0;
+
+	private static var konamiCodeComplete:Bool = false;
+	#end
 
 	public function menuButtonJsonDefault():MenuButtonJson
 	{
@@ -189,6 +199,25 @@ class MainMenuState extends MusicBeatState
 
 		if (stopSpamming)
 			return;
+
+		#if KONAMI_CODE_SECRET
+		if (!konamiCodeComplete)
+		{
+			if (FlxG.keys.anyJustPressed([konamiCodeControls[konamiCodeIndex]]))
+			{
+				konamiCodeIndex++;
+
+				if (konamiCodeControls.length == konamiCodeIndex)
+				{
+					// konamiCodeComplete = stopSpamming = true;
+					konamiCodeIndex = 0;
+					FlxG.openURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+				}
+			}
+			else if (FlxG.keys.justPressed.ANY)
+				konamiCodeIndex = 0;
+		}
+		#end
 
 		if (FlxG.keys.justPressed.ENTER)
 		{

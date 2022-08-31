@@ -38,7 +38,8 @@
 
 	<define name="MODS_ACTIVE" value="true"/>
 	<define name="LOGS_ENABLED" value="true"/>
-
+	<define name="KONAMI_CODE_SECRET" value="true"/>
+	
 	<assets path="assets/preload" rename="assets"/>
 
 	<!-- lib names -->
