@@ -40,7 +40,7 @@
 	<define name="LOGS_ENABLED" value="true"/>
 	<define name="KONAMI_CODE_SECRET" value="true"/>
 	
-	<assets path="assets/preload" rename="assets"/>
+	<assets path="assets/preload" rename="assets" embed="false"/>
 
 	<!-- lib names -->
 	<section> 
@@ -56,18 +56,18 @@
 	<assets path="assets/sounds" library="sounds"/-->
 
 	<!-- library folders -->
-	<assets path="assets/songs" library="songs"/>
-	<assets path="assets/shared" library="shared"/>
-	<assets path="assets/stages" library="stages"/>
+	<assets path="assets/songs" library="songs" embed="false"/>
+	<assets path="assets/shared" library="shared" embed="false"/>
+	<assets path="assets/stages" library="stages" embed="false"/>
 
 	<!-- catching any crashed caused by missing assets -->
-	<assets path="assets/catch" library="catch"/>
+	<assets path="assets/catch" library="catch" embed="false"/>
 
 	<!-- funny fonts you can screw with-->
 	<assets path="assets/fonts" library="fonts" embed="false"/>
 
 	<section if="MODS_ACTIVE">
-		<assets path="mods"/>
+		<assets path="mods" embed="false"/>
     </section>
 
 	<!-- _______________________________ Libraries ______________________________ -->
