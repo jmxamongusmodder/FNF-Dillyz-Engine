@@ -83,12 +83,12 @@ jobs:
         with:
           path: |
             ~/haxelib
-            ~/haxelib/opt/hostedtoolcache/haxe/4.2.4/
+            ~/haxelib/opt/hostedtoolcache/haxe/4.2.5/
             export/linux/haxe
             export/linux/obj
-          key: ${{ runner.os }}-haxelib-${{ hashFiles('**/Project.xml') }}
+          key: ${{ runner.os }}-haxelib_2-${{ hashFiles('**/Project.xml') }}
           restore-keys: |
-            ${{ runner.os }}-haxelib-
+            ${{ runner.os }}-haxelib_2-
       
       - uses: krdlab/setup-haxe@master
         with:
