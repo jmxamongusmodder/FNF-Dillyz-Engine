@@ -33,6 +33,7 @@ class FunkyLuaManager
 			lua = LuaL.newstate();
 			LuaL.openlibs(lua);
 			Lua.init_callbacks(lua);
+			trace(luaFileNameForDebugging);
 			trace("Lua version: " + Lua.version());
 			trace("LuaJIT version: " + Lua.versionJIT());
 

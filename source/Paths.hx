@@ -398,14 +398,14 @@ class Paths
 	{
 		try
 		{
-			if (assetExists('data/songs/$song/song', null, 'lua'))
-				return File.getContent(asset('data/songs/$song/song', null, 'lua'));
+			if (assetExists('data/songs/${song.toLowerCase()}/song', null, 'lua'))
+				return File.getContent(asset('data/songs/${song.toLowerCase()}/song', null, 'lua'));
 		}
 		catch (e:Exception)
 		{
 			DillyzLogger.log('Song Lua Missing; ${e.toString()}\n${e.message}', LogType.Error);
 		}
-		return 'function onCreatePost() funkyLog("what am i doing", LogType.Normal) end';
+		return 'function onCreatePost() funkyLog("what am i doing", "normal") end';
 	}
 
 	inline public static function music(path:String):Sound

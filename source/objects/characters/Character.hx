@@ -72,7 +72,7 @@ class Character extends FunkySprite
 		sprPath: "characters/Boyfriend",
 		sprType: "sparrow-v2",
 		deadVariant: "deadVariant",
-		flipX: false,
+		flipX: true,
 		flipY: false,
 		antialiasing: true,
 		idleLoop: ["idle"],

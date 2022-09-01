@@ -160,7 +160,7 @@ class PlayState extends MusicBeatState
 		theStage.setupLua();
 
 		if (Paths.songLuaExists(curSong.songName))
-			songLua = new FunkyLuaManager('${curSong.songName}.lua', Paths.songLua(curSong.songName));
+			songLua = new FunkyLuaManager('song.lua', Paths.songLua(curSong.songName));
 
 		middleScroll = PreferenceManager.middleScroll;
 		prepareStrumLineNotes();
@@ -256,8 +256,19 @@ class PlayState extends MusicBeatState
 
 	public function callLua(functionName:String, arguments:Array<Dynamic>)
 	{
+		var theRet:Int = FunkyLuaManager.funcRet_Proceed;
 		if (theStage.stageLua != null)
-			return theStage.stageLua.callFunction(functionName, arguments);
+		{
+			var stageRet = theStage.stageLua.callFunction(functionName, arguments);
+			if (theRet != stageRet)
+				theRet = stageRet;
+		}
+		if (songLua != null)
+		{
+			var songRet = songLua.callFunction(functionName, arguments);
+			if (theRet != songRet)
+				theRet = songRet;
+		}
 		return null;
 	}
 
@@ -442,6 +453,8 @@ class PlayState extends MusicBeatState
 			newCountdownSpr.screenCenter();
 			newCountdownSpr.x += offsetttt[0];
 			newCountdownSpr.y += offsetttt[1];
+
+			newCountdownSpr.antialiasing = PreferenceManager.antialiasing;
 		};
 
 		new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
@@ -718,6 +731,10 @@ class PlayState extends MusicBeatState
 		}
 
 		charRight.holdingControls = FlxG.keys.anyPressed(SongNote.keyArray);
+		setLua('stat_score', curScore);
+		setLua('stat_misses', missCount);
+		setLua('stat_accuracy', accuracyCount);
+		setLua('stat_health', curHealth);
 		callLua('onUpdatePost', [elapsed]);
 	}
 
