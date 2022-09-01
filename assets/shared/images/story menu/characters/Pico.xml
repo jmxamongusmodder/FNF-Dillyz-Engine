@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Pico.png">
+	<!-- Created with Adobe Animate version 22.0.8.217 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Pico Idle0000" x="1406" y="734" width="299" height="316" frameX="0" frameY="-9" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0001" x="1406" y="734" width="299" height="316" frameX="0" frameY="-9" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0002" x="0" y="708" width="304" height="322" frameX="0" frameY="-4" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0003" x="0" y="708" width="304" height="322" frameX="0" frameY="-4" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0004" x="308" y="707" width="308" height="322" frameX="-3" frameY="-4" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0005" x="620" y="707" width="305" height="322" frameX="-6" frameY="-4" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0006" x="352" y="376" width="305" height="327" frameX="-6" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0007" x="0" y="377" width="304" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0008" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0009" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0010" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0011" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0012" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle0013" x="661" y="376" width="305" height="327" frameX="-7" frameY="0" frameWidth="312" frameHeight="327"/>
+	<SubTexture name="Pico Idle Flipped0000" x="1406" y="370" width="341" height="360" frameX="-14" frameY="-11" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0001" x="1406" y="370" width="341" height="360" frameX="-14" frameY="-11" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0002" x="1055" y="370" width="347" height="367" frameX="-9" frameY="-5" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0003" x="1055" y="370" width="347" height="367" frameX="-9" frameY="-5" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0004" x="1055" y="0" width="352" height="366" frameX="-1" frameY="-6" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0005" x="1411" y="0" width="348" height="366" frameX="-1" frameY="-6" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0006" x="352" y="0" width="348" height="372" frameX="-1" frameY="-1" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0007" x="704" y="0" width="347" height="372" frameX="-1" frameY="-1" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0008" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0009" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0010" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0011" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0012" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+	<SubTexture name="Pico Idle Flipped0013" x="0" y="0" width="348" height="373" frameX="0" frameY="0" frameWidth="356" frameHeight="373"/>
+</TextureAtlas>

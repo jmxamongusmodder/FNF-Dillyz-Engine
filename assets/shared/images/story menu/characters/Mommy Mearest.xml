@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Mommy Mearest.png">
+	<!-- Created with Adobe Animate version 22.0.8.217 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Mommy Mearest Idle0000" x="534" y="0" width="174" height="371" frameX="-2" frameY="-1" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0001" x="534" y="0" width="174" height="371" frameX="-2" frameY="-1" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0002" x="178" y="376" width="174" height="365" frameX="-2" frameY="-7" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0003" x="178" y="376" width="174" height="365" frameX="-2" frameY="-7" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0004" x="0" y="376" width="174" height="369" frameX="-1" frameY="-3" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0005" x="0" y="376" width="174" height="369" frameX="-1" frameY="-3" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0006" x="534" y="375" width="174" height="370" frameX="0" frameY="-2" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0007" x="534" y="375" width="174" height="370" frameX="0" frameY="-2" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0008" x="0" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0009" x="0" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0010" x="178" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0011" x="178" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0012" x="356" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+	<SubTexture name="Mommy Mearest Idle0013" x="356" y="0" width="174" height="372" frameX="0" frameY="0" frameWidth="176" frameHeight="372"/>
+</TextureAtlas>
