@@ -1,0 +1,9 @@
+{
+	"texture": "Boyfriend",
+	"idleName": "Boyfriend Idle",
+	"heyName": "Boyfriend Hey",
+	"heyOffset": [0, 0],
+	"scale": 1.0,
+	"flipX": false,
+	"pos": [0, 0]
+}

@@ -241,7 +241,7 @@ class MainMenuState extends MusicBeatState
 				switch (optionDisplay[curIndex].menuButtonName)
 				{
 					case 'Story Mode':
-						switchState(PlayState, [], false, FunkinTransitionType.Normal);
+						switchState(StoryMenuState, [], false, FunkinTransitionType.Normal);
 					case 'Freeplay':
 						switchState(FreeplayState, [], false, FunkinTransitionType.Black);
 					case 'Options':
