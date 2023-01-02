@@ -4,16 +4,19 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import gamestates.MusicBeatState.FunkinTransitionType;
+import objects.characters.StoryModeCharacter;
 
 class StoryMenuState extends MusicBeatState
 {
 	var yellowSprite:FlxSprite;
+	//var dudethatexsists:StoryModeCharacter;
 
 	override public function create()
 	{
 		super.create();
 		yellowSprite = new FlxSprite(-30, FlxG.height / 10).makeGraphic(FlxG.width + 60, Std.int(FlxG.height / 1.85), FlxColor.fromString('#F9CF51'));
 		add(yellowSprite);
+		//dudethatexsists.texture = "test";
 		postCreate();
 	}
 
